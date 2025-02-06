@@ -1,0 +1,29 @@
+
+const Main = () => {
+  return (
+    <main className="bg-gray-100 p-8">
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold mb-4">Bienvenido a Mi Aplicación</h2>
+        <p className="text-lg mb-4">
+          Esta es una sección principal de la aplicación. Aquí puedes agregar el contenido que desees.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="text-xl font-semibold mb-2">Sección 1</h3>
+            <p>Contenido de la sección 1.</p>
+          </div>
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="text-xl font-semibold mb-2">Sección 2</h3>
+            <p>Contenido de la sección 2.</p>
+          </div>
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="text-xl font-semibold mb-2">Sección 3</h3>
+            <p>Contenido de la sección 3.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default Main;
