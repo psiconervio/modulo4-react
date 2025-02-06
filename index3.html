@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Primer Portafolio</title>
+  <style>
+    /* Estilos básicos para la página */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    /* Contenedor principal centrado */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Encabezados */
+    h1, h2 {
+      color: #2196F3;
+      text-align: center;
+    }
+    /* Secciones con margen */
+    .section {
+      margin: 20px 0;
+    }
+    /* Imagen de perfil */
+    .mi-foto {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      display: block;
+      margin: 20px auto;
+    }
+    /* Texto de descripción */
+    .descripcion {
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+    }
+    /* Botones */
+    .botones {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .boton {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .boton:hover {
+      background-color: #1976D2;
+    }
+    /* Contador de "me gusta" */
+    .contador {
+      text-align: center;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    /* Galería de imágenes */
+    .gallery img {
+      width: 150px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    /* Contenedor de video */
+    .video-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    /* Pie de página */
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Encabezado principal -->
+    <h1>Mi Primer Portafolio</h1>
+    
+    <!-- SECCIÓN: SOBRE MÍ -->
+    <div class="section" id="about">
+      <h2>Sobre mí</h2>
+      <!-- Imagen de perfil -->
+      <img src="https://picsum.photos/200/200" alt="Mi foto" class="mi-foto" id="miFoto">
+      <!-- Descripción personal -->
+      <p class="descripcion" id="descripcion">
+        ¡Hola! Soy un estudiante de programación y este es mi primer portafolio web.
+        Me gusta aprender sobre tecnología y crear cosas nuevas.
+      </p>
+      <!-- Botones de interactividad -->
+      <div class="botones">
+        <button class="boton" id="cambiarColor">Cambiar Color</button>
+        <button class="boton" id="cambiarTexto">Cambiar Texto</button>
+        <button class="boton" id="meGusta">¡Me Gusta! 👍</button>
+        <button class="boton" id="cambiarFoto">Cambiar Foto</button>
+      </div>
+      <!-- Contador de "me gusta" -->
+      <div class="contador">
+        Me gusta: <span id="contador">0</span>
+      </div>
+    </div>
+    
+    <!-- SECCIÓN: GALERÍA DE IMÁGENES -->
+    <div class="section gallery" id="gallery">
+      <h2>Galería de Imágenes</h2>
+      <!-- Agregamos imágenes con la etiqueta <img> -->
+      <img src="https://picsum.photos/seed/1/150" alt="Imagen 1">
+      <img src="https://picsum.photos/seed/2/150" alt="Imagen 2">
+      <img src="https://picsum.photos/seed/3/150" alt="Imagen 3">
+      <img src="https://picsum.photos/seed/3/150" alt="Imagen 3">
+    </div>
+    
+    <!-- SECCIÓN: VIDEO -->
+    <div class="section video-container" id="video">
+      <h2>Mi Video Favorito</h2>
+      <!-- Insertamos un video de YouTube usando un <iframe> -->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen></iframe>
+    </div>
+    
+    <!-- SECCIÓN: CONTACTO -->
+    <div class="section" id="contact">
+      <h2>Contacto</h2>
+      <p>Si quieres saber más de mí, envíame un correo a 
+         <a href="mailto:ejemplo@correo.com">ejemplo@correo.com</a>
+      </p>
+    </div>
+    
+    <!-- Pie de página -->
+    <footer>
+      <p>Creado con ❤️ en 2025</p>
+    </footer>
+  </div>
+  
+  <!-- JAVASCRIPT MUY SIMPLE CON COMENTARIOS EXPLICATIVOS -->
+  <script>
+    // Variables para guardar el número de "me gusta" y alternar estados
+    let likes = 0;          // Cuenta los "me gusta"
+    let colorToggle = false; // Para cambiar entre dos colores de fondo
+    let textToggle = false;  // Para alternar el texto de la descripción
+
+    // Obtenemos los elementos del HTML con los que vamos a trabajar:
+    const description = document.getElementById("descripcion");
+    const counterDisplay = document.getElementById("contador");
+    const photo = document.getElementById("miFoto");
+
+    // Textos para la descripción:
+    const originalText = description.textContent;
+    const alternateText = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
+
+    // Función para cambiar el color de fondo
+    function changeColor() {
+      // Si colorToggle es verdadero, ponemos un color; si es falso, otro
+      if (colorToggle) {
+        document.body.style.backgroundColor = "#f0f0f0";
+      } else {
+        document.body.style.backgroundColor = "#ffe0e0";
+      }
+      // Cambiamos el valor de colorToggle para la próxima vez
+      colorToggle = !colorToggle;
+    }
+
+    // Función para alternar el texto de la descripción
+    function changeText() {
+      // Si textToggle es verdadero, mostramos el texto original; de lo contrario, el alternativo
+      if (textToggle) {
+        description.textContent = originalText;
+      } else {
+        description.textContent = alternateText;
+      }
+      // Cambiamos el valor de textToggle para alternar la próxima vez
+      textToggle = !textToggle;
+    }
+
+    // Función para aumentar el contador de "me gusta"
+    function addLike() {
+      likes++; // Suma 1 al contador
+      counterDisplay.textContent = likes; // Muestra el nuevo total
+    }
+
+    // Función para cambiar la foto de perfil
+    function changePhoto() {
+      // Genera un número aleatorio para que la foto cambie
+      let randomNum = Math.floor(Math.random() * 1000);
+      // Cambia la imagen usando el número aleatorio en la URL
+      photo.src = "https://picsum.photos/seed/" + randomNum + "/200/200";
+    }
+
+    // Asignamos cada función a su botón correspondiente usando el evento 'onclick'
+    document.getElementById("cambiarColor").onclick = changeColor;
+    document.getElementById("cambiarTexto").onclick = changeText;
+    document.getElementById("meGusta").onclick = addLike;
+    document.getElementById("cambiarFoto").onclick = changePhoto;
+  </script>
+</body>
+</html>

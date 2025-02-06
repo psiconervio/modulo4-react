@@ -110,6 +110,10 @@
         <div class="contador">
             Me gusta: <span id="contador">0</span>
         </div>
+        <!-- Creen ustedes su propio boton de cambiar color y su propio boton de cambiar texto -->
+        <div class="nuevoboton">
+            
+        </div>
 
         <!-- Pie de página -->
         <footer>
@@ -119,6 +123,85 @@
 
     <!-- JavaScript refactorizado -->
     <script>
+        // Declaramos nuestras variables globales:
+        // 'likes' guarda el número de "me gusta" que se han acumulado.
+        let likes = 0;
+        // 'colorToggle' es una bandera (verdadero o falso) para saber qué color mostrar.
+        let colorToggle = false;
+        // 'textToggle' es otra bandera para alternar entre dos textos.
+        let textToggle = false;
+      
+        // Obtenemos (guardamos) las referencias de los elementos HTML en variables:
+        // 'desc' es el párrafo de descripción que veremos en pantalla.
+        const desc = document.getElementById("descripcion");
+        // 'count' es el elemento que muestra el número de "me gusta".
+        const count = document.getElementById("contador");
+        // 'photo' es la imagen de perfil que se muestra en la página.
+        const photo = document.getElementById("miFoto");
+      
+        // Guardamos dos versiones del texto de la descripción:
+        // 'originalText' es el texto que ya estaba en la descripción.
+        const originalText = desc.textContent;
+        // 'alternateText' es un texto nuevo que se mostrará al presionar el botón.
+        const alternateText = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
+      
+        // Función para cambiar el color de fondo de la página.
+        // Esta función alterna entre dos colores: un color claro y otro un poco diferente.
+        function changeColor() {
+          // Si 'colorToggle' es verdadero, se establece un color; si es falso, se establece otro color.
+          if (colorToggle) {
+            // Se asigna el color "#f0f0f0" como fondo.
+            document.body.style.backgroundColor = "#f0f0f0";
+          } else {
+            // Se asigna el color "#ffe0e0" como fondo.
+            document.body.style.backgroundColor = "#ffe0e0";
+          }
+          // Cambiamos el valor de 'colorToggle' para la próxima vez.
+          // Si era verdadero, ahora será falso, y viceversa.
+          colorToggle = !colorToggle;
+        }
+      
+        // Función para alternar el texto de la descripción.
+        // Cambia el contenido del párrafo entre dos textos.
+        function changeText() {
+          // Si 'textToggle' es verdadero, mostramos el texto original.
+          if (textToggle) {
+            desc.textContent = originalText;
+          } else {
+            // Si 'textToggle' es falso, mostramos el texto alternativo.
+            desc.textContent = alternateText;
+          }
+          // Cambiamos el valor de 'textToggle' para que la próxima vez se muestre el otro texto.
+          textToggle = !textToggle;
+        }
+      
+        // Función para aumentar el contador de "me gusta".
+        // Cada vez que se llama, suma 1 al contador y actualiza lo que se muestra en pantalla.
+        function addLike() {
+          likes++; // Suma 1 al valor actual de 'likes'.
+          // Actualiza el contenido del elemento 'count' para mostrar el nuevo número de "me gusta".
+          count.textContent = likes;
+        }
+      
+        // Función para cambiar la foto de perfil.
+        // Utiliza un número aleatorio para obtener una imagen distinta cada vez.
+        function changePhoto() {
+          // Genera un número aleatorio entre 0 y 999.
+          let randomNum = Math.floor(Math.random() * 1000);
+          // Cambia la fuente (src) de la imagen usando el número aleatorio en la URL.
+          // Esto permite que se muestre una imagen diferente cada vez.
+          photo.src = "https://picsum.photos/seed/" + randomNum + "/200/200";
+        }
+      
+        // Conectamos cada botón con su función correspondiente.
+        // Se obtiene cada botón por su id y se asigna la función que se ejecutará al hacer clic.
+        document.getElementById("cambiarColor").onclick = changeColor;
+        document.getElementById("cambiarTexto").onclick = changeText;
+        document.getElementById("meGusta").onclick = addLike;
+        document.getElementById("cambiarFoto").onclick = changePhoto;
+      </script>
+      
+    <!-- <script>
         // Variables globales y referencias al DOM
         let contador = 0;
         let colorActual = '#f0f0f0';
@@ -175,6 +258,6 @@
         document.getElementById('cambiarTexto').onclick = cambiarTexto;
         document.getElementById('meGusta').onclick = aumentarContador;
         document.getElementById('cambiarFoto').onclick = cambiarFoto;
-    </script>
+    </script> -->
 </body>
 </html>
