@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primer Portafolio</title>
+    <!-- Usamos una fuente simple y legible -->
+    <style>
+        /* Estilos básicos para empezar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos del encabezado */
+        h1 {
+            color: #2196F3;
+            text-align: center;
+        }
+
+        /* Estilos de la imagen */
+        .mi-foto {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        /* Estilos para la descripción */
+        .descripcion {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        /* Estilos para los botones */
+        .botones {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .boton {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background-color: #1976D2;
+        }
+
+        /* Estilos para el contador */
+        .contador {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Encabezado -->
+        <h1>Mi Primer Portafolio</h1>
+
+        <!-- Imagen de perfil -->
+        <img src="https://picsum.photos/200/200" alt="Mi foto" class="mi-foto" id="miFoto">
+
+        <!-- Descripción -->
+        <p class="descripcion" id="descripcion">
+            ¡Hola! Soy un estudiante de programación y este es mi primer portafolio web.
+            Me gusta aprender sobre tecnología y crear cosas nuevas.
+        </p>
+
+        <!-- Botones -->
+        <div class="botones">
+            <button class="boton" id="cambiarColor">Cambiar Color</button>
+            <button class="boton" id="cambiarTexto">Cambiar Texto</button>
+            <button class="boton" id="meGusta">¡Me Gusta! 👍</button>
+            <button class="boton" id="cambiarFoto">Cambiar Foto</button>
+        </div>
+
+        <!-- Contador de Me Gusta -->
+        <div class="contador">
+            Me gusta: <span id="contador">0</span>
+        </div>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>Creado con ❤️ en 2025</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript refactorizado -->
+    <script>
+        // Variables globales y referencias al DOM
+        let contador = 0;
+        let colorActual = '#f0f0f0';
+
+        // Elementos del DOM que usaremos
+        const descripcionEl = document.getElementById('descripcion');
+        const contadorEl = document.getElementById('contador');
+        const fotoEl = document.getElementById('miFoto');
+
+        // Textos para alternar la descripción
+        const textoOriginal = descripcionEl.textContent;
+        const textoNuevo = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
+
+        // Lista de colores para cambiar el fondo
+        const colores = ['#f0f0f0', '#ffe0e0', '#e0ffe0', '#e0e0ff'];
+
+        // Función para cambiar el color de fondo
+        function cambiarColor() {
+            // Encontrar el índice del color actual en el array
+            let indiceActual = colores.indexOf(colorActual);
+            // Calcular el índice del siguiente color (vuelve al principio si es el último)
+            let siguienteIndice = (indiceActual + 1) % colores.length;
+            // Actualizar el colorActual
+            colorActual = colores[siguienteIndice];
+            // Aplicar el nuevo color de fondo al body
+            document.body.style.backgroundColor = colorActual;
+        }
+
+        // Función para alternar el texto de la descripción
+        function cambiarTexto() {
+            if (descripcionEl.textContent === textoOriginal) {
+                descripcionEl.textContent = textoNuevo;
+            } else {
+                descripcionEl.textContent = textoOriginal;
+            }
+        }
+
+        // Función para aumentar el contador de "Me gusta"
+        function aumentarContador() {
+            contador++; // Suma 1 al contador
+            contadorEl.textContent = contador; // Actualiza el valor mostrado en pantalla
+        }
+
+        // Función para cambiar la foto de perfil
+        function cambiarFoto() {
+            // Generar un número aleatorio para variar la imagen
+            const numeroAleatorio = Math.floor(Math.random() * 1000);
+            // Actualizar la URL de la imagen usando el número aleatorio
+            fotoEl.src = `https://picsum.photos/seed/${numeroAleatorio}/200/200`;
+        }
+
+        // Conectar cada botón con su función correspondiente
+        document.getElementById('cambiarColor').onclick = cambiarColor;
+        document.getElementById('cambiarTexto').onclick = cambiarTexto;
+        document.getElementById('meGusta').onclick = aumentarContador;
+        document.getElementById('cambiarFoto').onclick = cambiarFoto;
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Primer Portafolio</title>
+    <!-- Usamos una fuente simple y legible -->
+    <style>
+        /* Estilos básicos para empezar */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos del encabezado */
+        h1 {
+            color: #2196F3;
+            text-align: center;
+        }
+
+        /* Estilos de la imagen */
+        .mi-foto {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        /* Estilos para la descripción */
+        .descripcion {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+
+        /* Estilos para los botones */
+        .botones {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .boton {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            background-color: #1976D2;
+        }
+
+        /* Estilos para el contador */
+        .contador {
+            text-align: center;
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        /* Estilos para el pie de página */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Encabezado -->
+        <h1>Mi Primer Portafolio</h1>
+
+        <!-- Imagen de perfil -->
+        <img src="https://picsum.photos/200/200" alt="Mi foto" class="mi-foto" id="miFoto">
+
+        <!-- Descripción -->
+        <p class="descripcion" id="descripcion">
+            ¡Hola! Soy un estudiante de programación y este es mi primer portafolio web.
+            Me gusta aprender sobre tecnología y crear cosas nuevas.
+        </p>
+
+        <!-- Botones -->
+        <div class="botones">
+            <button class="boton" id="cambiarColor">Cambiar Color</button>
+            <button class="boton" id="cambiarTexto">Cambiar Texto</button>
+            <button class="boton" id="meGusta">¡Me Gusta! 👍</button>
+            <button class="boton" id="cambiarFoto">Cambiar Foto</button>
+        </div>
+
+        <!-- Contador de Me Gusta -->
+        <div class="contador">
+            Me gusta: <span id="contador">0</span>
+        </div>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>Creado con ❤️ en 2025</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Variables para guardar nuestros datos
+        let contador = 0;
+        let colorActual = '#f0f0f0';
+        let textoOriginal = document.getElementById('descripcion').textContent;
+        let textoNuevo = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
+
+        // Función para cambiar el color de fondo
+        function cambiarColor() {
+            // Lista de colores simples
+            const colores = ['#f0f0f0', '#ffe0e0', '#e0ffe0', '#e0e0ff'];
+            // Encontrar el siguiente color
+            let indiceActual = colores.indexOf(colorActual);
+            let siguienteIndice = (indiceActual + 1) % colores.length;
+            colorActual = colores[siguienteIndice];
+            // Cambiar el color
+            document.body.style.backgroundColor = colorActual;
+        }
+
+        // Función para cambiar el texto
+        function cambiarTexto() {
+            let descripcion = document.getElementById('descripcion');
+            if (descripcion.textContent === textoOriginal) {
+                descripcion.textContent = textoNuevo;
+            } else {
+                descripcion.textContent = textoOriginal;
+            }
+        }
+
+        // Función para aumentar el contador de "Me gusta"
+        function aumentarContador() {
+            contador = contador + 1;
+            document.getElementById('contador').textContent = contador;
+        }
+
+        // Función para cambiar la foto
+        function cambiarFoto() {
+            let foto = document.getElementById('miFoto');
+            // Cambiamos la imagen usando un número aleatorio
+            let numeroAleatorio = Math.floor(Math.random() * 1000);
+            foto.src = `https://picsum.photos/seed/${numeroAleatorio}/200/200`;
+        }
+
+        // Conectar los botones con las funciones
+        document.getElementById('cambiarColor').onclick = cambiarColor;
+        document.getElementById('cambiarTexto').onclick = cambiarTexto;
+        document.getElementById('meGusta').onclick = aumentarContador;
+        document.getElementById('cambiarFoto').onclick = cambiarFoto;
+    </script>
+</body>
+</html>
