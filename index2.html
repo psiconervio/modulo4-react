@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -117,60 +118,51 @@
         </footer>
     </div>
 
-    <!-- JavaScript refactorizado -->
+    <!-- JavaScript -->
     <script>
-        // Variables globales y referencias al DOM
+        // Variables para guardar nuestros datos
         let contador = 0;
         let colorActual = '#f0f0f0';
-
-        // Elementos del DOM que usaremos
-        const descripcionEl = document.getElementById('descripcion');
-        const contadorEl = document.getElementById('contador');
-        const fotoEl = document.getElementById('miFoto');
-
-        // Textos para alternar la descripción
-        const textoOriginal = descripcionEl.textContent;
-        const textoNuevo = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
-
-        // Lista de colores para cambiar el fondo
-        const colores = ['#f0f0f0', '#ffe0e0', '#e0ffe0', '#e0e0ff'];
+        let textoOriginal = document.getElementById('descripcion').textContent;
+        let textoNuevo = "¡Me encanta programar y aprender cosas nuevas! Este es mi primer proyecto web.";
 
         // Función para cambiar el color de fondo
         function cambiarColor() {
-            // Encontrar el índice del color actual en el array
+            // Lista de colores simples
+            const colores = ['#f0f0f0', '#ffe0e0', '#e0ffe0', '#e0e0ff'];
+            // Encontrar el siguiente color
             let indiceActual = colores.indexOf(colorActual);
-            // Calcular el índice del siguiente color (vuelve al principio si es el último)
             let siguienteIndice = (indiceActual + 1) % colores.length;
-            // Actualizar el colorActual
             colorActual = colores[siguienteIndice];
-            // Aplicar el nuevo color de fondo al body
+            // Cambiar el color
             document.body.style.backgroundColor = colorActual;
         }
 
-        // Función para alternar el texto de la descripción
+        // Función para cambiar el texto
         function cambiarTexto() {
-            if (descripcionEl.textContent === textoOriginal) {
-                descripcionEl.textContent = textoNuevo;
+            let descripcion = document.getElementById('descripcion');
+            if (descripcion.textContent === textoOriginal) {
+                descripcion.textContent = textoNuevo;
             } else {
-                descripcionEl.textContent = textoOriginal;
+                descripcion.textContent = textoOriginal;
             }
         }
 
         // Función para aumentar el contador de "Me gusta"
         function aumentarContador() {
-            contador++; // Suma 1 al contador
-            contadorEl.textContent = contador; // Actualiza el valor mostrado en pantalla
+            contador = contador + 1;
+            document.getElementById('contador').textContent = contador;
         }
 
-        // Función para cambiar la foto de perfil
+        // Función para cambiar la foto
         function cambiarFoto() {
-            // Generar un número aleatorio para variar la imagen
-            const numeroAleatorio = Math.floor(Math.random() * 1000);
-            // Actualizar la URL de la imagen usando el número aleatorio
-            fotoEl.src = `https://picsum.photos/seed/${numeroAleatorio}/200/200`;
+            let foto = document.getElementById('miFoto');
+            // Cambiamos la imagen usando un número aleatorio
+            let numeroAleatorio = Math.floor(Math.random() * 1000);
+            foto.src = `https://picsum.photos/seed/${numeroAleatorio}/200/200`;
         }
 
-        // Conectar cada botón con su función correspondiente
+        // Conectar los botones con las funciones
         document.getElementById('cambiarColor').onclick = cambiarColor;
         document.getElementById('cambiarTexto').onclick = cambiarTexto;
         document.getElementById('meGusta').onclick = aumentarContador;
