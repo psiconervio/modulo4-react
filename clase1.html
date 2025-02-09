@@ -31,6 +31,10 @@
         background-color: #333;
         color: white;
       }
+      .contador {
+        font-size: 1.5em;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
@@ -41,26 +45,31 @@
     <button onclick="cambiarFoto()">Cambiar Imagen</button>
     <button onclick="modoOscuro()">Modo Oscuro</button>
     <button onclick="megusta()">¡Me Gusta! 👍</button>
-    <div class="contador">
-        Me gusta: <span id="contador">0</span>
-    </div>
+    <div class="contador">Me gusta: <span id="contador">0</span></div>
     <script>
-        // variable para contar los likes
-        let likes = 0;
-        function megusta() {
-            likes= likes + 1;
-            document.getElementById("contador").textContent = likes;
-        }
+      // variable(espacio de memoria reservado para informacion) para contar los likes
+      let likes = 0;
+      // Función(un conjunto de instrucciones que realiza una tarea o calcula un valor)
+      //  para contar los likes
+      function megusta() {
+        likes = likes + 1;
+        document.getElementById("contador").textContent = likes;
+      }
 
       // Función para cambiar el texto de la descripción
       function cambiarTexto() {
         let descripcion = document.getElementById("descripcion");
         // Si el texto es el original, lo cambia al nuevo texto
-        if (descripcion.textContent === "Hola, soy un estudiante aprendiendo a programar.") {
-          descripcion.textContent = "Me encanta programar y aprender cosas nuevas!";
+        if (
+          descripcion.textContent ===
+          "Hola, soy un estudiante aprendiendo a programar."
+        ) {
+          descripcion.textContent =
+            "Me encanta programar y aprender cosas nuevas!";
         } else {
           // Si no, lo cambia de vuelta al texto original
-          descripcion.textContent = "Hola, soy un estudiante aprendiendo a programar.";
+          descripcion.textContent =
+            "Hola, soy un estudiante aprendiendo a programar.";
         }
       }
 
@@ -71,6 +80,24 @@
         let randomNum = Math.floor(Math.random() * 1000);
         // Cambia la URL de la imagen para mostrar una nueva imagen aleatoria
         foto.src = "https://picsum.photos/seed/" + randomNum + "/200/200";
+      }
+      // Array con las rutas de tus fotos locales
+      // estructura de datos en programación que almacena información de manera ordenada
+      let fotosLocales = [
+        "ruta/a/tu/foto1.jpg",
+        "ruta/a/tu/foto2.jpg",
+        "ruta/a/tu/foto3.jpg",
+      ];
+      // Índice para llevar la cuenta de la foto actual
+      let fotoIndex = 0;
+
+      // Función para cambiar la foto de perfil
+      function cambiarFoto() {
+        let foto = document.getElementById("miFoto");
+        // Cambia la URL de la imagen para mostrar la siguiente imagen en el array
+        foto.src = fotosLocales[fotoIndex];
+        // Incrementa el índice y vuelve al inicio si llega al final del array
+        fotoIndex = (fotoIndex + 1) % fotosLocales.length;
       }
 
       // Función para alternar el modo oscuro
