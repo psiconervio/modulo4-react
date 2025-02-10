@@ -83,23 +83,28 @@
       }
       // Array con las rutas de tus fotos locales
       // estructura de datos en programación que almacena información de manera ordenada
-      let fotosLocales = [
-        "ruta/a/tu/foto1.jpg",
-        "ruta/a/tu/foto2.jpg",
-        "ruta/a/tu/foto3.jpg",
-      ];
-      // Índice para llevar la cuenta de la foto actual
-      let fotoIndex = 0;
+      // let fotosLocales = [
+      //   "ruta/a/tu/foto1.jpg",
+      //   "ruta/a/tu/foto2.jpg",
+      //   "ruta/a/tu/foto3.jpg",
+      // ];
+      // // Índice para llevar la cuenta de la foto actual
+      // let fotoIndex = 0;
 
       // Función para cambiar la foto de perfil
+      // function cambiarFoto() {
+      //   let foto = document.getElementById("miFoto");
+      //   // Cambia la URL de la imagen para mostrar la siguiente imagen en el array
+      //   foto.src = fotosLocales[fotoIndex];
+      //   // Incrementa el índice y vuelve al inicio si llega al final del array
+      //   fotoIndex = (fotoIndex + 1) % fotosLocales.length;
+      // }
       function cambiarFoto() {
-        let foto = document.getElementById("miFoto");
-        // Cambia la URL de la imagen para mostrar la siguiente imagen en el array
-        foto.src = fotosLocales[fotoIndex];
-        // Incrementa el índice y vuelve al inicio si llega al final del array
-        fotoIndex = (fotoIndex + 1) % fotosLocales.length;
-      }
-
+            let foto = document.getElementById('miFoto');
+            // Cambiamos la imagen usando un número aleatorio
+            let numeroAleatorio = Math.floor(Math.random() * 1000);
+            foto.src = `https://picsum.photos/seed/${numeroAleatorio}/200/200`;
+        }
       // Función para alternar el modo oscuro
       function modoOscuro() {
         // Alterna la clase 'dark-mode' en el cuerpo del documento
