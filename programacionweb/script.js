@@ -1,15 +1,13 @@
-      // variable(espacio de memoria reservado para informacion)
-      //  para contar los likes
-      let likes = 0;
-      // Función(un conjunto de instrucciones que realiza una tarea o calcula un valor)
-      //  para contar los likes
-      function megusta() {
-        // al valor likes que es es 0 se le suma 1 en cada click
-        // y se guarda en la misma variable
-        likes = likes + 1;
-        // se muestra el valor de likes en el elemento con id 'contador'
-        document.getElementById("contador").textContent = likes;
-      }
+// variable(espacio de memoria reservado para informacion) para contar los likes
+let likes = 0;
+// Función(un conjunto de instrucciones que realiza una tarea o calcula un valor)
+//  para contar los likes
+function megusta() {
+  likes = likes + 1;
+  //Es un método de JavaScript que selecciona un elemento del DOM (Document Object Model) usando su atributo id.
+  //En este caso, getElementById("descripcion") busca un elemento en el HTML que tenga el atributo id="descripcion".
+  document.getElementById("contador").textContent = likes;
+}
 
 // Función para cambiar el texto de la descripción
 function cambiarTexto() {
