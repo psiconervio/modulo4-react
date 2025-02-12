@@ -1,9 +1,13 @@
-      // variable(espacio de memoria reservado para informacion) para contar los likes
+      // variable(espacio de memoria reservado para informacion)
+      //  para contar los likes
       let likes = 0;
       // Función(un conjunto de instrucciones que realiza una tarea o calcula un valor)
       //  para contar los likes
       function megusta() {
+        // al valor likes que es es 0 se le suma 1 en cada click
+        // y se guarda en la misma variable
         likes = likes + 1;
+        // se muestra el valor de likes en el elemento con id 'contador'
         document.getElementById("contador").textContent = likes;
       }
 
