@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
+import batman from "../assets/batman.png";
 
 const NavBar = () => {
 
@@ -54,11 +55,11 @@ const NavBar = () => {
       <div className='flex justify-between items-center sm:px-12 sm:py-6 px-4 py-3'>
         {/* LOGO  */}
         <div className='flex items-center gap-2'>
-          <img src={'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Sol_de_Mayo_Bandera_Argentina.png/800px-Sol_de_Mayo_Bandera_Argentina.png'}
+          <img src={batman}
             alt='Logo'
             className='w-[60px]'
           />
-          <p className='text-white font-bold font-size-3xl'>ARG</p>
+          <p className='text-white font-bold font-size-3xl'>Batman</p>
         </div>
 
         {/* BURGER BTN  */}

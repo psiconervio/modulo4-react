@@ -16,8 +16,8 @@ function App() {
   return (
     <>
     <Navbar />
-    <EjemploMotion  />
     <Header />
+    <EjemploMotion  />
     <Main />
     <Footer />
     </>
