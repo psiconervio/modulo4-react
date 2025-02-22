@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchlist HTML</title>
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts - Orbitron -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Phosphor icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom settings Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Primary colors
+            'dark-primary': '#121212',
+            'dark-secondary': '#1E1E1E',
+            'accent-teal': '#4ECDC4',
+
+            // Tex
+            'text-primary': '#E0E0E0',
+            'text-secondary': '#A0A0A0',
+
+            // Buttons
+            'button-primary': {
+              DEFAULT: '#4ECDC4',
+              'hover': '#6EDCD4',
+              'active': '#3EBAB4'
+            },
+            'button-secondary': {
+              DEFAULT: '#2C2C2C',
+              'hover': '#3C3C3C',
+              'active': '#1C1C1C'
+            },
+
+            // Status
+            'state-success': '#2ecc71',
+            'state-warning': '#f39c12',
+            'state-error': '#e74c3c',
+            'state-info': '#3498db',
+
+            // Shadows
+            'shadow-soft': 'rgba(0,0,0,0.3)',
+            'shadow-medium': 'rgba(0,0,0,0.5)',
+            'shadow-intense': 'rgba(0,0,0,0.7)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Content page -->
+  <div>
+    <!-- Header content -->
+    <header class="bg-dark-secondary py-4 px-6 flex items-center justify-center">
+      <div class="w-full max-w-6xl flex items-center justify-between">
+
+        <div class="flex items-center space-x-4">
+          <h1 class="font-['Orbitron'] text-2xl font-bold text-accent-teal">
+            NODO Movies 🎬
+          </h1>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <button id="openWatchlist"
+            class="text-text-primary text-xl font-semibold hover:text-accent-teal transition-colors duration-300">
+            Watchlist
+          </button>
+
+          <i class="ph ph-user-circle text-4xl text-accent-teal hover:text-button-primary-hover cursor-pointer transition-colors duration-300"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- Modal Watchlist -->
+      <div id="watchlistModal"
+        class="fixed inset-0 bg-shadow-medium bg-opacity-75 flex justify-center items-center hidden z-50">
+        <div class="bg-dark-primary rounded-lg p-6 relative w-full max-w-3xl max-h-[80vh] overflow-hidden">
+          <!-- Button close -->
+          <button id="closeModal" class="absolute top-2 right-2 text-text-secondary hover:text-text-primary text-2xl">
+            &times;
+          </button>
+
+          <!-- Content modal -->
+          <h2 class="text-text-primary text-lg font-bold text-center mb-4">
+            Your Watchlist
+          </h2>
+
+          <!-- Empty Modal -->
+          <!-- <p class="text-text-secondary text-center">
+            You don't have any movies in your Watchlist yet.
+          </p> -->
+
+          <!-- Watchlist Cards Section -->
+          <div class="bg-dark-secondary/900 py-10 overflow-y-auto max-h-[65vh] px-4 space-y-4">
+            <!-- Card Component -->
+            <div class="flex items-center bg-dark-secondary rounded-lg shadow-md overflow-hidden p-4 space-x-4">
+              <!-- Image -->
+              <img src="/assets/img/imagen_01.jpg" alt="The Shining" class="w-20 h-28 object-cover rounded-md" />
+              <!-- Movie Info -->
+              <div class="flex-1">
+                <h3 class="text-text-primary text-lg font-bold">The Shining</h3>
+              </div>
+              <!-- Remove Button -->
+              <button
+                class="bg-state-error hover:bg-red-600 active:bg-red-700 text-text-primary py-2 px-4 rounded-md font-semibold transition-colors duration-300">
+                <i class="ph ph-trash"></i> Remove
+              </button>
+            </div>
+
+            <div class="flex items-center bg-dark-secondary rounded-lg shadow-md overflow-hidden p-4 space-x-4">
+              <img src="/assets/img/imagen_02.jpg" alt="Parasite" class="w-20 h-28 object-cover rounded-md" />
+              <div class="flex-1">
+                <h3 class="text-text-primary text-lg font-bold">Parasite</h3>
+              </div>
+              <button
+                class="bg-state-error hover:bg-red-600 active:bg-red-700 text-text-primary py-2 px-4 rounded-md font-semibold transition-colors duration-300">
+                <i class="ph ph-trash"></i> Remove
+              </button>
+            </div>
+
+            <div class="flex items-center bg-dark-secondary rounded-lg shadow-md overflow-hidden p-4 space-x-4">
+              <img src="/assets/img/imagen_07.jpg" alt="Old Boy" class="w-20 h-28 object-cover rounded-md" />
+              <div class="flex-1">
+                <h3 class="text-text-primary text-lg font-bold">Old Boy</h3>
+              </div>
+              <button
+                class="bg-state-error hover:bg-red-600 active:bg-red-700 text-text-primary py-2 px-4 rounded-md font-semibold transition-colors duration-300">
+                <i class="ph ph-trash"></i> Remove
+              </button>
+            </div>
+
+            <div class="flex items-center bg-dark-secondary rounded-lg shadow-md overflow-hidden p-4 space-x-4">
+              <img src="/assets/img/imagen_08.jpg" alt="2001: A Space Odyssey"
+                class="w-20 h-28 object-cover rounded-md" />
+              <div class="flex-1">
+                <h3 class="text-text-primary text-lg font-bold">2001: A Space Odyssey</h3>
+              </div>
+              <button
+                class="bg-state-error hover:bg-red-600 active:bg-red-700 text-text-primary py-2 px-4 rounded-md font-semibold transition-colors duration-300">
+                <i class="ph ph-trash"></i> Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Your content -->
+      <div class="bg-white py-10">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <!-- Card Component -->
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_01.jpg" alt="The Shining" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                The Shining
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_02.jpg" alt="Parasite" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Parasite
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_03.jpg" alt="The Substance" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                The Substance
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_04.jpg" alt="A Clockwork Orange" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                A Clockwork Orange
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_05.jpg" alt="Perfect Days" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Perfect Days
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_06.jpg" alt="Esperando la Carroza" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Esperando la Carroza
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_07.jpg" alt="Old Boy" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Old Boy
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_08.jpg" alt="2001: a space odyssey" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                2001: a space odyssey
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_09.jpg" alt="El Angel" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                El Angel
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_10.jpg" alt="El Clan" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                El Clan
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_11.jpg" alt="Eyes Wide Shut" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Eyes Wide Shut
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-dark-secondary rounded-lg shadow-lg overflow-hidden">
+            <img src="/assets/img/imagen_12.jpg" alt="Monster" class="" />
+            <div class="p-4">
+              <h2 class="text-text-primary text-lg text-center font-bold mb-2">
+                Monster
+              </h2>
+              <button
+                class="bg-button-primary hover:bg-button-primary-hover active:bg-button-primary-active text-dark-secondary py-2 px-4 rounded-md w-full font-semibold transition-colors duration-300">
+                <i class="ph ph-plus"></i> Add to Watchlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer content -->
+    <footer class="bg-dark-secondary py-4 px-6 flex items-center justify-center">
+      <div class="w-full max-w-6xl flex flex-col items-center space-y-4 text-center">
+        <p class="text-text-secondary text-sm">
+          DIPLOMATURA UNIVERSITARIA DESARROLLO WEB FULL STACK CON JAVASCRIPT
+        </p>
+
+        <a href="https://github.com/EsteNoEsMonti" target="_blank"
+          class="flex items-center space-x-2 text-accent-teal hover:text-button-primary-hover transition-colors duration-300">
+          <i class="ph ph-github-logo text-2xl"></i>
+          <span class="font-['Orbitron'] text-sm">github.com/EsteNoEsMonti</span>
+        </a>
+
+        <p class="text-text-secondary text-sm">
+          &copy; <span id="currentYear"></span>
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
