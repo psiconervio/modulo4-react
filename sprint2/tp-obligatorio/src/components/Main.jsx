@@ -2,12 +2,13 @@ import { useState } from "react";
 import useWatchlist from "../hooks/useWatchlist";
 import MovieList from "../components/MovieList";
 import WatchlistModal from "../components/WatchlistModal";
+import  movies  from "../db/movies.json";
 
-const movies = [
-  { id: 1, title: "Inception", image: "https://via.placeholder.com/150" },
-  { id: 2, title: "Interstellar", image: "https://via.placeholder.com/150" },
-  { id: 3, title: "The Dark Knight", image: "https://via.placeholder.com/150" }
-];
+// const movies = [
+//   { id: 1, title: "Inception", image: "https://via.placeholder.com/150" },
+//   { id: 2, title: "Interstellar", image: "https://via.placeholder.com/150" },
+//   { id: 3, title: "The Dark Knight", image: "https://via.placeholder.com/150" }
+// ];
 
 const Home = () => {
   const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
