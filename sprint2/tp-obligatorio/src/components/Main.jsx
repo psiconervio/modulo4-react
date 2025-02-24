@@ -1,21 +1,50 @@
-const Main = () => {
+import { useState } from "react";
+import useWatchlist from "../hooks/useWatchlist";
+import MovieList from "../components/MovieList";
+import WatchlistModal from "../components/WatchlistModal";
+
+const movies = [
+  { id: 1, title: "Inception", image: "https://via.placeholder.com/150" },
+  { id: 2, title: "Interstellar", image: "https://via.placeholder.com/150" },
+  { id: 3, title: "The Dark Knight", image: "https://via.placeholder.com/150" }
+];
+
+const Home = () => {
+  const { watchlist, addToWatchlist, removeFromWatchlist } = useWatchlist();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <main className="bg-gray-800 p-8 text-black text-white">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold mb-4">El señor de la noche</h2>
-        <p className="text-lg mb-4">
-          Batman es un hombre alto, caucásico, tiene una figura oscura e
-          imponente, posee con cabello negro corto y ojos marrones. Él lleva un
-          traje gris oscuro con el símbolo negro de un murciélago, en medio de
-          el pecho. Batman también usa una capucha negra que lo cubre en todo
-          momento para ocultar su identidad.
-        </p>
-      </div>
-    </main>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">Películas Populares</h1>
+      <MovieList movies={movies}  addToWatchlist={addToWatchlist} />
+      <button className="bg-green-500 text-white px-4 py-2 mt-4" onClick={() => setIsModalOpen(true)}>
+        Ver mi lista
+      </button>
+      {isModalOpen && <WatchlistModal watchlist={watchlist} onClose={() => setIsModalOpen(false)} removeFromWatchlist={removeFromWatchlist} />}
+    </div>
   );
 };
 
-export default Main;
+export default Home;
+
+// const Main = () => {
+//   return (
+//     <main className="bg-gray-800 p-8 text-black text-white">
+//       <div className="container mx-auto">
+//         <h2 className="text-3xl font-bold mb-4">El señor de la noche</h2>
+//         <p className="text-lg mb-4">
+//           Batman es un hombre alto, caucásico, tiene una figura oscura e
+//           imponente, posee con cabello negro corto y ojos marrones. Él lleva un
+//           traje gris oscuro con el símbolo negro de un murciélago, en medio de
+//           el pecho. Batman también usa una capucha negra que lo cubre en todo
+//           momento para ocultar su identidad.
+//         </p>
+//       </div>
+//     </main>
+//   );
+// };
+
+// export default Main;
 
 // const Main = () => {
 //   return (
