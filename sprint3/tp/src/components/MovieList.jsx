@@ -5,7 +5,7 @@ const MovieList = ({ watchlist, setWatchlist }) => {
 
 
   const addWatchlist = (movies) => {
-    if (!watchlist.some((item) => item.id === movie.id)) { 
+    if (!watchlist.some(item => item.id === movie.id)) { 
     const updatedWatchlist = [...watchlist, movies]; // Actualiza la lista
     setWatchlist(updatedWatchlist); // Actualiza el estado
     localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist)); // Guarda en localStorage
