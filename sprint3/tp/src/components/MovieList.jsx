@@ -22,7 +22,7 @@ const MovieList = ({ watchlist, setWatchlist }) => {
           key={movie.id}
           className="bg-gray-800 p-4 rounded shadow-md text-center"
         >
-          <img src={`/public/${movie.img}.jpg`} alt="" />
+          <img src={`/${movie.img}.jpg`} alt="" />
           <p>{movie.name}</p>
           <button
             className="bg-green-500 text-white px-4 py-2"
