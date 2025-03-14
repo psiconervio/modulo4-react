@@ -11,8 +11,10 @@ import { useState } from "react";
 import WatchlistModal from "./components/WatchlistModal";
 import MovieList from "./components/MovieList";
 import { useEffect } from "react";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+  const { isAuthenticated } = useAuth();
   // const [count, setCount] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
@@ -29,14 +31,19 @@ function App() {
     <>
       <Navbar />
       <Header setIsModalOpen={setIsModalOpen} />
-      <WatchlistModal
+      {!isAuthenticated ? (
+        <p>isAuthenticated : false</p>
+      ) : (
+        <p> isAuthenticated : true </p>
+      )}
+      {/* <WatchlistModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         watchlist={watchlist}
         setWatchlist={setWatchlist}
-      />
-      <MovieList watchlist={watchlist} setWatchlist={setWatchlist} />
-      <EjemploMotion />
+      /> */}
+      {/* <MovieList watchlist={watchlist} setWatchlist={setWatchlist} /> */}
+      {/* <EjemploMotion /> */}
       <Main />
       <Footer />
     </>

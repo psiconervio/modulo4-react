@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Superhéroes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+  <h1>Lista de Superhéroes</h1>
+  <a style="display: flex; justify-content: center;" href="/addSuperhero">Agregar Nuevo Superhéroe</a>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nombre del Superhéroe</th>
+        <th>Nombre Real</th>
+        <th>Edad</th>
+        <th>Planeta de Origen</th>
+        <th>Debilidad</th>
+        <th>ID</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% superheroes.forEach((hero) => { %>
+        <tr>
+          <td><%= hero.Nombre %></td>
+          <td><%= hero.NombreReal %></td>
+          <td><%= hero.Edad %></td>
+          <td><%= hero.PlanetadeOrigen %></td>
+          <td><%= hero.Debilidad || "N/A" %></td>
+          <td><%= hero.id || "N/A" %></td>
+          <td>
+            <a href="/editSuperhero/<%= hero.id %>">Editar</a>
+            <form action="/api/heroes/id/<%= hero.id %>" method="DELETE"  style="display: inline;">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    const API_URL = 'http://localhost:3000/api/heroes'; // Cambia según tu configuración
+
+// Función para cargar la tabla de superhéroes
+async function loadSuperheroes() {
+  const response = await fetch(API_URL);
+  const superheroes = await response.json();
+  
+  const table = `
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Poder</th>
+          <th>Aliados</th>
+          <th>Enemigos</th>
+          <th>Aliados</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${superheroes.map(hero => `
+          <tr>
+            <td>${hero._id}</td>
+            <td>${hero.nombreSuperHeroe}</td>
+            <td>${hero.Nombre}</td>
+            <td>${hero.Edad}</td>
+            <td>${hero.Poderes}</td>
+            <td>${hero.Aliados}</td>
+            <td>${hero.Enemigos}</td>
+            <td class="action-buttons">
+              <button class="edit-btn" onclick="editHero(${hero.id})">Editar</button>
+              <button class="delete-btn" onclick="deleteHero(${hero.id})">Eliminar</button>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+
+  document.getElementById('superhero-table').innerHTML = table;
+}
+
+// Mostrar formulario para crear o editar un superhéroe
+function showCreateForm() {
+  document.getElementById('superhero-form').style.display = 'block';
+  document.getElementById('form-title').textContent = 'Añadir Superhéroe';
+  document.getElementById('superheroForm').reset();
+  document.getElementById('superheroForm').onsubmit = createHero;
+}
+
+// Crear un superhéroe
+async function createHero(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData.entries());
+
+  await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  document.getElementById('superhero-form').style.display = 'none';
+  loadSuperheroes();
+}
+
+// Editar un superhéroe
+async function editHero(id) {
+  const response = await fetch(`${API_URL}/${id}`);
+  const hero = await response.json();
+
+  document.getElementById('superhero-form').style.display = 'block';
+  document.getElementById('form-title').textContent = 'Editar Superhéroe';
+  document.getElementById('nombre').value = hero.nombre;
+  document.getElementById('edad').value = hero.edad;
+  document.getElementById('poder').value = hero.poder;
+
+  document.getElementById('superheroForm').onsubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+
+    await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    document.getElementById('superhero-form').style.display = 'none';
+    loadSuperheroes();
+  };
+}
+
+// Eliminar un superhéroe
+async function deleteHero(id) {
+  if (confirm('¿Estás seguro de que deseas eliminar este superhéroe?')) {
+    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    loadSuperheroes();
+  }
+}
+
+// Cargar la tabla al iniciar
+loadSuperheroes();
+
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superhéroes Dashboard</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .delete-btn {
+      background-color: #f44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Superhéroes Dashboard</h1>
+  <button onclick="showCreateForm()">Añadir Superhéroe</button>
+  <div id="superhero-table">
+    <!-- Aquí se cargará la tabla con JavaScript -->
+  <!-- </div>
+  <div id="superhero-form" style="display:none;">
+    <h2 id="form-title">Añadir Superhéroe</h2>
+    <form id="superheroForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" required>
+      <label for="poder">Poder:</label>
+      <input type="text" id="poder" name="poder" required>
+      <button type="submit">Guardar</button>
+    </form>
+  </div>
+
+</body>
+</html> -->

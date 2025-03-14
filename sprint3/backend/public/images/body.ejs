@@ -1,0 +1,33 @@
+<div class="items-center align-center">
+    <table class="tabla" border="1" >
+      <thead>
+        <tr class="mx-4">
+          <th>Nombre del Superhéroe</th>
+          <th>Nombre Real</th>
+          <th>Edad</th>
+          <th>Planeta de Origen</th>
+          <th>Debilidad</th>
+          <th>ID</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% superheroes.forEach((hero) => { %>
+          <tr class="mx-10">
+            <td class="mx-10"><%= hero.Nombre %></td>
+            <td class="mx-10"><%= hero.NombreReal %></td>
+            <td class="mx-10"><%= hero.Edad %></td>
+            <td class="mx-10"><%= hero.PlanetadeOrigen %></td>
+            <td class="mx-10"><%= hero.Debilidad || "N/A" %></td>
+            <td class="mx-10"><%= hero.id || "N/A" %></td>
+            <td>
+              <a href="/editSuperhero/<%= hero.id %>">Editar</a>
+              <form action="/api/heroes/id/<%= hero.id %>" method="DELETE"  style="display: inline;">
+                <button type="submit">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
