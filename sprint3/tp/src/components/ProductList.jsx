@@ -11,13 +11,19 @@ const ProductList = () => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <div className="text-white items-center">
-      <h2>Lista de Productos</h2>
-      <ul>
+    <div className="text-white text-center p-6 bg-gray-800">
+      <h2 className="text-2xl font-bold mb-4">Lista de Productos</h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((product) => (
-          <li key={product.id}>
-            {product.name} - ${product.price}
-            <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+          <li className="bg-gray-700 p-4 rounded-lg shadow-md" key={product.id}>
+            <div className="text-lg font-semibold">{product.name}</div>
+            <div className="text-gray-400">${product.price}</div>
+            <button
+              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => addToCart(product)}
+            >
+              Agregar al carrito
+            </button>
           </li>
         ))}
       </ul>
