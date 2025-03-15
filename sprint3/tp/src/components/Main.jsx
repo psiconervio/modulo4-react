@@ -1,6 +1,10 @@
+import ProductList from "./ProductList";
+// import Cart from "./Cart";
+
 const Main = () => {
   return (
-    <main className="bg-gray-800 p-8 text-black text-white">
+    <main className="bg-gray-800 p-8 text-white">
+      {/* <Cart /> */}
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-4">El señor de la noche</h2>
         <p className="text-lg mb-4">

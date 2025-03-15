@@ -1,23 +1,23 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import "./App.css";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import EjemploMotion from "./components/EjemploMotion";
 import { useState } from "react";
 import WatchlistModal from "./components/WatchlistModal";
 import MovieList from "./components/MovieList";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useAuth } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import ProductList from "./components/ProductList";
+import { Cart } from "./components/Cart";
 
 function App() {
   const { isAuthenticated } = useAuth();
-  // const [count, setCount] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [watchlist, setWatchlist] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [isModalOpenCart, setIsModalOpenCart] = useState(false);
 
   //ver si hay peliculas en la watchlist en localstorage
   useEffect(() => {
@@ -27,25 +27,42 @@ function App() {
     }
   }, []);
 
+//Cargar desde localstorage
+  useEffect(() => {
+    const storeCart = localStorage.getItem("cart");
+    if (storeCart) {
+      setCart(JSON.parse(storeCart));
+    }}, []);
+
   return (
     <>
-      <Navbar />
-      <Header setIsModalOpen={setIsModalOpen} />
-      {!isAuthenticated ? (
-        <p>isAuthenticated : false</p>
-      ) : (
-        <p> isAuthenticated : true </p>
-      )}
-      {/* <WatchlistModal
+        <Navbar />
+        <Header
+          setIsModalOpenCart={setIsModalOpenCart}
+          setIsModalOpen={setIsModalOpen}
+        />
+        <ProductList />
+        <Cart
+          isModalOpenCart={isModalOpenCart}
+          setIsModalOpenCart={setIsModalOpenCart}
+          cart={cart}
+          setCart={setCart}
+        />
+        {/* {!isAuthenticated ? (
+          <p>isAuthenticated : false</p>
+        ) : (
+          <p> isAuthenticated : true </p>
+        )} */}
+        {/* <WatchlistModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         watchlist={watchlist}
         setWatchlist={setWatchlist}
       /> */}
-      {/* <MovieList watchlist={watchlist} setWatchlist={setWatchlist} /> */}
-      {/* <EjemploMotion /> */}
-      <Main />
-      <Footer />
+        {/* <MovieList watchlist={watchlist} setWatchlist={setWatchlist} /> */}
+        {/* <EjemploMotion /> */}
+        <Main />
+        <Footer />
     </>
   );
 }
