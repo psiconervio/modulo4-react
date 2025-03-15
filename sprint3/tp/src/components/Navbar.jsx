@@ -107,6 +107,7 @@ const NavBar = () => {
                 </a>
               </li>
             ))}
+            <li  className="text-white"><i class="bi bi-toggle-off"></i></li>
           </ul>
         </div>
       </div>

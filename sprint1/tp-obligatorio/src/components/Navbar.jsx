@@ -148,6 +148,7 @@ const NavBar = () => {
               </a>
             </li>
           ))}
+          <li>asdasds</li>
         </ul>
       </div>
     </nav>
