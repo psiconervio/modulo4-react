@@ -3,7 +3,7 @@ import ProductList from "./ProductList";
 
 const Main = () => {
   return (
-    <main className="bg-gray-800 p-8 text-white">
+    <main className="bg-gray-800 p-8 dark:text-white ligth:text-black">
       {/* <Cart /> */}
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-4">El señor de la noche</h2>

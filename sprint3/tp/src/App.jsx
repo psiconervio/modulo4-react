@@ -8,7 +8,6 @@ import WatchlistModal from "./components/WatchlistModal";
 import MovieList from "./components/MovieList";
 import { useEffect, useContext } from "react";
 import { useAuth } from "./context/AuthContext";
-import { CartProvider } from "./context/CartContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 
@@ -27,42 +26,43 @@ function App() {
     }
   }, []);
 
-//Cargar desde localstorage
+  //Cargar desde localstorage
   useEffect(() => {
     const storeCart = localStorage.getItem("cart");
     if (storeCart) {
       setCart(JSON.parse(storeCart));
-    }}, []);
+    }
+  }, []);
 
   return (
     <>
-        <Navbar />
-        <Header
-          setIsModalOpenCart={setIsModalOpenCart}
-          setIsModalOpen={setIsModalOpen}
-        />
-        <ProductList />
-        <Cart
-          isModalOpenCart={isModalOpenCart}
-          setIsModalOpenCart={setIsModalOpenCart}
-          cart={cart}
-          setCart={setCart}
-        />
-        {/* {!isAuthenticated ? (
+      <Navbar />
+      <Header
+        setIsModalOpen={setIsModalOpen}
+        setIsModalOpenCart={setIsModalOpenCart}
+      />
+      <ProductList />
+      <Cart
+        isModalOpenCart={isModalOpenCart}
+        setIsModalOpenCart={setIsModalOpenCart}
+        cart={cart}
+        setCart={setCart}
+      />
+      {/* {!isAuthenticated ? (
           <p>isAuthenticated : false</p>
         ) : (
           <p> isAuthenticated : true </p>
         )} */}
-        {/* <WatchlistModal
+      {/* <WatchlistModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         watchlist={watchlist}
         setWatchlist={setWatchlist}
       /> */}
-        {/* <MovieList watchlist={watchlist} setWatchlist={setWatchlist} /> */}
-        {/* <EjemploMotion /> */}
-        <Main />
-        <Footer />
+      {/* <MovieList watchlist={watchlist} setWatchlist={setWatchlist} /> */}
+      {/* <EjemploMotion /> */}
+      <Main />
+      <Footer />
     </>
   );
 }

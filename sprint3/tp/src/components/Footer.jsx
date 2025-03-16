@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+import { ThemeContext } from "../context/ThemeContext";
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -14,11 +15,19 @@ const Footer = () => {
       }`}
     >
       <div className="container mx-auto text-center">
-        <p>Hecho con React por Augusto Del Campo &copy;</p>
+        <p
+          className={
+            theme === "dark"
+              ? "bg-white text-black p-4"
+              : "bg-gray-900 text-white p-4"
+          }
+        >
+          Hecho con React por Augusto Del Campo &copy;
+        </p>
         <nav>
           <ul className="flex justify-center space-x-4">
             <li>
-              <a href="#privacy" className="hover:underline">
+              <a href="#privacy" className="hover:underline ">
                 Privacidad
               </a>
             </li>

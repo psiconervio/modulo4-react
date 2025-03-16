@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext"; // Ajusta la ruta si es necesario
 
 const products = [
-  { id: 1, name: "Laptop", price: 1000 },
-  { id: 2, name: "Auriculares", price: 200 },
-  { id: 3, name: "Mouse", price: 50 }
+  { id: 1, name: "Laptop", price: 1000, img: "tienda/tienda_1" },
+  { id: 2, name: "Auriculares", price: 200, img: "tienda/tienda_2" },
+  { id: 3, name: "Mouse", price: 50, img: "tienda/tienda_3" },
 ];
 
 const ProductList = () => {
@@ -16,6 +16,8 @@ const ProductList = () => {
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((product) => (
           <li className="bg-gray-700 p-4 rounded-lg shadow-md" key={product.id}>
+
+            <img className="h-80" src={`/${product.img}.jpg`} alt="" />
             <div className="text-lg font-semibold">{product.name}</div>
             <div className="text-gray-400">${product.price}</div>
             <button
