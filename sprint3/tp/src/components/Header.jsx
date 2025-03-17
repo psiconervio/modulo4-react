@@ -18,9 +18,9 @@ const Header = ({ setIsModalOpen, setIsModalOpenCart }) => {
 
   return (
     // <header className="bg-blue-900/40 text-white p-4">
-    <header className={theme === "dark" ? "bg-gray-900 text-white p-4" : "bg-white-300 text-black p-4"}>
+    <header className={theme === "dark" ? "bg-gray-900 text-white p-4" : "bg-white text-black p-4"}>
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold dark:text-black">¡Hola mundo!</h1>
+        <h1 className="text-2xl font-bold ">¡Hola mundo!</h1>
         <button
           className="bg-green-500 text-white px-4 py-2"
           onClick={onOpenModal}

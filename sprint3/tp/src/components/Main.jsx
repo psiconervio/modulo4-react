@@ -1,13 +1,16 @@
 import ProductList from "./ProductList";
 // import Cart from "./Cart";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext"; 
 
 const Main = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <main className="bg-gray-800 p-8 dark:text-white ligth:text-black">
       {/* <Cart /> */}
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-4">El señor de la noche</h2>
-        <p className="text-lg mb-4">
+        <p className={theme === "dark" ? "bg-gray-900 text-white p-4" : "bg-white text-black p-4"}>
           Batman es un hombre alto, caucásico, tiene una figura oscura e
           imponente, posee con cabello negro corto y ojos marrones. Él lleva un
           traje gris oscuro con el símbolo negro de un murciélago, en medio de
