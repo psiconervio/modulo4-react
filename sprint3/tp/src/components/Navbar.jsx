@@ -41,7 +41,7 @@ const NavBar = () => {
   return (
     <nav
       className={`w-full backdrop-blur-md z-50 transition-all duration-300 ${
-        theme === "dark" ? "bg-gray-900" : "bg-white"
+        theme === "dark" ? "bg-gray-900" : "bg-gray-700"
       } bg-opacity-30 `}
     >
       {/* Vista para escritorio */}

@@ -18,8 +18,8 @@ const Footer = () => {
         <p
           className={
             theme === "dark"
-              ? "bg-gray-900 text-white p-4"
-              : "bg-white text-black p-4"
+              ? "text-white p-4"
+              : "text-black p-4"
           }
         >
           Hecho con React por Augusto Del Campo &copy;

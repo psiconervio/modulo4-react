@@ -22,7 +22,7 @@ const Header = ({ setIsModalOpen, setIsModalOpenCart }) => {
       className={
         theme === "dark"
           ? "bg-gray-800 text-white p-4"
-          : "bg-white text-black p-4"
+          : "bg-gray-600 text-white p-4"
       }
     >
       <div className="container mx-auto flex justify-between items-center">
