@@ -16,8 +16,9 @@ const ProductList = () => {
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.map((product) => (
           <li className="bg-gray-700 p-4 rounded-lg shadow-md" key={product.id}>
-
-            <img className="h-80" src={`/${product.img}.jpg`} alt="" />
+            <div className="flex justify-center">
+              <img className="h-80" src={`/${product.img}.jpg`} alt="" />
+            </div>
             <div className="text-lg font-semibold">{product.name}</div>
             <div className="text-gray-400">${product.price}</div>
             <button

@@ -1,7 +1,10 @@
-import { useState } from "react"; // Importa el hook useState para manejar el estado del menú
+import { useState,useContext } from "react"; // Importa el hook useState para manejar el estado del menú
 import batman from "../assets/batman.png"; // Importa una imagen desde la carpeta assets
+import { ThemeContext } from "../context/ThemeContext";
 
 const NavBar = () => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+  
   // Estado para controlar si el menú está abierto o cerrado (para la vista móvil)
   const [isOpen, setIsOpen] = useState(false);
   console.log("isOpen -> ", isOpen); // Muestra en consola el estado actual de isOpen
@@ -36,12 +39,16 @@ const NavBar = () => {
   ];
 
   return (
-    <nav className="w-full bg-gray-900 bg-opacity-30 backdrop-blur-md z-50 transition-all duration-300">
+    <nav
+      className={`w-full backdrop-blur-md z-50 transition-all duration-300 ${
+        theme === "dark" ? "bg-gray-900" : "bg-white"
+      } bg-opacity-30 `}
+    >
       {/* Vista para escritorio */}
       <div className="flex justify-between items-center sm:px-12 sm:py-6 px-4 py-3">
         <div className="flex items-center gap-2">
           <img src={batman} alt="Logo" className="w-[60px]" />
-          <p className="text-white font-bold font-size-3xl">Batman</p>
+          <p className="text-white font-bold font-size-3xl">BatmanShop</p>
         </div>
 
         {/* Botón del menú hamburguesa para móviles */}
@@ -107,7 +114,20 @@ const NavBar = () => {
                 </a>
               </li>
             ))}
-            <li  className="text-white"><i class="bi bi-toggle-off"></i></li>
+                      <button
+            className={
+              theme === "dark"
+                ? "bg-gray-900 text-white"
+                : "bg-white text-black"
+            }
+            onClick={toggleTheme}
+          >
+            {theme === "light" ? (
+              <i className="bi bi-toggle-off"></i>
+            ) : (
+              <i className="bi bi-toggle-on"></i>
+            )}
+          </button>
           </ul>
         </div>
       </div>
@@ -150,6 +170,22 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
+        <div className="h-14  flex justify-center">
+        <button
+            className={
+              theme === "dark"
+                ? " text-white"
+                : " text-black"
+            }
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? (
+              <i className="h-20 bi bi-toggle-off"></i>
+            ) : (
+              <i className="bi bi-toggle-on"></i>
+            )}
+          </button>
+        </div>
       </div>
     </nav>
   );

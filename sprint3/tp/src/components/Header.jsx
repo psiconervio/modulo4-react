@@ -18,34 +18,43 @@ const Header = ({ setIsModalOpen, setIsModalOpenCart }) => {
 
   return (
     // <header className="bg-blue-900/40 text-white p-4">
-    <header className={theme === "dark" ? "bg-gray-900 text-white p-4" : "bg-white text-black p-4"}>
+    <header
+      className={
+        theme === "dark"
+          ? "bg-gray-800 text-white p-4"
+          : "bg-white text-black p-4"
+      }
+    >
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold ">¡Hola mundo!</h1>
-        <button
+        <h1 className="text-2xl font-bold ">Productos</h1>
+        {/* <button
           className="bg-green-500 text-white px-4 py-2"
           onClick={onOpenModal}
         >
           ver watchlist
-        </button>
-        <button
-          className="bg-green-500 text-white px-4 py-2"
-          onClick={onOpenModalCart}
-        >
-          <i class="bi bi-bag"></i>
-          Carrito
-        </button>
-        <button
-          className={
-            theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
-          }
-          onClick={toggleTheme}
-        >
-          {theme === "light" ? (
-            <i className="bi bi-toggle-off"></i>
-          ) : (
-            <i className="bi bi-toggle-on"></i>
-          )}
-        </button>
+        </button> */}
+        <div>
+          <button
+            className="mx-5 bg-green-500 text-white px-4 py-2"
+            onClick={onOpenModalCart}
+          >
+            <i className="bi bi-bag"></i>
+          </button>
+          {/* <button
+            className={
+              theme === "dark"
+                ? "bg-gray-900 text-white"
+                : "bg-white text-black"
+            }
+            onClick={toggleTheme}
+          >
+            {theme === "light" ? (
+              <i className="bi bi-toggle-off"></i>
+            ) : (
+              <i className="bi bi-toggle-on"></i>
+            )}
+          </button> */}
+        </div>
       </div>
     </header>
   );
