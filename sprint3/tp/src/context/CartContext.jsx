@@ -27,15 +27,23 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((product) => product.id !== id));
   };
-
-  const updateQuantity = (id, quantity) => {
+//legacy
+  // const updateQuantity = (id, quantity) => {
+  //   setCart((prevCart) =>
+  //     prevCart.map((product) =>
+  //       product.id === id ? { ...product, quantity: Math.max(1, quantity) } : product
+  //     )
+  //   );
+  // };
+  const updateQuantity = (id, delta) => {
     setCart((prevCart) =>
       prevCart.map((product) =>
-        product.id === id ? { ...product, quantity: Math.max(1, quantity) } : product
+        product.id === id
+          ? { ...product, quantity: Math.max(1, product.quantity + delta) }
+          : product
       )
     );
   };
-
   const totalPrice = cart.reduce((total, product) => total + product.price * product.quantity, 0);
 
   return (

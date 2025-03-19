@@ -1,11 +1,9 @@
-import React,{useContext} from "react";
-import { CartContext } from '../context/CartContext';
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-export const Cart = ({
-  isModalOpenCart,
-  setIsModalOpenCart,
-}) => {
-  const { cart, addToCart, removeFromCart, updateQuantity, totalPrice } = useContext(CartContext);
+export const Cart = ({ isModalOpenCart, setIsModalOpenCart }) => {
+  const { cart, addToCart, removeFromCart, updateQuantity, totalPrice } =
+    useContext(CartContext);
 
   if (!isModalOpenCart) return null;
   //funcion para cerrar el modal
@@ -26,7 +24,7 @@ export const Cart = ({
                   <p className="text-gray-600">${product.price}</p>
                 </div>
                 <div className="flex items-center">
-                  <button
+                  {/* <button
                     className="bg-gray-200 px-2 py-1 rounded-l"
                     onClick={() => updateQuantity(product.id, 1)}
                   >
@@ -38,11 +36,26 @@ export const Cart = ({
                     onClick={() => updateQuantity(product.id, -1)}
                   >
                     -
+                  </button> */}
+                  <button
+                    className="bg-gray-200 px-2 py-1 rounded-l"
+                    onClick={() => updateQuantity(product.id, 1)} 
+                  >
+                    +
+                  </button>
+                  <span className="px-4">{product.quantity}</span>
+                  <button
+                    className="bg-gray-200 px-2 py-1 rounded-r"
+                    onClick={() => updateQuantity(product.id, -1)} 
+                  >
+                    -
                   </button>
                 </div>
               </div>
               <div className="flex justify-between items-center mt-2">
-                <p className="text-gray-600">Subtotal: ${product.price * product.quantity}</p>
+                <p className="text-gray-600">
+                  Subtotal: ${product.price * product.quantity}
+                </p>
                 <div>
                   <button
                     className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
