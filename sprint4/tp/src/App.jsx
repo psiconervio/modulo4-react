@@ -10,6 +10,7 @@ import { useEffect, useContext } from "react";
 import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
+import { FetchCharacters } from "./components/FetchCharacters";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -17,7 +18,9 @@ function App() {
   const [watchlist, setWatchlist] = useState([]);
   const [cart, setCart] = useState([]);
   const [isModalOpenCart, setIsModalOpenCart] = useState(false);
+  // const [personajes, setPersonajes] = useState([]);
 
+  
   //ver si hay peliculas en la watchlist en localstorage
   useEffect(() => {
     const storedWatchlist = localStorage.getItem("watchlist");
@@ -41,6 +44,7 @@ function App() {
         setIsModalOpen={setIsModalOpen}
         setIsModalOpenCart={setIsModalOpenCart}
       />
+      <FetchCharacters />
       <ProductList />
       <Cart
         isModalOpenCart={isModalOpenCart}
