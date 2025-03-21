@@ -14,7 +14,7 @@ export const FetchCharacters = () => {
   //   console.log(FetchCharacters);
   return (
     <>
-      <div className="text-center text-white my-4 mx-auto">
+      <div className="text-center text-white my-10 mx-8">
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {personajes.map((personaje) => (
             <li className="bg-gray-700 p-4 rounded-lg shadow-m" key={personaje.id}>
