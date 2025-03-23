@@ -11,6 +11,7 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
+import { FormSearch } from "./components/FormSearch";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -44,14 +45,15 @@ function App() {
         setIsModalOpen={setIsModalOpen}
         setIsModalOpenCart={setIsModalOpenCart}
       />
+      <FormSearch />
       <FetchCharacters />
-      <ProductList />
+      {/* <ProductList />
       <Cart
         isModalOpenCart={isModalOpenCart}
         setIsModalOpenCart={setIsModalOpenCart}
         cart={cart}
         setCart={setCart}
-      />
+      /> */}
       {/* {!isAuthenticated ? (
           <p>isAuthenticated : false</p>
         ) : (
