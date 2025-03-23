@@ -11,7 +11,6 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
-import { FavoriteCharacter } from "./components/FavoriteCharacter";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -41,9 +40,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <FavoriteCharacter
-      
-      />
       <Header
         setIsModalOpen={setIsModalOpen}
         setIsModalOpenCart={setIsModalOpenCart}
