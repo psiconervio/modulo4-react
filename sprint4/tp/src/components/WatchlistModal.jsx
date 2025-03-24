@@ -7,13 +7,16 @@ const WatchlistModal = ({
   watchlist,
   setWatchlist,
 }) => {
-  if (!isModalOpen) return null;
+  // Verifica si la variable `isModalOpen` es falsa o no está definida
+  if (!isModalOpen)
+    // Si `isModalOpen` es falsa, retorna `null` y no renderiza nada
+    return null;
 
   const onClose = () => setIsModalOpen(false); // cerrar modal
 
-  const removerFromWatchlist = (id) =>{
-    setWatchlist(watchlist.filter((movie) => movie.id !== id))
-  }
+  const removerFromWatchlist = (id) => {
+    setWatchlist(watchlist.filter((movie) => movie.id !== id));
+  };
 
   return (
     <div className=" fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center <-50">
@@ -27,12 +30,18 @@ const WatchlistModal = ({
           watchlist.map((movie) => (
             <div className="my-2" key={movie.id}>
               <p>{movie.name}</p>
-              <button className="bg-red-500 text-white px-4 py-2" onClick={() => removerFromWatchlist(movie.id)}>remover </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2"
+                onClick={() => removerFromWatchlist(movie.id)}
+              >
+                remover{" "}
+              </button>
             </div>
           ))
         )}
-        <button className="bg-gray-500 text-white px-4 py-2" onClick={onClose}>CERRAR </button>
-
+        <button className="bg-gray-500 text-white px-4 py-2" onClick={onClose}>
+          CERRAR{" "}
+        </button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const NavBar = () => {
   
   // Estado para controlar si el menú está abierto o cerrado (para la vista móvil)
   const [isOpen, setIsOpen] = useState(false);
-  console.log("isOpen -> ", isOpen); // Muestra en consola el estado actual de isOpen
+  // console.log("isOpen -> ", isOpen); // Muestra en consola el estado actual de isOpen
 
   // Función para alternar entre abrir y cerrar el menú
   const toggleMenu = () => {

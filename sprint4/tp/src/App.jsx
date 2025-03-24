@@ -12,29 +12,37 @@ import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
 import { FormSearch } from "./components/FormSearch";
+import { FavPersonajeModal } from "./components/FavPersonajeModal";
 
 function App() {
-  const { isAuthenticated } = useAuth();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [watchlist, setWatchlist] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [isModalOpenCart, setIsModalOpenCart] = useState(false);
-  // const [personajes, setPersonajes] = useState([]);
+  // const { isAuthenticated } = useAuth();
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [watchlist, setWatchlist] = useState([]);
+  // const [cart, setCart] = useState([]);
+  // const [isModalOpenCart, setIsModalOpenCart] = useState(false);
+  const [isModalFav, setIsModalFav] = useState(false);
+  const [personajes, setPersonajes] = useState([]);
 
-  
   //ver si hay peliculas en la watchlist en localstorage
-  useEffect(() => {
-    const storedWatchlist = localStorage.getItem("watchlist");
-    if (storedWatchlist) {
-      setWatchlist(JSON.parse(storedWatchlist)); // Convierte la cadena en un objeto/array
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedWatchlist = localStorage.getItem("watchlist");
+  //   if (storedWatchlist) {
+  //     setWatchlist(JSON.parse(storedWatchlist)); // Convierte la cadena en un objeto/array
+  //   }
+  // }, []);
 
-  //Cargar desde localstorage
+  // //Cargar desde localstorage
+  // useEffect(() => {
+  //   const storeCart = localStorage.getItem("cart");
+  //   if (storeCart) {
+  //     setCart(JSON.parse(storeCart));
+  //   }
+  // }, []);
+
   useEffect(() => {
-    const storeCart = localStorage.getItem("cart");
-    if (storeCart) {
-      setCart(JSON.parse(storeCart));
+    const storedPersonajes = localStorage.getItem("personajes");
+    if (storedPersonajes) {
+      setPersonajes(JSON.parse(storedPersonajes));
     }
   }, []);
 
@@ -42,11 +50,24 @@ function App() {
     <>
       <Navbar />
       <Header
-        setIsModalOpen={setIsModalOpen}
-        setIsModalOpenCart={setIsModalOpenCart}
+        // setIsModalOpen={setIsModalOpen}
+        // setIsModalOpenCart={setIsModalOpenCart}
+        isModalFav={isModalFav}
+        setIsModalFav={setIsModalFav}
       />
       <FormSearch />
-      <FetchCharacters />
+      <FetchCharacters
+        isModalFav={isModalFav}
+        setIsModalFav={setIsModalFav}
+        personajes={personajes}
+        setPersonajes={setPersonajes}
+      />
+      <FavPersonajeModal
+        personajes={personajes}
+        setPersonajes={setPersonajes}
+        isModalFav={isModalFav}
+        setIsModalFav={setIsModalFav}
+      />
       {/* <ProductList />
       <Cart
         isModalOpenCart={isModalOpenCart}
