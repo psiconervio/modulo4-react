@@ -13,6 +13,7 @@ import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
 import { FormSearch } from "./components/FormSearch";
 import { FavPersonajeModal } from "./components/FavPersonajeModal";
+import { toast } from "react-toastify";
 
 function App() {
   // const { isAuthenticated } = useAuth();
@@ -43,6 +44,7 @@ function App() {
     const storedPersonajes = localStorage.getItem("personajes");
     if (storedPersonajes) {
       setPersonajes(JSON.parse(storedPersonajes));
+      toast.success("Personajes cargados desde local storage");
     }
   }, []);
 
