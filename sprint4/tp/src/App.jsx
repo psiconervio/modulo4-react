@@ -11,9 +11,10 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
-import { FormSearch } from "./components/FormSearch";
+import { FormSearchCharacteres } from "./components/FormSearchCharacteres";
 import { FavPersonajeModal } from "./components/FavPersonajeModal";
 import { toast,ToastContainer } from "react-toastify";
+import { PersonajeProvider } from "./context/CharacterContext";
 
 function App() {
   // const { isAuthenticated } = useAuth();
@@ -48,6 +49,7 @@ function App() {
   }, []);
   return (
     <>
+    <PersonajeProvider>
       <Navbar />
       <Header
         // setIsModalOpen={setIsModalOpen}
@@ -56,7 +58,7 @@ function App() {
         setIsModalFav={setIsModalFav}
       />
       <ToastContainer />
-      <FormSearch />
+      <FormSearchCharacteres />
       <FetchCharacters
         isModalFav={isModalFav}
         setIsModalFav={setIsModalFav}
@@ -91,6 +93,7 @@ function App() {
       {/* <EjemploMotion /> */}
       <Main />
       <Footer />
+      </PersonajeProvider>
     </>
   );
 }

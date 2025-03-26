@@ -27,6 +27,7 @@ export const FetchCharacters = ({personajes, setPersonajes}) => {
       const updatedPersonajes = [...personajes, personaje];
       setPersonajes(updatedPersonajes);
       localStorage.setItem("personajes", JSON.stringify(updatedPersonajes));
+      toast.success("Personaje agregado a favoritos");
     }
     else {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
