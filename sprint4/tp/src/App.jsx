@@ -63,12 +63,12 @@ function App() {
         />
         <ToastContainer />
         {/* <FormSearchCharacteres /> */}
-        <FetchCharacters
+        {/* <FetchCharacters
           isModalFav={isModalFav}
           setIsModalFav={setIsModalFav}
           personajes={personajes}
           setPersonajes={setPersonajes}
-        />
+        /> */}
         <FavPersonajeModal
           personajes={personajes}
           setPersonajes={setPersonajes}

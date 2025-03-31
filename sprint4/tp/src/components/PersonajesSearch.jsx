@@ -42,7 +42,7 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
   }, [name]); // Ejecutar cada vez que cambia `name`
 
   return (
-    <div className="mx-4 my-4 text-white">
+    <div className="mx-4 my-4 text-white ">
       <h1>Buscar Personajes de Rick y Morty</h1>
       <SearchForm name={name} setName={setName} />
       {error && <p>{error}</p>}
@@ -50,7 +50,7 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
         {characters.map((character) => (
           <li className="bg-gray-700 p-4 rounded-lg shadow-m" key={character.id}>
             <div className="flex items-center justify-center">
-              <img src={character.image} alt={character.name} width={50} />
+              <img src={character.image} alt={character.name}  />
             </div>
             {character.name}
             <button
