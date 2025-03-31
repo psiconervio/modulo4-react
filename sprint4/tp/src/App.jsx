@@ -11,12 +11,27 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 import { FetchCharacters } from "./components/FetchCharacters";
-import { FormSearchCharacteres } from "./components/FormSearchCharacteres";
+import  SearchForm  from "./components/SearchForm";
 import { FavPersonajeModal } from "./components/FavPersonajeModal";
 import { toast,ToastContainer } from "react-toastify";
 import { PersonajeProvider } from "./context/CharacterContext";
 
+
 function App() {
+  const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(null);
+
+  const fetchCharacters = async (name) => {
+    try {
+      const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${name}`);
+      const data = await response.json();
+      setCharacters(data.results || []);
+      setError(null);
+    } catch (err) {
+      console.error(err);
+      setError('Error al buscar personajes');
+    }
+  };
   // const { isAuthenticated } = useAuth();
   // const [isModalOpen, setIsModalOpen] = useState(false);
   // const [watchlist, setWatchlist] = useState([]);
@@ -57,8 +72,21 @@ function App() {
         isModalFav={isModalFav}
         setIsModalFav={setIsModalFav}
       />
+        <div>
+      <h1>Buscar Personajes de Rick y Morty</h1>
+      <SearchForm onSearch={fetchCharacters} />
+      {error && <p>{error}</p>}
+      <ul>
+        {characters.map((character) => (
+          <li key={character.id}>
+            <img src={character.image} alt={character.name} width={50} />
+            {character.name}
+          </li>
+        ))}
+      </ul>
+    </div>
       <ToastContainer />
-      <FormSearchCharacteres />
+      {/* <FormSearchCharacteres /> */}
       <FetchCharacters
         isModalFav={isModalFav}
         setIsModalFav={setIsModalFav}
@@ -71,6 +99,7 @@ function App() {
         isModalFav={isModalFav}
         setIsModalFav={setIsModalFav}
       />
+      
       {/* <ProductList />
       <Cart
         isModalOpenCart={isModalOpenCart}
