@@ -9,12 +9,13 @@ const SearchForm = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='text-white mx-4 my-4' onSubmit={handleSubmit}>
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Buscar personaje"
+        className='text-white'
       />
       <button type="submit">Buscar</button>
     </form>
@@ -22,6 +23,9 @@ const SearchForm = ({ onSearch }) => {
 };
 
 export default SearchForm;
+
+
+
 // import React from "react";
 // import { useState } from "react";
 // import { usePersonaje } from "../context/CharacterContext";
