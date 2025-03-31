@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
+import React from "react";
 
-const SearchForm = ({ onSearch }) => {
-  const [name, setName] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(name);
-  };
-
+const SearchForm = ({ name, setName }) => {
   return (
-    <form className='text-white mx-4 my-4' onSubmit={handleSubmit}>
+    <form className="text-white mx-4 my-4">
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Buscar personaje"
-        className='text-white'
+        className="text-white p-2 border border-gray-700 rounded"
       />
-      <button type="submit">Buscar</button>
     </form>
   );
 };
 
 export default SearchForm;
+
+// import React, { useState } from 'react';
+
+// const SearchForm = ({ onSearch }) => {
+//   const [name, setName] = useState('');
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     onSearch(name);
+//   };
+
+//   return (
+//     <form className='text-white mx-4 my-4' onSubmit={handleSubmit}>
+//       <input
+//         type="text"
+//         value={name}
+//         onChange={(e) => setName(e.target.value)}
+//         placeholder="Buscar personaje"
+//         className='text-white p-2 border border-gray-700 rounded'
+//       />
+//       <button type="submit">Buscar</button>
+//     </form>
+//   );
+// };
+
+// export default SearchForm;
 
 
 
