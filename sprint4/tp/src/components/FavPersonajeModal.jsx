@@ -18,13 +18,11 @@ export const FavPersonajeModal = ({
     toast.success("Personaje removido de favoritos");
   };
 
-  console.log(personajes);
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/70">
       <div className="bg-white p-6 w-11/12 max-w-md relative rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold">Personajes Favoritos</h2>
         <p>FavPersonajeModal</p>
-
         {personajes.length === 0 ? (
           <p>No hay personajes en la lista de favoritos</p>
         ) : (

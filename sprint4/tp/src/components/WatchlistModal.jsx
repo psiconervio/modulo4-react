@@ -13,7 +13,6 @@ const WatchlistModal = ({
     return null;
 
   const onClose = () => setIsModalOpen(false); // cerrar modal
-
   const removerFromWatchlist = (id) => {
     setWatchlist(watchlist.filter((movie) => movie.id !== id));
   };
