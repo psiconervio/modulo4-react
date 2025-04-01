@@ -1,20 +1,4 @@
-// import React from "react";
 
-// const SearchForm = ({ name, setName }) => {
-//   return (
-//     <form className="text-white mx-4 my-4">
-//       <input
-//         type="text"
-//         value={name}
-//         onChange={(e) => setName(e.target.value)}
-//         placeholder="Buscar personaje"
-//         className="text-white p-2 border border-gray-700 rounded"
-//       />
-//     </form>
-//   );
-// };
-
-// export default SearchForm;
 
 import React, { useState } from 'react';
 
@@ -41,6 +25,25 @@ const SearchForm = ({ onSearch }) => {
 };
 
 export default SearchForm;
+//Codigo con debounce
+// import React from "react";
+
+// const SearchForm = ({ name, setName }) => {
+//   return (
+//     <form className="text-white mx-4 my-4">
+//       <input
+//         type="text"
+//         value={name}
+//         onChange={(e) => setName(e.target.value)}
+//         placeholder="Buscar personaje"
+//         className="text-white p-2 border border-gray-700 rounded"
+//       />
+//     </form>
+//   );
+// };
+
+// export default SearchForm;
+
 
 
 
