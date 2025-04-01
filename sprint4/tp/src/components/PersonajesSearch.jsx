@@ -70,12 +70,10 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import { toast } from "react-toastify";
-import { api } from "../api/api";
 
 export const PersonajesSearch = ({ personajes, setPersonajes }) => {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(null);
-  const [ischaracters, setIscharacters] = useState([]);
 
   const añadirPersonajesFav = (personaje) => {
     if (!personajes.some((item) => item.id === personaje.id)) {
