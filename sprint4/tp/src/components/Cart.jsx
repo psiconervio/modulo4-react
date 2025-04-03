@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 export const Cart = ({ isModalOpenCart, setIsModalOpenCart }) => {
-  // desestructuracion de cartcontext, para usar funciones que manejan el carte
+  // desestructuracion de cartcontext, para usar funciones que manejan el cart
   const {
     cart,
     addToCart,

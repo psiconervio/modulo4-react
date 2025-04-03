@@ -1,39 +1,23 @@
-import React, { useState, useEffect } from "react";
-// Importamos React y los hooks `useState` y `useEffect`.
-// `useState` se usa para manejar estados locales y `useEffect` para manejar efectos secundarios.
+import { useState } from "react";
 import SearchForm from "./SearchForm";
-// Importamos el componente `SearchForm`, que probablemente contiene el formulario de búsqueda.
 import { toast } from "react-toastify";
-// Importamos la librería `react-toastify` para mostrar notificaciones al usuario.
 
 export const PersonajesSearch = ({ personajes, setPersonajes }) => {
-  // Componente funcional `PersonajesSearch` que recibe dos props:
-  // `personajes`: lista de personajes favoritos.
-  // `setPersonajes`: función para actualizar la lista de personajes favoritos.
   const [characters, setCharacters] = useState([]);
-  // Estado local `characters` para almacenar los personajes obtenidos de la API.
-  // `setCharacters` es la función para actualizar este estado.
   const [error, setError] = useState(null);
-  // Estado local `error` para manejar errores en la búsqueda de personajes.
+
   const añadirPersonajesFav = (personaje) => {
-    // Función para añadir un personaje a la lista de favoritos.
     if (!personajes.some((item) => item.id === personaje.id)) {
-      // Verifica si el personaje ya está en la lista de favoritos.
       const updatedPersonajes = [...personajes, personaje];
-      // Si no está, crea una nueva lista con el personaje añadido.
       setPersonajes(updatedPersonajes);
-     // Actualiza el estado global de personajes favoritos.
       localStorage.setItem("personajes", JSON.stringify(updatedPersonajes));
-      // Guarda la lista actualizada en el `localStorage` para persistencia.
       toast.success("Personaje agregado a favoritos");
-      // Muestra una notificación de éxito.
     } else {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
-      // Si el personaje ya está en la lista, muestra una notificación de error.
     }
   };
   const fetchCharacters = async (name) => {
-    // Función para buscar personajes en la API de Rick and Morty, el parametro onSearch de searchForm
+    // funcion para buscar personajes en la API el parametro onSearch de searchForm
     try {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?name=${name}`
@@ -44,7 +28,7 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
       setCharacters(data.results || []);
       // Actualiza el estado `characters` con los resultados obtenidos.
       // Si no hay resultados, se asigna un array vacío.
-     setError(null);
+      setError(null);
       // Limpia cualquier error previo.
     } catch (err) {
       console.error(err);
@@ -55,38 +39,30 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
   };
   return (
     <div className="mx-4 my-4 text-white ">
-      {/* Contenedor principal con clases de estilo (probablemente de Tailwind CSS). */}
       <h1>Buscar Personajes de Rick y Morty</h1>
-      {/* Título de la página. */}
       <SearchForm onSearch={fetchCharacters} />
       {/* Componente `SearchForm` que recibe la función `fetchCharacters` como prop.
           Esta función se ejecutará cuando el usuario realice una búsqueda. */}
       {error && <p>{error}</p>}
-      {/* Si hay un error, se muestra un mensaje en pantalla. */}
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 items-center justify-center">
-        {/* Lista de personajes mostrada en un diseño de cuadrícula. */}
         {characters.map((character) => (
           <li
             className="bg-gray-700 p-4 rounded-lg shadow-m flex items-center justify-center flex-col"
             key={character.id}
-            // Cada elemento de la lista tiene un estilo y una clave única basada en el ID del personaje.
           >
             <div className="flex items-center justify-center">
-              <img src={character.image} alt={character.name} className="w-50" />
-              {/* Imagen del personaje con su respectivo nombre como texto alternativo. */}
+              <img
+                src={character.image}
+                alt={character.name}
+                className="w-50"
+              />
             </div>
-            <div>
-              {character.name}
-              {/* Nombre del personaje. */}
-            </div>
+            <div>{character.name}</div>
             <button
               onClick={() => añadirPersonajesFav(character)}
-              // Al hacer clic en el botón, se llama a la función `añadirPersonajesFav` con el personaje actual.
               className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              // Clases de estilo para el botón.
             >
               <i className="bi bi-heart-fill"></i> Agregar a Favoritos
-              {/* Icono y texto del botón. */}
             </button>
           </li>
         ))}
@@ -225,4 +201,3 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
 //     </div>
 //   );
 // };
-
