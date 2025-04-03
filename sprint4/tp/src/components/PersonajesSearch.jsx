@@ -22,19 +22,12 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?name=${name}`
       );
-      // Realiza una solicitud a la API con el nombre del personaje.
       const data = await response.json();
-      // Convierte la respuesta en un objeto JSON.
       setCharacters(data.results || []);
-      // Actualiza el estado `characters` con los resultados obtenidos.
-      // Si no hay resultados, se asigna un array vacío.
       setError(null);
-      // Limpia cualquier error previo.
     } catch (err) {
       console.error(err);
-      // Muestra el error en la consola.
       setError("Error al buscar personajes");
-      // Actualiza el estado `error` con un mensaje de error.
     }
   };
   return (
