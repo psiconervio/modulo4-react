@@ -31,7 +31,7 @@ export const PersonajeProvider = ({ children }) => {
   // useEffect(() => {
   //   localStorage.setItem("personajes", JSON.stringify(personajes));
   // });
-
+// buscar todos personajes
   const buscarpersonaje = () => {};
 
   return (

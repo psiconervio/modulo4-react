@@ -1,10 +1,11 @@
 import { useState } from "react";
 import SearchForm from "./SearchForm";
 import { toast } from "react-toastify";
+import { usePersonaje } from "../context/CharacterContext";
 
 export const PersonajesSearch = ({ personajes, setPersonajes }) => {
+  const { personajes, getPersonaje, buscarpersonaje, loading, error } = usePersonaje()
   const [characters, setCharacters] = useState([]);
-  const [error, setError] = useState(null);
 
   const añadirPersonajesFav = (personaje) => {
     if (!personajes.some((item) => item.id === personaje.id)) {
@@ -16,20 +17,21 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
     }
   };
-  const fetchCharacters = async (name) => {
-    // funcion para buscar personajes en la API el parametro onSearch de searchForm
-    try {
-      const response = await fetch(
-        `https://rickandmortyapi.com/api/character/?name=${name}`
-      );
-      const data = await response.json();
-      setCharacters(data.results || []);
-      setError(null);
-    } catch (err) {
-      console.error(err);
-      setError("Error al buscar personajes");
-    }
-  };
+  const { getPersonaje, personajes } = personajes
+  // const fetchCharacters = async (name) => {
+  //   // funcion para buscar personajes en la API el parametro onSearch de searchForm
+  //   try {
+  //     const response = await fetch(
+  //       `https://rickandmortyapi.com/api/character/?name=${name}`
+  //     );
+  //     const data = await response.json();
+  //     setCharacters(data.results || []);
+  //     setError(null);
+  //   } catch (err) {
+  //     console.error(err);
+  //     setError("Error al buscar personajes");
+  //   }
+  // };
   return (
     <div className="mx-4 my-4 text-white ">
       <h1>Buscar Personajes de Rick y Morty</h1>

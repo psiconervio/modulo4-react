@@ -1,32 +1,32 @@
-import { useState } from 'react'; 
-import { usePersonaje } from "../context/CharacterContext"
+import { useState } from "react";
+import { usePersonaje } from "../context/CharacterContext";
 
-const SearchForm = ({ onSearch }) => { 
-  // Declaramos un componente funcional llamado SearchForm. Este componente recibe una prop llamada `onSearch`, 
+const SearchForm = ({ onSearch }) => {
+  // Declaramos un componente funcional llamado SearchForm. Este componente recibe una prop llamada `onSearch`,
   // que es una función que se ejecutará cuando el formulario sea enviado.
-  const [name, setName] = useState(''); 
-  const handleSubmit = (e) => { 
-    e.preventDefault(); 
-    onSearch(name); 
-    // Llamamos a la función `onSearch` (pasada como prop) y le pasamos el valor actual de `name`. 
+  const { getPersonaje } = usePersonaje();
+  const [name, setName] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // onSearch(name);
+    getPersonaje(name)
+    // Llamamos a la función `onSearch` (pasada como prop) y le pasamos el valor actual de `name`.
     // Esto permite que el componente padre reciba el valor buscado.
   };
   return (
-    <form className='text-white mx-4 my-4' onSubmit={handleSubmit}> 
-      {/* asignamos la función `handleSubmit` al evento `onSubmit`. */}
-     <input
-        type="text" 
-        value={name} 
-        onChange={(e) => setName(e.target.value)} 
-        placeholder="Buscar personaje" 
-        className='text-white p-2 border border-gray-700 rounded' 
+    <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Buscar personaje"
+        className="text-white p-2 border border-gray-700 rounded"
       />
-      <button type="submit">Buscar</button> 
+      <button type="submit">Buscar</button>
     </form>
   );
 };
-
-export default SearchForm; 
+export default SearchForm;
 
 // import React, { useState } from 'react';
 // const SearchForm = ({ onSearch }) => {
@@ -53,8 +53,6 @@ export default SearchForm;
 
 // export default SearchForm;
 
-
-
 //Codigo con debounce
 // import React from "react";
 
@@ -73,9 +71,6 @@ export default SearchForm;
 // };
 
 // export default SearchForm;
-
-
-
 
 // import React from "react";
 // import { useState } from "react";
@@ -96,7 +91,7 @@ export default SearchForm;
 //     if (!personaje.trim() === "") return;
 //     getPersonaje(personaje);
 //   };
-// //APLICAR FILTRO DE NOMBRES Y PERSONAJES Y MOSTRAR EN EL MODAL 
+// //APLICAR FILTRO DE NOMBRES Y PERSONAJES Y MOSTRAR EN EL MODAL
 // // MINUTO 46 CLASE CONSULTA 25-03
 //   return (
 //     <form onSubmit={handleSubmit} className="flex gap-2 mb-6" action="">
