@@ -1,26 +1,20 @@
-import { useState } from "react";
+// SearchForm.jsx
 import { usePersonaje } from "../context/CharacterContext";
-// const SearchForm = ({ onSearch }) => {
-const SearchForm = ( ) => {
-  // Declaramos un componente funcional llamado SearchForm. Este componente recibe una prop llamada `onSearch`,
-  // que es una función que se ejecutará cuando el formulario sea enviado.
-  const { getPersonaje } = usePersonaje();
-  const [character, setCharacter] = useState([])
-  const [name, setName] = useState("");
+
+const SearchForm = () => {
+  const { getPersonaje, busqueda, setBusqueda } = usePersonaje();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onSearch(name);
-    getPersonaje(name)
-    // Llamamos a la función `onSearch` (pasada como prop) y le pasamos el valor actual de `name`.
-    // Esto permite que el componente padre reciba el valor buscado.
+    getPersonaje(busqueda);
   };
-  console.log("el nombre es",name)
+
   return (
     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
         placeholder="Buscar personaje"
         className="text-white p-2 border border-gray-700 rounded"
       />
@@ -28,7 +22,48 @@ const SearchForm = ( ) => {
     </form>
   );
 };
+
 export default SearchForm;
+
+// // SearchForm.jsx
+// import { useState } from "react";
+// import { usePersonaje } from "../context/CharacterContext";
+
+// const SearchForm = ( ) => {
+//   const { getPersonaje, busqueda, setBusqueda } = usePersonaje();
+//   const [character, setCharacter] = useState([])
+//   const [name, setName] = useState("");
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     getPersonaje(busqueda);
+//   };
+//   console.log("el nombre es",busqueda)
+
+
+//   return (
+//     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
+//       <input
+//         type="text"
+//         value={busqueda}
+//         onChange={(e) => setBusqueda(e.target.value)}
+//         placeholder="Buscar personaje"
+//         className="text-white p-2 border border-gray-700 rounded"
+//       />
+//       <button type="submit">Buscar</button>
+//     </form>
+//   );
+// };
+// export default SearchForm;
+
+
+
+
+
+
+
+
+
 
 // import React, { useState } from 'react';
 // const SearchForm = ({ onSearch }) => {

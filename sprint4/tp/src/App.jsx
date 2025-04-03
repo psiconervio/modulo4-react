@@ -11,10 +11,11 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 // import { FetchCharacters } from "./components/FetchCharacters";
-// import { FavPersonajeModal } from "./components/FavPersonajeModal";
-import {  ToastContainer } from "react-toastify";
+import { FavPersonajeModal } from "./components/FavPersonajeModal";
+import { ToastContainer } from "react-toastify";
 import { PersonajeProvider } from "./context/CharacterContext";
 import { PersonajesSearch } from "./components/PersonajesSearch";
+import SearchForm from "./components/SearchForm";
 
 function App() {
   // const { isAuthenticated } = useAuth();
@@ -54,6 +55,7 @@ function App() {
           isModalFav={isModalFav}
           setIsModalFav={setIsModalFav}
         />
+        <SearchForm />
         <PersonajesSearch
           isModalFav={isModalFav}
           setIsModalFav={setIsModalFav}
@@ -68,12 +70,12 @@ function App() {
           personajes={personajes}
           setPersonajes={setPersonajes}
         /> */}
-        {/* <FavPersonajeModal
+        <FavPersonajeModal
           personajes={personajes}
           setPersonajes={setPersonajes}
           isModalFav={isModalFav}
           setIsModalFav={setIsModalFav}
-        /> */}
+        />
         {/* <ProductList />
       <Cart
         isModalOpenCart={isModalOpenCart}
