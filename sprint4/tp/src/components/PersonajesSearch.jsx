@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { usePersonaje } from "../context/CharacterContext";
 
 // export const PersonajesSearch = ({ personajes, setPersonajes }) => {
-export const PersonajesSearch = ({ }) => {
+export const PersonajesSearch = () => {
   const { personajes,setPersonajes, getPersonaje, buscarpersonaje, loading, error } = usePersonaje()
   const [characters, setCharacters] = useState([]);
 
@@ -18,6 +18,7 @@ export const PersonajesSearch = ({ }) => {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
     }
   };
+  console.log(personajes)
   // const { getPersonaje, personajes } = personajes
   // const fetchCharacters = async (name) => {
   //   // funcion para buscar personajes en la API el parametro onSearch de searchForm
@@ -57,7 +58,7 @@ export const PersonajesSearch = ({ }) => {
             <div>{character.name}</div>
             <button
               // onClick={() => añadirPersonajesFav(character)}
-              onClick={() => añadirPersonajesFav(personajes)}
+              onClick={() => añadirPersonajesFav(character)}
               className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
               <i className="bi bi-heart-fill"></i> Agregar a Favoritos

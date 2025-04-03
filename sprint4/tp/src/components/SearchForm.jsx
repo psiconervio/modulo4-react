@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { usePersonaje } from "../context/CharacterContext";
-
-const SearchForm = ({ onSearch }) => {
+// const SearchForm = ({ onSearch }) => {
+const SearchForm = ( ) => {
   // Declaramos un componente funcional llamado SearchForm. Este componente recibe una prop llamada `onSearch`,
   // que es una función que se ejecutará cuando el formulario sea enviado.
   const { getPersonaje } = usePersonaje();
+  const [character, setCharacter] = useState([])
   const [name, setName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const SearchForm = ({ onSearch }) => {
     // Llamamos a la función `onSearch` (pasada como prop) y le pasamos el valor actual de `name`.
     // Esto permite que el componente padre reciba el valor buscado.
   };
+  console.log("el nombre es",name)
   return (
     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
       <input
