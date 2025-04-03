@@ -11,9 +11,8 @@ import { useAuth } from "./context/AuthContext";
 import ProductList from "./components/ProductList";
 import { Cart } from "./components/Cart";
 // import { FetchCharacters } from "./components/FetchCharacters";
-import SearchForm from "./components/SearchForm";
 // import { FavPersonajeModal } from "./components/FavPersonajeModal";
-import { toast, ToastContainer } from "react-toastify";
+import {  ToastContainer } from "react-toastify";
 import { PersonajeProvider } from "./context/CharacterContext";
 import { PersonajesSearch } from "./components/PersonajesSearch";
 
