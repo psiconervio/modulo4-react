@@ -3,8 +3,9 @@ import SearchForm from "./SearchForm";
 import { toast } from "react-toastify";
 import { usePersonaje } from "../context/CharacterContext";
 
-export const PersonajesSearch = ({ personajes, setPersonajes }) => {
-  const { personajes, getPersonaje, buscarpersonaje, loading, error } = usePersonaje()
+// export const PersonajesSearch = ({ personajes, setPersonajes }) => {
+export const PersonajesSearch = ({ }) => {
+  const { personajes,setPersonajes, getPersonaje, buscarpersonaje, loading, error } = usePersonaje()
   const [characters, setCharacters] = useState([]);
 
   const añadirPersonajesFav = (personaje) => {
@@ -17,7 +18,7 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
     }
   };
-  const { getPersonaje, personajes } = personajes
+  // const { getPersonaje, personajes } = personajes
   // const fetchCharacters = async (name) => {
   //   // funcion para buscar personajes en la API el parametro onSearch de searchForm
   //   try {
@@ -35,7 +36,8 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
   return (
     <div className="mx-4 my-4 text-white ">
       <h1>Buscar Personajes de Rick y Morty</h1>
-      <SearchForm onSearch={fetchCharacters} />
+      {/* <SearchForm onSearch={fetchCharacters} /> */}
+      <SearchForm />
       {/* Componente `SearchForm` que recibe la función `fetchCharacters` como prop.
           Esta función se ejecutará cuando el usuario realice una búsqueda. */}
       {error && <p>{error}</p>}
@@ -54,7 +56,8 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
             </div>
             <div>{character.name}</div>
             <button
-              onClick={() => añadirPersonajesFav(character)}
+              // onClick={() => añadirPersonajesFav(character)}
+              onClick={() => añadirPersonajesFav(personajes)}
               className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
             >
               <i className="bi bi-heart-fill"></i> Agregar a Favoritos
