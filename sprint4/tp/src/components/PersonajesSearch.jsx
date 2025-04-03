@@ -33,7 +33,7 @@ export const PersonajesSearch = ({ personajes, setPersonajes }) => {
     }
   };
   const fetchCharacters = async (name) => {
-    // Función para buscar personajes en la API de Rick and Morty. de el parametro onSearch de searchForm
+    // Función para buscar personajes en la API de Rick and Morty, el parametro onSearch de searchForm
     try {
       const response = await fetch(
         `https://rickandmortyapi.com/api/character/?name=${name}`
