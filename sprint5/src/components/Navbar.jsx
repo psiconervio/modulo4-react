@@ -1,6 +1,8 @@
 import { useState,useContext } from "react"; // Importa el hook useState para manejar el estado del menú
 import batman from "../assets/batman.png"; // Importa una imagen desde la carpeta assets
 import { ThemeContext } from "../context/ThemeContext";
+import { Link } from "react-router"; // Importa el componente Link para la navegación entre rutas
+
 
 const NavBar = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
@@ -94,6 +96,9 @@ const NavBar = () => {
                 </a>
               </li>
             ))}
+            <Link to="/Footer" onClick={console.log("click")}>
+            a
+            </Link>
           </ul>
         </div>
 

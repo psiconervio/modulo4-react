@@ -1,16 +1,28 @@
-import { useContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
+import { featchPersonaId } from "../services/jugadoresapi";
 
-const ItemContext = useContext();
+const ItemContext = createContext();
 
 const ItemProvider = ({ children }) => {
-  const [loading, setloading] = useState(second)
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState(() => {
-    useEffect(() => {
-      localStorage.setItem("items", JSON.stringify(items));
-    }, [items]);
     return JSON.parse(localStorage.getItem("items")) || [];
   });
+
+  const getItem = async (id) => {
+    setLoading(true);
+    try {
+      const data = await featchPersonaId(id);
+      setItems(data);
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching items:", error);
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addItem = (item) => {
     setItems((prevItems) => [...prevItems, item]);
@@ -25,8 +37,12 @@ const ItemProvider = ({ children }) => {
   };
 
   return (
-    <ItemContext.Provider value={{ItemProvider,  items, addItem, removeItem, clearItems }}>
+    <ItemContext.Provider
+      value={{ items, getItem, addItem, removeItem, clearItems, loading, error }}
+    >
       {children}
     </ItemContext.Provider>
   );
 };
+
+export { ItemProvider, ItemContext };
