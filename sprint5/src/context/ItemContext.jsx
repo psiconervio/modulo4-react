@@ -3,6 +3,8 @@ import { useContext, useState, useEffect } from "react";
 const ItemContext = useContext();
 
 const ItemProvider = ({ children }) => {
+  const [loading, setloading] = useState(second)
+  const [error, setError] = useState(null);
   const [items, setItems] = useState(() => {
     useEffect(() => {
       localStorage.setItem("items", JSON.stringify(items));
@@ -23,7 +25,7 @@ const ItemProvider = ({ children }) => {
   };
 
   return (
-    <ItemContext.Provider value={{ items, addItem, removeItem, clearItems }}>
+    <ItemContext.Provider value={{ItemProvider,  items, addItem, removeItem, clearItems }}>
       {children}
     </ItemContext.Provider>
   );
