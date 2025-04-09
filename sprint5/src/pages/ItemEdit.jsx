@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const ItemEdit = () => {
+ const ItemEdit = () => {
   return (
     <div>ItemEdit</div>
   )
 }
+
+export default ItemEdit
