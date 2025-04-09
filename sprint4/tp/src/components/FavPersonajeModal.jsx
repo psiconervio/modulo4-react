@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-// FavPersonajeModal.jsx
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 

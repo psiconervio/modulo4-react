@@ -1,4 +1,3 @@
-// charactercontext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
 import { featchpersonaje } from "../services/rymapi";
 

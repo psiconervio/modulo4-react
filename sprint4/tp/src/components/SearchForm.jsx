@@ -1,4 +1,3 @@
-// SearchForm.jsx
 import { usePersonaje } from "../context/CharacterContext";
 
 const SearchForm = () => {

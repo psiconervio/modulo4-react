@@ -1,4 +1,3 @@
-// PersonajesSearch.jsx
 import { toast } from "react-toastify";
 import { usePersonaje } from "../context/CharacterContext";
 
