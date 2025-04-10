@@ -27,7 +27,6 @@ function App() {
     <>
       <PersonajeProvider>
         <Navbar />
-        <AppRouter />
         <Header
           isModalFav={isModalFav}
           setIsModalFav={setIsModalFav}
