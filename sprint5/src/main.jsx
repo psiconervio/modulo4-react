@@ -7,6 +7,7 @@ import { CartProvider } from "./context/CartContext.jsx";
 import {ItemProvider} from "./context/ItemContext.jsx";
 import  AppRouter  from "./router/AppRouter";
 import { PersonajeProvider } from "./context/CharacterContext.jsx";
+import { SuperProvider } from "./context/SuperContext.jsx";
 
 
 createRoot(document.getElementById("root")).render(
@@ -16,7 +17,9 @@ createRoot(document.getElementById("root")).render(
           <CartProvider>
             <PersonajeProvider>
             <ItemProvider>
+              <SuperProvider>
               <AppRouter />
+              </SuperProvider>
             </ItemProvider>
             </PersonajeProvider>
           </CartProvider>

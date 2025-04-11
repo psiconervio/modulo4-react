@@ -20,9 +20,9 @@ const NavBar = () => {
   // Lista de enlaces de navegación
   const navbarLinks = [
     { id: 1, title: "create", link: "/items/create", element: <ItemCreate /> },
-    { id: 2, title: "items", link: "/",element: <ItemList /> },
-    { id: 3, title: "Contacto", link: "/",element: <ItemCreate /> },
-    { id: 4, title: "Soporte", link: "/" ,element: <ItemCreate /> },
+    { id: 2, title: "items", link: "/", element: <ItemList /> },
+    { id: 3, title: "Contacto", link: "/", element: <ItemCreate /> },
+    { id: 4, title: "Soporte", link: "/", element: <ItemCreate /> },
   ];
 
   // Lista de enlaces a redes sociales con iconos de Bootstrap Icons
@@ -90,7 +90,7 @@ const NavBar = () => {
             {navbarLinks.map((link) => (
               <li key={link.id}>
                 <Link
-                  element={<ItemCreate />}
+                  element={link.element}
                   to={link.link}
                   className="text-sm text-white hover:text-yellow-500 transition-transform duration-300 transform hover:scale-110 inline-block"
                 >
@@ -98,9 +98,7 @@ const NavBar = () => {
                 </Link>
               </li>
             ))}
-            <Link className="text-sm text-white hover:text-yellow-500 transition-transform duration-300 transform hover:scale-110 inline-block" to="/create" element={<ItemCreate />}>
-              Crear
-            </Link>
+
           </ul>
         </div>
 

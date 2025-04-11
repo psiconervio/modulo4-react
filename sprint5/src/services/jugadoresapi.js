@@ -1,26 +1,29 @@
 import axios from "axios";
 
-
 export const featchPersonaId = async (id) => {
   const url = `https://67ef0b8dc11d5ff4bf7b9f43.mockapi.io/api/v1/users/${id}`;
   const response = await axios.get(url);
   return response.data;
 };
 
-
 export const featchPersonaName = async (id) => {
-    const url = `https://67ef0b8dc11d5ff4bf7b9f43.mockapi.io/api/v1/users/${id}`;
-    const response = await axios.get(url);
-    return response.data;
-  };
-
-  
-export const apidbmongo = async (id) => {
-  const url = `https://nodofullstack-m3-0w08.onrender.com/api/heroes/${id}`;
+  const url = `https://67ef0b8dc11d5ff4bf7b9f43.mockapi.io/api/v1/users/${id}`;
   const response = await axios.get(url);
   return response.data;
 };
 
+export const apidbmongo = async (id) => {
+  const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
+  const url = id ? `${baseUrl}/${id}` : baseUrl;
+
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+    throw error;
+  }
+};
 
 // router.get('/heroes', obtenerTodosLosSuperheroesController);
 // router.get('/heroes/:id', obtenerSuperheroePorIdController);
@@ -36,7 +39,7 @@ export const apidbmongo = async (id) => {
 // router.put('/heroes/nombre/:nombreSuperHeroe',validarHeroeEvalidator, actualizarHeroePorNombre);
 // // ejercicio 4
 // router.delete('/heroes/id/:id', borrarHeroePorId);
-// //PETICION HTTP DE DELETE A GET PARA PODER ELMINAR 
+// //PETICION HTTP DE DELETE A GET PARA PODER ELMINAR
 // router.get('/heroes/id/:id', borrarHeroePorId);
 // //Actualizar por id
 // // router.post('/heroes/idput/:id', actualizarHeroePorId);
