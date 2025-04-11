@@ -12,11 +12,14 @@ export const featchPersonaName = async (id) => {
   return response.data;
 };
 
-export const apidbmongo = async (id) => {
+export const apidbmongo = async (id = "") => {
   const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
-  const url = id ? `${baseUrl}/${id}` : baseUrl;
+  const url = `${baseUrl}/${id}`;
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   try {
+    await delay(2000); // Wait for 2 seconds
     const response = await axios.get(url);
     return response.data;
   } catch (error) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext } from 'react'
-import { SuperContext } from '../context/SuperContext'
+// import { usePersonaje } from '../context/SuperContext'
 
 
 

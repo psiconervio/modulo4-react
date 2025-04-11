@@ -1,14 +1,19 @@
 import React, { useEffect, useContext } from "react";
-import { ItemContext } from "../context/ItemContext";
+import { useSuper } from "../context/SuperContext";
 
 const ItemList = () => {
-  const { items, getItems } = useContext(ItemContext);
+  const { items, getItem } = useSuper();
 
-//   console.log(items);
-//   useEffect(() => {
-//     getItems();
-//   }, []);
-  return <div>ItemList</div>;
+  console.log(items);
+  useEffect(() => {
+    getItem();
+  }, []);
+  return (
+    <>
+      <div>ItemList</div>
+      <button onClick={() => getItem()}> BOTONAPI</button>
+    </>
+  );
 };
 
 export default ItemList;

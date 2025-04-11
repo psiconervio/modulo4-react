@@ -1,20 +1,24 @@
 // SearchForm.jsx
 import { usePersonaje } from "../context/CharacterContext";
+import { useSuper } from "../context/SuperContext";
 
 const SearchForm = () => {
-  const { getPersonaje, busqueda, setBusqueda } = usePersonaje();
+  //importamos el contexto de personajes
+
+  const { getItem, items, setItems, busquedaitems, setBusquedaitems } =
+    useSuper();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getPersonaje(busqueda);
+    getItem(busquedaitems);
   };
 
   return (
     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
+        value={busquedaitems}
+        onChange={(e) => setBusquedaitems(e.target.value)}
         placeholder="Buscar personaje"
         className="text-white p-2 border border-gray-700 rounded"
       />
@@ -40,7 +44,6 @@ export default SearchForm;
 //   };
 //   console.log("el nombre es",busqueda)
 
-
 //   return (
 //     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
 //       <input
@@ -55,15 +58,6 @@ export default SearchForm;
 //   );
 // };
 // export default SearchForm;
-
-
-
-
-
-
-
-
-
 
 // import React, { useState } from 'react';
 // const SearchForm = ({ onSearch }) => {

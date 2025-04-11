@@ -1,9 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import { featchPersonaId } from "../services/jugadoresapi";
 
 const ItemContext = createContext();
 
-const ItemProvider = ({ children }) => {
+export const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState(() => {
@@ -45,4 +45,4 @@ const ItemProvider = ({ children }) => {
   );
 };
 
-export { ItemProvider, ItemContext };
+export const useItem = () => useContext(ItemContext);
