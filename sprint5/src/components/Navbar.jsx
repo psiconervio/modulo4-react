@@ -3,6 +3,7 @@ import batman from "../assets/batman.png"; // Importa una imagen desde la carpet
 import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router"; // Importa el componente Link para la navegación entre rutas
 import ItemCreate from "../pages/ItemCreate";
+import ItemList from "../pages/ItemList"; // Importa el componente ItemList para la navegación entre rutas
 
 const NavBar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -19,7 +20,7 @@ const NavBar = () => {
   // Lista de enlaces de navegación
   const navbarLinks = [
     { id: 1, title: "create", link: "/items/create", element: <ItemCreate /> },
-    { id: 2, title: "Nosotros", link: "/",element: <ItemCreate /> },
+    { id: 2, title: "items", link: "/",element: <ItemList /> },
     { id: 3, title: "Contacto", link: "/",element: <ItemCreate /> },
     { id: 4, title: "Soporte", link: "/" ,element: <ItemCreate /> },
   ];
