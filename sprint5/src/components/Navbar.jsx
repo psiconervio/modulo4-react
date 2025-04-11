@@ -1,12 +1,12 @@
-import { useState,useContext } from "react"; // Importa el hook useState para manejar el estado del menú
+import { useState, useContext } from "react"; // Importa el hook useState para manejar el estado del menú
 import batman from "../assets/batman.png"; // Importa una imagen desde la carpeta assets
 import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router"; // Importa el componente Link para la navegación entre rutas
-
+import ItemCreate from "../pages/ItemCreate";
 
 const NavBar = () => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
-  
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   // Estado para controlar si el menú está abierto o cerrado (para la vista móvil)
   const [isOpen, setIsOpen] = useState(false);
   // console.log("isOpen -> ", isOpen); // Muestra en consola el estado actual de isOpen
@@ -18,10 +18,10 @@ const NavBar = () => {
 
   // Lista de enlaces de navegación
   const navbarLinks = [
-    { id: 1, title: "Inicio", link: "/" },
-    { id: 2, title: "Nosotros", link: "/" },
-    { id: 3, title: "Contacto", link: "/" },
-    { id: 4, title: "Soporte", link: "/" },
+    { id: 1, title: "create", link: "/items/create", element: <ItemCreate /> },
+    { id: 2, title: "Nosotros", link: "/",element: <ItemCreate /> },
+    { id: 3, title: "Contacto", link: "/",element: <ItemCreate /> },
+    { id: 4, title: "Soporte", link: "/" ,element: <ItemCreate /> },
   ];
 
   // Lista de enlaces a redes sociales con iconos de Bootstrap Icons
@@ -88,16 +88,17 @@ const NavBar = () => {
           <ul className="flex space-x-4 px-4">
             {navbarLinks.map((link) => (
               <li key={link.id}>
-                <a
-                  href="/"
+                <Link
+                  element={<ItemCreate />}
+                  to={link.link}
                   className="text-sm text-white hover:text-yellow-500 transition-transform duration-300 transform hover:scale-110 inline-block"
                 >
                   {link.title}
-                </a>
+                </Link>
               </li>
             ))}
-            <Link to="/Footer" onClick={console.log("click")}>
-            a
+            <Link className="text-sm text-white hover:text-yellow-500 transition-transform duration-300 transform hover:scale-110 inline-block" to="/create" element={<ItemCreate />}>
+              Crear
             </Link>
           </ul>
         </div>
@@ -119,20 +120,18 @@ const NavBar = () => {
                 </a>
               </li>
             ))}
-                      <button
-            className={
-              theme === "dark"
-                ? "bg-gray-900 text-white"
-                : " text-white"
-            }
-            onClick={toggleTheme}
-          >
-            {theme === "light" ? (
-              <i className="bi bi-toggle-off"></i>
-            ) : (
-              <i className="bi bi-toggle-on"></i>
-            )}
-          </button>
+            <button
+              className={
+                theme === "dark" ? "bg-gray-900 text-white" : " text-white"
+              }
+              onClick={toggleTheme}
+            >
+              {theme === "light" ? (
+                <i className="bi bi-toggle-off"></i>
+              ) : (
+                <i className="bi bi-toggle-on"></i>
+              )}
+            </button>
           </ul>
         </div>
       </div>
@@ -176,12 +175,8 @@ const NavBar = () => {
           ))}
         </ul>
         <div className="h-14  flex justify-center">
-        <button
-            className={
-              theme === "dark"
-                ? " text-white"
-                : " text-black"
-            }
+          <button
+            className={theme === "dark" ? " text-white" : " text-black"}
             onClick={toggleTheme}
           >
             {theme === "dark" ? (
