@@ -32,18 +32,36 @@ export const ItemProvider = ({ children }) => {
     console.log("items", items);
   }, [items]);
 
-  // const addItem = (newheroe) => {
-  //   setHeroesfav((prevHeroes) => {
-  //     const existingHero = prevHeroes.find((hero) => hero.id === newheroe.id);
-  //     if (existingHero) {
-  //       return prevHeroes.map((hero) =>
-  //         hero.id === newheroe.id ? { ...hero, ...newheroe } : hero
-  //       );
-  //     } else {
-  //       return [...prevHeroes, newheroe];
-  //     }
-  //   });
-  // };
+  const addItem = async (newheroe) => {
+    try {
+      const response = await fetch("https://nodofullstack-m3-0w08.onrender.com/api/heroes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newheroe),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add hero");
+      }
+
+      const savedHero = await response.json();
+
+      setHeroesfav((prevHeroes) => {
+        const existingHero = prevHeroes.find((hero) => hero.id === savedHero.id);
+        if (existingHero) {
+          return prevHeroes.map((hero) =>
+            hero.id === savedHero.id ? { ...hero, ...savedHero } : hero
+          );
+        } else {
+          return [...prevHeroes, savedHero];
+        }
+      });
+    } catch (error) {
+      console.error("Error adding hero:", error);
+    }
+  };
 
   const removeItem = (itemId) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
