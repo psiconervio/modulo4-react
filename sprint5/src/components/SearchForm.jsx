@@ -1,24 +1,22 @@
 // SearchForm.jsx
 import { usePersonaje } from "../context/CharacterContext";
-import { useSuper } from "../context/SuperContext";
+import { useItem } from "../context/ItemContext";
 
 const SearchForm = () => {
   //importamos el contexto de personajes
-
-  const { getItem, items, setItems, busquedaitems, setBusquedaitems } =
-    useSuper();
+const { getItem, busqueda, setBusqueda } =useItem()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getItem(busquedaitems);
+    getItem(busqueda);
   };
 
   return (
     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={busquedaitems}
-        onChange={(e) => setBusquedaitems(e.target.value)}
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
         placeholder="Buscar personaje"
         className="text-white p-2 border border-gray-700 rounded"
       />

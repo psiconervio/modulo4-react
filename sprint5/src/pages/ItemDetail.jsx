@@ -1,13 +1,13 @@
 import React from "react";
 import { useContext } from "react";
 
-import { useSuper } from "../context/SuperContext";
+import { useItem } from "../context/ItemContext";
 
 const ItemDetail = () => {
-  const { getItem, items } = useSuper();
+  // const { getItem, items } = useItem();
   // const {id} = useParams()
 
-  console.log("items", items);
+  // console.log("items", items);
 
   return (
     <>
