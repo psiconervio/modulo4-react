@@ -1,51 +1,107 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useItem } from "../context/ItemContext";
 
 const ItemCreate = () => {
   const { addItem } = useItem();
 
   // Estados para los inputs
-  const [name, setName] = useState("");
-  const [poder, setPoder] = useState("");
+  const [nombreSuperHeroe, setNombreSuperHeroe] = useState("");
+  const [nombreReal, setNombreReal] = useState("");
   const [edad, setEdad] = useState("");
+  const [planetaOrigen, setPlanetaOrigen] = useState("Desconocido");
+  const [debilidad, setDebilidad] = useState("");
+  const [poderes, setPoderes] = useState("");
+  const [aliados, setAliados] = useState("");
+  const [enemigos, setEnemigos] = useState("");
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    const id = Math.floor(Math.random() * 1000);
-    const newheroe = { id, name, poder, edad };
-    addItem(newheroe);
+
+    // Crear el objeto con los datos del formulario
+    const newHeroe = {
+      nombreSuperHeroe,
+      nombreReal,
+      edad: parseInt(edad, 10), // Convertir edad a número
+      planetaOrigen,
+      debilidad,
+      poderes: poderes.split(","), // Convertir a array separando por comas
+      aliados: aliados.split(","), // Convertir a array separando por comas
+      enemigos: enemigos.split(","), // Convertir a array separando por comas
+    };
+
+    addItem(newHeroe);
 
     // Limpiar los campos después de agregar
-    setName("");
-    setPoder("");
+    setNombreSuperHeroe("");
+    setNombreReal("");
     setEdad("");
+    setPlanetaOrigen("Desconocido");
+    setDebilidad("");
+    setPoderes("");
+    setAliados("");
+    setEnemigos("");
   };
 
   return (
     <div>
-      <h1>ItemCreate</h1>
+      <h1>Crear Superhéroe</h1>
       <form onSubmit={handlesubmit}>
         <div className="mx-4 my-4">
           <input
             type="text"
-            placeholder="Nombre"
+            placeholder="Nombre del Superhéroe"
             className="text-white p-2 border border-gray-700 rounded"
-            value={name}
-            onChange={(e) => setName(e.target.value)} // Actualiza el estado
+            value={nombreSuperHeroe}
+            onChange={(e) => setNombreSuperHeroe(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Poder"
+            placeholder="Nombre Real"
             className="text-white p-2 border border-gray-700 rounded"
-            value={poder}
-            onChange={(e) => setPoder(e.target.value)} // Actualiza el estado
+            value={nombreReal}
+            onChange={(e) => setNombreReal(e.target.value)}
           />
           <input
-            type="text"
+            type="number"
             placeholder="Edad"
             className="text-white p-2 border border-gray-700 rounded"
             value={edad}
-            onChange={(e) => setEdad(e.target.value)} // Actualiza el estado
+            onChange={(e) => setEdad(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Planeta de Origen"
+            className="text-white p-2 border border-gray-700 rounded"
+            value={planetaOrigen}
+            onChange={(e) => setPlanetaOrigen(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Debilidad"
+            className="text-white p-2 border border-gray-700 rounded"
+            value={debilidad}
+            onChange={(e) => setDebilidad(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Poderes (separados por comas)"
+            className="text-white p-2 border border-gray-700 rounded"
+            value={poderes}
+            onChange={(e) => setPoderes(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Aliados (separados por comas)"
+            className="text-white p-2 border border-gray-700 rounded"
+            value={aliados}
+            onChange={(e) => setAliados(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Enemigos (separados por comas)"
+            className="text-white p-2 border border-gray-700 rounded"
+            value={enemigos}
+            onChange={(e) => setEnemigos(e.target.value)}
           />
         </div>
         <button

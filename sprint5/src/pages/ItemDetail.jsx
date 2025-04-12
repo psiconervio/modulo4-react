@@ -4,25 +4,28 @@ import { useContext } from "react";
 import { useItem } from "../context/ItemContext";
 
 const ItemDetail = () => {
-  // const { getItem, items } = useItem();
+  const { getItem, heroesfav, setHeroesfav } = useItem();
   // const {id} = useParams()
 
-  // console.log("items", items);
+  console.log("heroesfav", heroesfav);
 
   return (
     <>
       <div>ItemDetail</div>
       <button onClick={()=> getItem()}> BOTONAPI</button>
       <div>
-        {/* <h1 className="text-2xl font-bold text-center">Detalle del Producto</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {items.map((item) => (
-            <div key={item.id} className="bg-gray-700 p-4 rounded-lg shadow-md">
-              <img className="h-80" src={`/${item.img}.jpg`} alt="" />
-              <div className="text-lg font-semibold">{item.name}</div>
-            </div>
-          ))}
-        </div> */}
+        {heroesfav.map((item) => (
+          <div key={item.id}>
+            <h1>{item.nombreSuperHeroe}</h1>
+            <h2>{item.nombreReal}</h2>
+            <h3>{item.edad}</h3>
+            <h4>{item.planetaOrigen}</h4>
+            <h5>{item.debilidad}</h5>
+            <h6>{item.poderes}</h6>
+            <p>{item.aliados}</p>
+            <p>{item.enemigos}</p>
+          </div>
+        ))}
       </div>
     </>
   );
