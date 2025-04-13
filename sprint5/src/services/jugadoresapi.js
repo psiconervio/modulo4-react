@@ -7,7 +7,7 @@ export const apidbmongo = async (id = "") => {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   try {
-    await delay(2000); // Wait for 2 seconds
+    await delay(1000); // Wait for 2 seconds
     const response = await axios.get(url);
     return response.data;
   } catch (error) {

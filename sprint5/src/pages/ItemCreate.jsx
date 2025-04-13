@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useItem } from "../context/ItemContext";
+import { toast } from "react-toastify";
 
 const ItemCreate = () => {
   const { addItem } = useItem();
@@ -30,6 +31,7 @@ const ItemCreate = () => {
     };
 
     addItem(newHeroe);
+    toast.success("Superhéroe agregado correctamente");
 
     // Limpiar los campos después de agregar
     setNombreSuperHeroe("");
@@ -61,7 +63,7 @@ const ItemCreate = () => {
             value={nombreReal}
             onChange={(e) => setNombreReal(e.target.value)}
           />
-          <input
+          {/* <input
             type="number"
             placeholder="Edad"
             className="text-white p-2 border border-gray-700 rounded"
@@ -102,7 +104,7 @@ const ItemCreate = () => {
             className="text-white p-2 border border-gray-700 rounded"
             value={enemigos}
             onChange={(e) => setEnemigos(e.target.value)}
-          />
+          /> */}
         </div>
         <button
           type="submit"

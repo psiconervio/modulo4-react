@@ -10,6 +10,7 @@ import SearchForm from "./components/SearchForm";
 import { PersonajesSearch } from "./components/PersonajesSearch";
 import { ToastContainer } from "react-toastify";
 import { FavPersonajeModal } from "./components/FavPersonajeModal";
+import FavSuperModal from "./components/FavSuperModal";
 
 const Layout = () => {
   const [isModalFav, setIsModalFav] = useState(false);
@@ -37,12 +38,16 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <FavPersonajeModal
+      <FavSuperModal
+      isModalFav={isModalFav}
+      setIsModalFav={setIsModalFav}
+      />
+      {/* <FavPersonajeModal
         personajes={personajes}
         setPersonajes={setPersonajes}
         isModalFav={isModalFav}
         setIsModalFav={setIsModalFav}
-      />
+      /> */}
       <Main />
       <Footer />
     </>
