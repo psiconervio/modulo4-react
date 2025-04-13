@@ -10,16 +10,18 @@ export const ItemProvider = ({ children }) => {
   const [busqueda, setBusqueda] = useState();
   //modal favoritos
   const [heroesfav, setHeroesfav] = useState([]);
+  const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
   //estado para fetchear base de datos
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || [];
   });
-
+ console.log("resultados", resultadosbusqueda);
+  //obtener heroe db por id
   const getItem = async (id) => {
     setLoading(true);
     try {
       const data = await apidbmongo(id);
-      setItems(data);
+      setResultadosbusqueda(data);
       setError(null);
     } catch (error) {
       console.error("Error fetching items:", error);
@@ -44,7 +46,6 @@ export const ItemProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     fetchItemsFromDatabase();
   }, []);
   // Guardar favoritos en el almacenamiento local cuando cambien
