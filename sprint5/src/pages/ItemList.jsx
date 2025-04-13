@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useItem } from "../context/ItemContext";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ItemList = () => {
   const { items, heroesfav, handleAddToFavorites } = useItem();
@@ -21,10 +22,15 @@ const ItemList = () => {
                 Planeta de Origen: {item.PlanetaOrigen}
               </p>
               <p className="text-gray-300">Debilidad: {item.Debilidad}</p>
+              <p className="text-gray-300">id: {item.id}</p>
               <button
                 onClick={() => {
                   if (heroesfav.some((hero) => hero.id === item.id)) {
-                    toast.error("Quitar de favoritos");
+                    Swal.fire({
+                      title: "Good job!",
+                      text: "You clicked the button!",
+                      icon: "success"
+                    });
                   } else {
                     toast.success("Agregado a favoritos");
                   }
