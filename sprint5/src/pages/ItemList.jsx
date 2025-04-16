@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { useItem } from "../context/ItemContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const ItemList = () => {
   const { items, heroesfav, handleAddToFavorites } = useItem();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -23,13 +25,13 @@ const ItemList = () => {
               </p>
               <p className="text-gray-300">Debilidad: {item.Debilidad}</p>
               <p className="text-gray-300">id: {item.id}</p>
-              <button
+              {/* <button
                 onClick={() => {
                   if (heroesfav.some((hero) => hero.id === item.id)) {
                     Swal.fire({
                       title: "Good job!",
                       text: "You clicked the button!",
-                      icon: "success"
+                      icon: "success",
                     });
                   } else {
                     toast.success("Agregado a favoritos");
@@ -41,6 +43,12 @@ const ItemList = () => {
                 {heroesfav.some((hero) => hero.id === item.id)
                   ? "Quitar de favoritos"
                   : "Agregar a favoritos"}
+              </button> */}
+              <button
+                onClick={() => navigate(`/items/${item.id}`)}
+                className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+              >
+                Ver detalles
               </button>
             </div>
           ))}

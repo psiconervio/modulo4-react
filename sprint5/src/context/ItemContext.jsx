@@ -53,18 +53,18 @@ export const ItemProvider = ({ children }) => {
     localStorage.setItem("heroesfav", JSON.stringify(heroesfav));
   }, [heroesfav]);
 
-  const handleAddToFavorites = (item) => {
-    const existingHero = heroesfav.find((hero) => hero.id === item.id);
-    if (existingHero) {
-      setHeroesfav((prevHeroes) =>
-        prevHeroes.filter((hero) => hero.id !== item.id)
-      );
-      toast.error("Quitar de favoritos");
-    } else {
-      setHeroesfav((prevHeroes) => [...prevHeroes, item]);
-      toast.success("Agregado a favoritos");
-    }
-  };
+  // const handleAddToFavorites = (item) => {
+  //   const existingHero = heroesfav.find((hero) => hero.id === item.id);
+  //   if (existingHero) {
+  //     setHeroesfav((prevHeroes) =>
+  //       prevHeroes.filter((hero) => hero.id !== item.id)
+  //     );
+  //     toast.error("Quitar de favoritos");
+  //   } else {
+  //     setHeroesfav((prevHeroes) => [...prevHeroes, item]);
+  //     toast.success("Agregado a favoritos");
+  //   }
+  // };
   // Cargar favoritos desde el almacenamiento local al montar el contexto
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("heroesfav")) || [];
@@ -133,7 +133,7 @@ export const ItemProvider = ({ children }) => {
         setHeroesfav,
         loading,
         error,
-        handleAddToFavorites,
+        // handleAddToFavorites,
       }}
     >
       {children}

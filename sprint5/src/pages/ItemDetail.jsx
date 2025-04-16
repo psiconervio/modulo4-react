@@ -14,7 +14,7 @@ const ItemDetail = () => {
       try {
         setLoading(true);
         // Reemplaza esta URL con la de tu API que devuelve un objeto por ID
-        const response = await fetch(`https://nodofullstack-m3-0w08.onrender.com/api/heroes/${id}`);
+        const response = await fetch(`https://nodofullstack-m3-0w08.onrender.com/api/heroes/id/${id}`);
         if (!response.ok) throw new Error("No se pudo obtener los datos.");
         const data = await response.json();
         setHeroesfav(data);

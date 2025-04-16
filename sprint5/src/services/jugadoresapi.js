@@ -1,11 +1,8 @@
 import axios from "axios";
-
 export const apidbmongo = async (id = "") => {
   const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
   const url = `${baseUrl}/${id}`;
-
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
   try {
     await delay(1000); // Wait for 2 seconds
     const response = await axios.get(url);
@@ -15,6 +12,45 @@ export const apidbmongo = async (id = "") => {
     throw error;
   }
 };
+
+export const apidbmongoPost = async (data) => {
+  const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
+  const url = `${baseUrl}`;
+
+  try {
+    const response = await axios.post(url, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data to API:", error);
+    throw error;
+  }
+};
+export const apidbmongoPut = async (id, data) => {
+  const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
+  const url = `${baseUrl}/${id}`;
+
+  try {
+    const response = await axios.put(url, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating data in API:", error);
+    throw error;
+  }
+};
+export const apidbmongoDelete = async (id) => {
+  const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
+  const url = `${baseUrl}/${id}`;
+
+  try {
+    const response = await axios.delete(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting data from API:", error);
+    throw error;
+  }
+};
+
+
 
 
 // router.get('/heroes', obtenerTodosLosSuperheroesController);
