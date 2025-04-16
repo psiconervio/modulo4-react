@@ -36,9 +36,6 @@ const ItemDetail = () => {
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  console.log("heroesfav", heroesfav);
-  console.log("itemsdetalle", itemdetalle);
-
   return (
     <>
       <div className="mx-10 mt-5 w-50">
