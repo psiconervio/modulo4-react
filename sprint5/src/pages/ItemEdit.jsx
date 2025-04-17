@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useItem } from "../context/ItemContext";
 
+
 const ItemEdit = () => {
   const { id } = useParams(); // Extrae el id de la URL
   const navigate = useNavigate();
@@ -17,6 +18,9 @@ const ItemEdit = () => {
     aliados: "",
     enemigos: "",
   });
+  const url = import.meta.env.VITE_API_URL;
+  console.log(url)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +28,7 @@ const ItemEdit = () => {
         setLoading(true);
         const response = await fetch(
           `https://nodofullstack-m3-0w08.onrender.com/api/heroes/id/${id}`
+          // `${url}/${id}`
         );
         if (!response.ok) throw new Error("No se pudo obtener los datos.");
         const data = await response.json();

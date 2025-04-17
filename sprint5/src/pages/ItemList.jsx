@@ -8,6 +8,11 @@ const ItemList = () => {
   const { items, heroesfav, handleAddToFavorites } = useItem();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const url = import.meta.env.VITE_API_URL;
+  //   console.log(url);
+  // },[]);
+
   return (
     <>
       <div className="mx-4 my-4">
