@@ -1,10 +1,13 @@
 import React from "react";
 import { useItem } from "../context/ItemContext";
 import ItemCard from "../components/ItemCard";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ItemList = () => {
+  const navigate = useNavigate();
   const { items } = useItem(); // Accede a los items desde el contexto
-console.log("ITEMS",items);
+  
+  console.log("ITEMS", items);
   return (
     <div className="container mx-auto p-4 text-white">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Lista de Héroes</h1>
@@ -18,12 +21,14 @@ console.log("ITEMS",items);
             edad={item.Edad}
           />
         ))}
+        <button onClick={() => navigate(`/edit`)}>EDITARR</button>
       </div>
     </div>
   );
 };
 
 export default ItemList;
+
 // import React, { useEffect } from "react";
 // import { useItem } from "../context/ItemContext";
 // import { toast } from "react-toastify";

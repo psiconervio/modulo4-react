@@ -15,6 +15,7 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, Edad }) => {
       >
         Editar
       </button>
+      <button onClick={()=> navigate(`/items/${id}`)}>verDetalles</button>
     </div>
   );
 };
