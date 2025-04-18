@@ -11,9 +11,9 @@ export const apidbmongo = async (id = "") => {
   }
 };
 
-export const apidbmongoNombre = async (nombre = "") => {
+export const apidbmongoNombre = async (nombreSuperHeroe = "") => {
   const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes/nombre";
-  const url = `${baseUrl}/${nombre}`;
+  const url = `${baseUrl}/${nombreSuperHeroe}`;
   try {
     const response = await axios.get(url);
     return response.data;

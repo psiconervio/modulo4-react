@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 const ItemCard = ({ id, nombreReal, nombreSuperHeroe, Edad }) => {
   const navigate = useNavigate();
 
-  console.log("ID", id);
-  console.log("nombreReal", nombreReal);
-  console.log("nombreSuperHeroe", nombreSuperHeroe);
-  console.log("Edad", Edad);
-
   return (
     <div className=" text-white border border-gray-300 rounded-lg shadow-md p-4 hover:shadow-lg transition duration-200">
       <h1 className="text-lg font-bold  mb-2">
