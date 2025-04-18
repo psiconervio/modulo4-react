@@ -10,6 +10,7 @@ const SearchForm = () => {
     e.preventDefault();
     getItem(busqueda);
   };
+  console.log("el nombre es", busqueda);
 
   return (
     <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
