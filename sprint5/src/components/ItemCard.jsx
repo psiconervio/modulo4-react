@@ -4,9 +4,16 @@ import { useNavigate } from "react-router-dom";
 const ItemCard = ({ id, nombreReal, nombreSuperHeroe, Edad }) => {
   const navigate = useNavigate();
 
+  console.log("ID", id);
+  console.log("nombreReal", nombreReal);
+  console.log("nombreSuperHeroe", nombreSuperHeroe);
+  console.log("Edad", Edad);
+
   return (
     <div className=" text-white border border-gray-300 rounded-lg shadow-md p-4 hover:shadow-lg transition duration-200">
-      <h1 className="text-lg font-bold  mb-2">NombreSuperheroe:{nombreSuperHeroe}</h1>
+      <h1 className="text-lg font-bold  mb-2">
+        NombreSuperheroe:{nombreSuperHeroe}
+      </h1>
       <h2 className="text-sm mb-1">Nombre Real: {nombreReal}</h2>
       <h3 className="text-sm mb-1">Edad: {Edad}</h3>
       <button
@@ -15,7 +22,12 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, Edad }) => {
       >
         Editar
       </button>
-      <button onClick={()=> navigate(`/items/${id}`)}>verDetalles</button>
+      <button
+        className="bg-green-500 mx-2 p-2 rounded"
+        onClick={() => navigate(`/items/${id}`)}
+      >
+        Ver Detalles
+      </button>
     </div>
   );
 };

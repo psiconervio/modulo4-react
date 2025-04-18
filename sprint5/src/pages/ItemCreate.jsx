@@ -46,9 +46,9 @@ const ItemCreate = () => {
   };
 
   return (
-    <div>
-      <h1>Crear Superhéroe</h1>
-      <form onSubmit={handlesubmit}>
+    <div className="bg-gray-800 text-white p-4 rounded shadow-md mb-4 mx-3">
+      <h1 className="text-xl font-bold">Crear Jugador</h1>
+      <form className="" onSubmit={handlesubmit}>
         <div className="mx-4 my-4">
           <input
             type="text"
@@ -109,7 +109,7 @@ const ItemCreate = () => {
         </div>
         <button
           type="submit"
-          className="mx-2 border border-amber-600 rounded-lg text-lg font-semibold cursor-pointer"
+          className="mx-2 bg-amber-600 rounded p-2 text-lg font-semibold cursor-pointer"
         >
           Agregar
         </button>

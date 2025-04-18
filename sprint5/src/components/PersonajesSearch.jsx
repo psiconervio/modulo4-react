@@ -14,10 +14,8 @@ export const PersonajesSearch = () => {
       toast.error("El personaje ya se encuentra en la lista de favoritos");
     }
   };
-console.log(resultados)
   return (
     <div className="mx-4 my-4 text-white">
-      <h1>Buscar Personajes de Rick y Morty</h1>
       {error && <p>{error.message || error.toString()}</p>}
       {loading && <p>Cargando...</p>}
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6 items-center justify-center">

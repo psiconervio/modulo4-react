@@ -15,7 +15,6 @@ export const ItemProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || [];
   });
- console.log("resultados", resultadosbusqueda);
   //obtener heroe db por id
   const getItem = async (id) => {
     setLoading(true);

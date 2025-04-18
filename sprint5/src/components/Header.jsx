@@ -15,7 +15,7 @@ const Header = ({ setIsModalFav }) => {
       }
     >
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold ">Api rick y morty</h1>
+        <h1 className="text-2xl ml-8 font-bold ">Estaditicas De Personajes</h1>
         <div
           onClick={onOpenModalFav}
           className="mx-5 bg-green-700 text-white px-4 py-2"

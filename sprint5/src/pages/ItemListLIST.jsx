@@ -1,16 +1,13 @@
-import React from "react";
 import { useItem } from "../context/ItemContext";
 import ItemCard from "../components/ItemCard";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const ItemList = () => {
-  const navigate = useNavigate();
   const { items } = useItem(); // Accede a los items desde el contexto
-  
-  console.log("ITEMS", items);
+
+  // console.log("ITEMS", items);
   return (
     <div className="container mx-auto p-4 text-white">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Lista de Héroes</h1>
+      <h1 className="text-2xl font-bold text-gray-100 mb-6">Lista de Heroes</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-white">
         {items.map((item) => (
           <ItemCard
@@ -21,7 +18,6 @@ const ItemList = () => {
             edad={item.Edad}
           />
         ))}
-        <button onClick={() => navigate(`/edit`)}>EDITARR</button>
       </div>
     </div>
   );

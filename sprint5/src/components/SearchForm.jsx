@@ -18,9 +18,9 @@ const { getItem, busqueda, setBusqueda } =useItem()
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
         placeholder="Buscar personaje"
-        className="text-white p-2 border border-gray-700 rounded"
+        className="text-white p-2 border border-gray-700 rounded mx-2"
       />
-      <button type="submit">Buscar</button>
+      <button className=" bg-blue-600 rounded p-2 mx-2" type="submit">Buscar Personaje</button>
     </form>
   );
 };

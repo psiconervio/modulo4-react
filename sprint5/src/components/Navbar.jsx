@@ -4,6 +4,8 @@ import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router"; // Importa el componente Link para la navegación entre rutas
 import ItemCreate from "../pages/ItemCreate";
 import ItemList from "../pages/ItemList"; // Importa el componente ItemList para la navegación entre rutas
+import  afa  from "../assets/afa.png";
+import avatarbatman from "../assets/avatarbatman.svg"; // Importa una imagen desde la carpeta assets
 
 const NavBar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -50,8 +52,8 @@ const NavBar = () => {
       {/* Vista para escritorio */}
       <div className="flex justify-between items-center sm:px-12 sm:py-6 px-4 py-3">
         <div className="flex items-center gap-2">
-          <img src={batman} alt="Logo" className="w-[60px]" />
-          <p className="text-white font-bold font-size-3xl">BatmanShop</p>
+          <img src={avatarbatman} alt="Logo" className="w-[60px]" />
+          <p className="text-white font-bold text-2xl ml-4">Super-Base</p>
         </div>
 
         {/* Botón del menú hamburguesa para móviles */}
