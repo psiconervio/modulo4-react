@@ -1,5 +1,6 @@
 import { useItem } from "../context/ItemContext";
 import ItemCard from "../components/ItemCard";
+import SearchForm from "../components/SearchForm";
 
 const ItemList = () => {
   const { items } = useItem(); // Accede a los items desde el contexto
@@ -7,6 +8,7 @@ const ItemList = () => {
   // console.log("ITEMS", items);
   return (
     <div className="container mx-auto p-4 text-white">
+      {/* <SearchForm /> */}
       <h1 className="text-2xl font-bold text-gray-100 mb-6">Lista de Heroes</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-white">
         {items.map((item) => (

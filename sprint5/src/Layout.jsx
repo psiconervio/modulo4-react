@@ -42,12 +42,6 @@ const Layout = () => {
       isModalFav={isModalFav}
       setIsModalFav={setIsModalFav}
       />
-      {/* <FavPersonajeModal
-        personajes={personajes}
-        setPersonajes={setPersonajes}
-        isModalFav={isModalFav}
-        setIsModalFav={setIsModalFav}
-      /> */}
       <Main />
       <Footer />
     </>

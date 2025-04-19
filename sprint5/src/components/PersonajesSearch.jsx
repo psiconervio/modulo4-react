@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import { useItem } from "../context/ItemContext";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -37,7 +36,7 @@ export const PersonajesSearch = () => {
   };
 
   return (
-    <div className="mx-4 my-4 text-white">
+    <div className="container mx-auto text-white">
       {error && <p className="my-4 p-4">{error.message || error.toString()}</p>}
       {loading && <p className="my-4 p-4">Cargando...</p>}
       {resultadosbusqueda.length > 0 ? (

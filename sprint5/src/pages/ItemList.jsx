@@ -1,20 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useItem } from "../context/ItemContext";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 const ItemList = () => {
-  const { items, heroesfav, handleAddToFavorites,
-    getItem,
-    addItem,
-    removeItem,
-    clearItems,
-    busqueda,
-    setBusqueda,
-    setHeroesfav,
-    loading,
-    error, } = useItem();
+  const { items } = useItem();
   const navigate = useNavigate();
 
   // useEffect(() => {

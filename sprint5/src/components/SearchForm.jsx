@@ -13,14 +13,14 @@ const SearchForm = () => {
   console.log("el nombre es", busqueda);
 
   return (
-    <div className="mx-4 my-4">
-      <form className="text-white mx-4 my-4" onSubmit={handleSubmit}>
+    <div className="container mx-auto p-4">
+      <form className="text-white my-4" onSubmit={handleSubmit}>
         <input
           type="text"
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="Buscar personaje"
-          className="text-white p-2 border border-gray-700 rounded mx-2"
+          className="text-white p-2 border border-gray-700 rounded "
         />
         <button className=" bg-blue-600 rounded p-2 mx-2" type="submit">
           Buscar Personaje
