@@ -46,70 +46,70 @@ const ItemCreate = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded shadow-md mb-4 mx-3">
+    <div className="bg-gray-800 text-white container mx-auto p-4 rounded shadow-md mb-4 ">
       <h1 className="text-xl font-bold">Crear Jugador</h1>
       <form className="" onSubmit={handlesubmit}>
         <div className="mx-4 my-4">
           <input
             type="text"
             placeholder="Nombre del Superhéroe"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white mx-2 p-2 border border-gray-700 rounded"
             value={nombreSuperHeroe}
             onChange={(e) => setNombreSuperHeroe(e.target.value)}
           />
           <input
             type="text"
             placeholder="Nombre Real"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 mx-2 border border-gray-700 rounded"
             value={nombreReal}
             onChange={(e) => setNombreReal(e.target.value)}
           />
-          {/* <input
+          <input
             type="number"
             placeholder="Edad"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={edad}
             onChange={(e) => setEdad(e.target.value)}
           />
           <input
             type="text"
             placeholder="Planeta de Origen"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={planetaOrigen}
             onChange={(e) => setPlanetaOrigen(e.target.value)}
           />
           <input
             type="text"
             placeholder="Debilidad"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={debilidad}
             onChange={(e) => setDebilidad(e.target.value)}
           />
           <input
             type="text"
             placeholder="Poderes (separados por comas)"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={poderes}
             onChange={(e) => setPoderes(e.target.value)}
           />
           <input
             type="text"
             placeholder="Aliados (separados por comas)"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={aliados}
             onChange={(e) => setAliados(e.target.value)}
           />
           <input
             type="text"
             placeholder="Enemigos (separados por comas)"
-            className="text-white p-2 border border-gray-700 rounded"
+            className="text-white p-2 border mx-2 border-gray-700 rounded"
             value={enemigos}
             onChange={(e) => setEnemigos(e.target.value)}
-          /> */}
+          />
         </div>
         <button
           type="submit"
-          className="mx-2 bg-amber-600 rounded p-2 text-lg font-semibold cursor-pointer"
+          className="mx-2 bg-amber-600 rounded  p-2 text-lg font-semibold cursor-pointer"
         >
           Agregar
         </button>
