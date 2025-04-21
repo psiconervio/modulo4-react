@@ -34,9 +34,9 @@ export const ItemProvider = ({ children }) => {
   }, []);
 
   // Guardar favoritos en el almacenamiento local cuando cambien
-  useEffect(() => {
-    localStorage.setItem("heroesfav", JSON.stringify(heroesfav));
-  }, [heroesfav]);
+  // useEffect(() => {
+  //   localStorage.setItem("heroesfav", JSON.stringify(heroesfav));
+  // }, [heroesfav]);
 
   // Cargar favoritos desde el almacenamiento local al montar el contexto
   useEffect(() => {
@@ -77,23 +77,23 @@ export const ItemProvider = ({ children }) => {
         throw new Error("Failed to add hero");
       }
 
-      const savedHero = await response.json();
+      // const savedHero = await response.json();
 
-      setHeroesfav((prevHeroes) => {
-        const existingHero = prevHeroes.find(
-          (hero) => hero.id === savedHero.id
-        );
-        if (existingHero) {
-          const updatedHeroes = prevHeroes.map((hero) =>
-            hero.id === savedHero.id ? { ...hero, ...savedHero } : hero
-          );
-          toast.error("Quitar de favoritos");
-          return updatedHeroes;
-        } else {
-          toast.success("Agregado a favoritos");
-          return [...prevHeroes, savedHero];
-        }
-      });
+      // setHeroesfav((prevHeroes) => {
+      //   const existingHero = prevHeroes.find(
+      //     (hero) => hero.id === savedHero.id
+      //   );
+      //   if (existingHero) {
+      //     const updatedHeroes = prevHeroes.map((hero) =>
+      //       hero.id === savedHero.id ? { ...hero, ...savedHero } : hero
+      //     );
+      //     toast.error("Quitar de favoritos");
+      //     return updatedHeroes;
+      //   } else {
+      //     toast.success("Agregado a favoritos");
+      //     return [...prevHeroes, savedHero];
+      //   }
+      // });
     } catch (error) {
       console.error("Error adding hero:", error);
     }

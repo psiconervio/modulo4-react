@@ -1,5 +1,4 @@
 // SearchForm.jsx
-import { usePersonaje } from "../context/CharacterContext";
 import { useItem } from "../context/ItemContext";
 
 const SearchForm = () => {
@@ -10,7 +9,7 @@ const SearchForm = () => {
     e.preventDefault();
     getItem(busqueda);
   };
-  console.log("el nombre es", busqueda);
+  // console.log("el nombre es", busqueda);
 
   return (
     <div className="container mx-auto p-4">
