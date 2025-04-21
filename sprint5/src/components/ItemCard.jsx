@@ -5,17 +5,42 @@ import axios from "axios";
 import { useItem } from "../context/ItemContext";
 
 const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
-  const { setHeroesfav, heroesfav } = useItem(); // Asegúrate de que el contexto esté definido correctamente
+  const { setHeroesfav, heroesfav, items } = useItem(); // Asegúrate de que el contexto esté definido correctamente
   const navigate = useNavigate();
-
-  const agregarFavoritos = () => {
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("heroesfav")) || [];
+    setHeroesfav(storedFavorites); // Mover esta actualización de estado dentro de useEffect
+  }, []);
+  const agregarFavoritos = (id) => {
     try {
-      setHeroesfav(id);
-      console.log(heroesfav);
+      const item = items.find((item) => item.id === id);
+      if (item && !heroesfav.some((hero) => hero.id === id)) {
+        const nuevosFavoritos = [...heroesfav, item];
+        setHeroesfav(nuevosFavoritos);
+        localStorage.setItem("heroesfav", JSON.stringify(nuevosFavoritos)); // Guardar en localStorage
+        console.log("Agregado a favoritos:", item);
+        console.log("heroes:", nuevosFavoritos);
+      } else {
+        console.log("El héroe ya está en favoritos o no existe:", id);
+      }
     } catch (error) {
       console.error("Error al agregar a favoritos:", error);
     }
   };
+  // const agregarFavoritos = (id) => {
+  //   try {
+  //     const item = items.find((item) => item.id === id);
+  //     if (item && !heroesfav.some((hero) => hero.id === id)) {
+  //       setHeroesfav([...heroesfav, item]);
+  //       console.log("Agregado a favoritos:", item);
+  //       console.log("heroes:", heroesfav);
+  //     } else {
+  //       console.log("El héroe ya está en favoritos o no existe:", id);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error al agregar a favoritos:", error);
+  //   }
+  // };
   const deleteData = async () => {
     try {
       const response = await axios.delete(
@@ -25,7 +50,7 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
       if (response.status === 200) {
         alert("Item eliminado exitosamente.");
         Swal.fire({
-          title: "Good job!",
+          title: "Eliminado!",
           text: "You clicked the button!",
           icon: "success",
         });

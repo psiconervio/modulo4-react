@@ -8,7 +8,11 @@ export const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [busqueda, setBusqueda] = useState("");
-  const [heroesfav, setHeroesfav] = useState([]);
+  const [heroesfav, setHeroesfav] = useState(() => {
+    // Recuperar desde localStorage al cargar el componente
+    const savedFavorites = localStorage.getItem("heroesfav");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
   const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || [];
