@@ -33,8 +33,8 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
   //   console.log(id, nombreReal, nombreSuperHeroe, edad, Edad, "desde el item card");
   // }, []);
   return (
-    <div className=" text-white border border-gray-300 rounded-lg shadow-md p-4 hover:shadow-lg transition duration-200">
-      <h1 className="text-1xlg font-bold  mb-2">
+    <div className=" text-white border border-gray-300 rounded shadow-md p-4 hover:shadow-lg transition duration-200">
+      <h1 className="text-lg font-bold  mb-2">
         Nombre Super heroe:{nombreSuperHeroe}
       </h1>
       <h2 className="text-sm mb-1">Nombre Real: {nombreReal}</h2>
@@ -42,18 +42,18 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
       <div className="mt-6">
         <button
           onClick={() => navigate(`/items/${id}/edit`)}
-          className="bg-blue-500 text-white py-2 px-2 rounded hover:bg-blue-600 transition duration-200"
+          className="bg-blue-500/70 text-white m-1 p-1 rounded hover:bg-blue-600 transition duration-200"
         >
           Editar
         </button>
         <button
-          className="bg-green-500 mx-2 p-2 rounded"
+          className="bg-green-500/70 m-1 p-1 rounded"
           onClick={() => navigate(`/items/${id}`)}
         >
           Ver Detalles
         </button>
         <button
-          className="bg-red-600 px-2 py-2 rounded"
+          className="bg-red-600/70 m-1 p-1 rounded"
           onClick={() => deleteData(id)}
         >
           borrar

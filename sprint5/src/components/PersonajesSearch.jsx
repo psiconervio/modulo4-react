@@ -57,18 +57,18 @@ export const PersonajesSearch = () => {
               </button> */}
               <button
                 onClick={() => navigate(`/items/${id}/edit`)}
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                className="bg-blue-500 text-white m-1 p-1  rounded hover:bg-blue-600 transition duration-200"
               >
                 Editar
               </button>
               <button
-                className="bg-green-500 mx-2 p-2 rounded"
+                className="bg-green-500 m-1 p-1 rounded"
                 onClick={() => navigate(`/items/${id}`)}
               >
                 Ver Detalles
               </button>
               <button
-                className="bg-red-600 px-4 py-2 rounded"
+                className="bg-red-600 m-1 p-1 rounded"
                 onClick={() => deleteData(idToExtract)}
               >
                 borrar
