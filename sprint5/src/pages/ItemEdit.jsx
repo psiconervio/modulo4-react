@@ -82,13 +82,13 @@ const ItemEdit = () => {
 
       if (response.ok) {
         alert("Héroe actualizado con éxito.");
-        navigate(`/detalle/${id}`);
+        navigate(`/items/${id}`);
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message || "No se pudo actualizar el héroe.");
       }
     } catch (err) {
-      // console.error("Error en la solicitud:", err.message);
+      console.error("Error en la solicitud:", err.message);
       alert(err.message);
     }
   };
