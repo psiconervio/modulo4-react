@@ -2,10 +2,20 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useItem } from "../context/ItemContext";
 
 const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
+  const { setHeroesfav, heroesfav } = useItem(); // Asegúrate de que el contexto esté definido correctamente
   const navigate = useNavigate();
 
+  const agregarFavoritos = () => {
+    try {
+      setHeroesfav(id);
+      console.log(heroesfav);
+    } catch (error) {
+      console.error("Error al agregar a favoritos:", error);
+    }
+  };
   const deleteData = async () => {
     try {
       const response = await axios.delete(
@@ -29,9 +39,6 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(id, nombreReal, nombreSuperHeroe, edad, Edad, "desde el item card");
-  // }, []);
   return (
     <div className=" text-white border border-gray-300 rounded shadow-md p-4 hover:shadow-lg transition duration-200">
       <h1 className="text-lg font-bold  mb-2">
@@ -57,6 +64,12 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
           onClick={() => deleteData(id)}
         >
           borrar
+        </button>
+        <button
+          className="bg-amber-600/70 m-1 p-1 rounded"
+          onClick={() => agregarFavoritos(id)}
+        >
+          Agregar a Favoritos
         </button>
       </div>
     </div>
