@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -62,12 +62,12 @@ const ItemCard = ({
 
   return (
     <div className=" text-white border border-gray-300 rounded shadow-md p-4 hover:shadow-lg transition duration-200">
-      <h1 className="text-lg font-bold mb-2">
-        SuperHeroe: {nombreSuperHeroe}
-      </h1>
+      <h1 className="text-lg font-bold mb-2">SuperHeroe: {nombreSuperHeroe}</h1>
       <h2 className="text-sm mb-1">Nombre Real: {nombreReal}</h2>
       <h3 className="text-sm mb-1">Edad: {edad}</h3>
-      <h3 className="text-sm mb-1">PlanetadeOrigen: {planetaOrigen},{PlanetadeOrigen}</h3>
+      <h3 className="text-sm mb-1">
+        PlanetadeOrigen: {PlanetadeOrigen}
+      </h3>
       <div className="mt-6">
         <button
           onClick={() => navigate(`/items/${id}/edit`)}

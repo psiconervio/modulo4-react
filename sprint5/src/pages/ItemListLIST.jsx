@@ -18,6 +18,7 @@ const ItemList = () => {
             nombreReal={item.Nombre}
             nombreSuperHeroe={item.NombreReal}
             edad={item.Edad}
+            PlanetadeOrigen={item.PlanetadeOrigen}
           />
         ))}
       </div>
