@@ -1,0 +1,7 @@
+html{
+  background-color: rgb(14, 21, 36);
+}
+
+body,h1,h2,h3,h4,h5,h6,p,ul,li,a,p{
+  color: white;
+}

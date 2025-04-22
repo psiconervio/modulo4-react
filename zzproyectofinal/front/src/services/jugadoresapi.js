@@ -11,6 +11,18 @@ export const apidbmongo = async (id = "") => {
   }
 };
 
+export const apidbmongoNombre = async (nombreSuperHeroe = "") => {
+  const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes/nombre";
+  const url = `${baseUrl}/${nombreSuperHeroe}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data from API:", error);
+    throw error;
+  }
+};
+
 export const apidbmongoPost = async (data) => {
   const baseUrl = "https://nodofullstack-m3-0w08.onrender.com/api/heroes";
   const url = `${baseUrl}`;

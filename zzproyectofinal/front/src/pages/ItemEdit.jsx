@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useItem } from "../context/ItemContext";
 
 const ItemEdit = () => {
   const { id } = useParams(); // Extrae el id de la URL
@@ -17,8 +16,6 @@ const ItemEdit = () => {
     aliados: "",
     enemigos: "",
   });
-  // const url = import.meta.env.VITE_API_URL;
-  // console.log(url)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +23,6 @@ const ItemEdit = () => {
         setLoading(true);
         const response = await fetch(
           `https://nodofullstack-m3-0w08.onrender.com/api/heroes/id/${id}`
-          // `${url}/${id}`
         );
         if (!response.ok) throw new Error("No se pudo obtener los datos.");
         const data = await response.json();
@@ -103,7 +99,10 @@ const ItemEdit = () => {
   return (
     <div className="mx-10 mt-5">
       <h1 className="text-center mb-5">Editar Héroe</h1>
-      <form className="grid grid-cols-1 md:grid-cols-3 gap-4" onSubmit={handleSubmit}>
+      <form
+        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        onSubmit={handleSubmit}
+      >
         <label className="flex flex-col">
           Nombre del Superhéroe:
           <input
@@ -184,13 +183,14 @@ const ItemEdit = () => {
             className="border border-gray-300 rounded-lg p-2"
           />
         </label>
-        <div className="col-span-1 md:col-span-3 flex justify-center">
+        <div className="mt-10 flex justify-center items-center">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            className="bg-blue-500 text-white p-2 rounded mx-4 hover:bg-blue-600"
           >
             Guardar Cambios
           </button>
+          <button className="bg-blue-400 rounded p-2 hover:bg-blue-300" onClick={() => navigate(-1)}>Volver</button>
         </div>
       </form>
     </div>

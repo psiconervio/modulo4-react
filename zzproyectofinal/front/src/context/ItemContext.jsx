@@ -1,13 +1,13 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
-import { apidbmongo } from "../services/jugadoresapi"; // Import your API function here
+import { apidbmongo, apidbmongoNombre } from "../services/jugadoresapi"; // Import your API function here
 const ItemContext = createContext();
 
 export const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   //busqueda por id
-  const [busqueda, setBusqueda] = useState();
+  const [busqueda, setBusqueda] = useState("");
   //modal favoritos
   const [heroesfav, setHeroesfav] = useState([]);
   const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
@@ -15,11 +15,15 @@ export const ItemProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || [];
   });
+  useEffect(() => {
+    console.log("Resultados de búsqueda:", resultadosbusqueda);
+  }, [resultadosbusqueda]);
   //obtener heroe db por id
-  const getItem = async (id) => {
+  const getItem = async (nombre) => {
     setLoading(true);
     try {
-      const data = await apidbmongo(id);
+      const data = await apidbmongoNombre(nombre);
+      console.log("Data fetched:", data);
       setResultadosbusqueda(data);
       setError(null);
     } catch (error) {
@@ -130,6 +134,7 @@ export const ItemProvider = ({ children }) => {
         setBusqueda,
         heroesfav,
         setHeroesfav,
+        resultadosbusqueda,
         loading,
         error,
         // handleAddToFavorites,
