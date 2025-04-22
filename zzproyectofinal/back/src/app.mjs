@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/database.mjs";
 import routes from "./routes/index.mjs";
-// import initializeRolesAndPermissions from "./scripts/createRolesAndPermissions.mjs";
+import initializeRolesAndPermissions from "./scripts/createRolesAndPermissions.mjs";
 
 // Configurar variables de entorno
 dotenv.config();
@@ -15,7 +15,7 @@ import "./models/User.mjs";
 
 const app = express();
 
-// initializeRolesAndPermissions(); // Inicializar roles y permisos al iniciar la aplicación
+initializeRolesAndPermissions(); // Inicializar roles y permisos al iniciar la aplicación
 // Configuración de CORS más segura y específica
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
