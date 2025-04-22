@@ -10,7 +10,6 @@ export const ItemProvider = ({ children }) => {
   const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [heroesfav, setHeroesfav] = useState(() => {
-    // Recuperar desde localStorage al cargar el componente
     const savedFavorites = localStorage.getItem("heroesfav");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
@@ -40,10 +39,9 @@ export const ItemProvider = ({ children }) => {
 
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("heroesfav")) || [];
-    setHeroesfav(storedFavorites); // mover esta actualización de estado dentro de useEffect
+    setHeroesfav(storedFavorites); 
   }, []);
 
-  // Obtener héroe por nombre
   const getItem = async (nombre) => {
     setLoading(true);
     try {
@@ -58,7 +56,6 @@ export const ItemProvider = ({ children }) => {
     }
   };
 
-  // Añadir héroe
   const addItem = async (newheroe) => {
     try {
       const response = await fetch(
@@ -80,12 +77,10 @@ export const ItemProvider = ({ children }) => {
     }
   };
 
-  // Eliminar héroe
   const removeItem = (itemId) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
 
-  // Limpiar todos los héroes
   const clearItems = () => {
     setItems([]);
   };

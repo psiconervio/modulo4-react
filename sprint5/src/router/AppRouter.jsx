@@ -5,10 +5,8 @@ import ItemCreate from "../pages/ItemCreate";
 import NotFound from "../pages/NotFound.jsx";
 import Layout from "../layout.jsx";
 import ItemListLIST from "../pages/ItemListLIST.jsx";
-import { useItem } from "../context/ItemContext.jsx";
 
 const AppRouter = () => {
-  const { items, heroesfav, handleAddToFavorites } = useItem();
   return (
     <>
       <BrowserRouter>

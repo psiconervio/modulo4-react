@@ -9,7 +9,6 @@ const ItemCard = ({
   nombreReal,
   nombreSuperHeroe,
   edad,
-  planetaOrigen,
   PlanetadeOrigen,
 }) => {
   const { setHeroesfav, heroesfav, items } = useItem(); // Asegúrate de que el contexto esté definido correctamente
@@ -26,7 +25,7 @@ const ItemCard = ({
       if (item && !heroesfav.some((hero) => hero.id === id)) {
         const nuevosFavoritos = [...heroesfav, item];
         setHeroesfav(nuevosFavoritos);
-        localStorage.setItem("heroesfav", JSON.stringify(nuevosFavoritos)); // Guardar en localStorage
+        localStorage.setItem("heroesfav", JSON.stringify(nuevosFavoritos)); 
         console.log("Agregado a favoritos:", item);
         console.log("heroes:", nuevosFavoritos);
       } else {
@@ -50,7 +49,7 @@ const ItemCard = ({
           text: "You clicked the button!",
           icon: "success",
         });
-        navigate("/"); // Redirige a la lista de items después de eliminar
+        navigate("/"); 
       } else {
         alert("Error al eliminar el item.");
       }
