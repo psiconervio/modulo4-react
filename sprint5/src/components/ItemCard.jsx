@@ -4,13 +4,22 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useItem } from "../context/ItemContext";
 
-const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
+const ItemCard = ({
+  id,
+  nombreReal,
+  nombreSuperHeroe,
+  edad,
+  planetaOrigen,
+  PlanetadeOrigen,
+}) => {
   const { setHeroesfav, heroesfav, items } = useItem(); // Asegúrate de que el contexto esté definido correctamente
   const navigate = useNavigate();
+
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("heroesfav")) || [];
     setHeroesfav(storedFavorites); // Mover esta actualización de estado dentro de useEffect
   }, []);
+
   const agregarFavoritos = (id) => {
     try {
       const item = items.find((item) => item.id === id);
@@ -27,20 +36,7 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
       console.error("Error al agregar a favoritos:", error);
     }
   };
-  // const agregarFavoritos = (id) => {
-  //   try {
-  //     const item = items.find((item) => item.id === id);
-  //     if (item && !heroesfav.some((hero) => hero.id === id)) {
-  //       setHeroesfav([...heroesfav, item]);
-  //       console.log("Agregado a favoritos:", item);
-  //       console.log("heroes:", heroesfav);
-  //     } else {
-  //       console.log("El héroe ya está en favoritos o no existe:", id);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error al agregar a favoritos:", error);
-  //   }
-  // };
+
   const deleteData = async () => {
     try {
       const response = await axios.delete(
@@ -66,11 +62,12 @@ const ItemCard = ({ id, nombreReal, nombreSuperHeroe, edad, Edad }) => {
 
   return (
     <div className=" text-white border border-gray-300 rounded shadow-md p-4 hover:shadow-lg transition duration-200">
-      <h1 className="text-lg font-bold  mb-2">
-        Nombre Super heroe:{nombreSuperHeroe}
+      <h1 className="text-lg font-bold mb-2">
+        SuperHeroe: {nombreSuperHeroe}
       </h1>
       <h2 className="text-sm mb-1">Nombre Real: {nombreReal}</h2>
       <h3 className="text-sm mb-1">Edad: {edad}</h3>
+      <h3 className="text-sm mb-1">PlanetadeOrigen: {planetaOrigen},{PlanetadeOrigen}</h3>
       <div className="mt-6">
         <button
           onClick={() => navigate(`/items/${id}/edit`)}

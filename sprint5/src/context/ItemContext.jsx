@@ -7,13 +7,13 @@ const ItemContext = createContext();
 export const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [heroesfav, setHeroesfav] = useState(() => {
     // Recuperar desde localStorage al cargar el componente
     const savedFavorites = localStorage.getItem("heroesfav");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
-  const [resultadosbusqueda, setResultadosbusqueda] = useState([]);
   const [items, setItems] = useState(() => {
     return JSON.parse(localStorage.getItem("items")) || [];
   });
@@ -25,6 +25,7 @@ export const ItemProvider = ({ children }) => {
       try {
         const data = await apidbmongo();
         setItems(data);
+        console.log(data);
         toast.success("Base de datos cargada correctamente");
         setError(null);
       } catch (error) {
@@ -37,15 +38,9 @@ export const ItemProvider = ({ children }) => {
     fetchItemsFromDatabase();
   }, []);
 
-  // Guardar favoritos en el almacenamiento local cuando cambien
-  // useEffect(() => {
-  //   localStorage.setItem("heroesfav", JSON.stringify(heroesfav));
-  // }, [heroesfav]);
-
-  // Cargar favoritos desde el almacenamiento local al montar el contexto
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("heroesfav")) || [];
-    setHeroesfav(storedFavorites); // Mover esta actualización de estado dentro de useEffect
+    setHeroesfav(storedFavorites); // mover esta actualización de estado dentro de useEffect
   }, []);
 
   // Obtener héroe por nombre
@@ -80,24 +75,6 @@ export const ItemProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error("Failed to add hero");
       }
-
-      // const savedHero = await response.json();
-
-      // setHeroesfav((prevHeroes) => {
-      //   const existingHero = prevHeroes.find(
-      //     (hero) => hero.id === savedHero.id
-      //   );
-      //   if (existingHero) {
-      //     const updatedHeroes = prevHeroes.map((hero) =>
-      //       hero.id === savedHero.id ? { ...hero, ...savedHero } : hero
-      //     );
-      //     toast.error("Quitar de favoritos");
-      //     return updatedHeroes;
-      //   } else {
-      //     toast.success("Agregado a favoritos");
-      //     return [...prevHeroes, savedHero];
-      //   }
-      // });
     } catch (error) {
       console.error("Error adding hero:", error);
     }
