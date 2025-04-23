@@ -1,12 +1,12 @@
 import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useForm } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
-    formstate: { errors },
+    formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
@@ -15,23 +15,28 @@ const Login = () => {
   const { login } = useAuth();
 
   return (
-    <div>
+    <div className="mx-4 my-4">
       <h1>login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          {...register("email", { required: true })}
-        />
-        {errors.email && <span>This field is required</span>}
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", { required: true })}
-        ></input>
-        <input type="text" />
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            {...register("email", { required: true })}
+          />
+          {errors.email && <span>This field is required</span>}
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <span>This field is required</span>}
+        </div>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
