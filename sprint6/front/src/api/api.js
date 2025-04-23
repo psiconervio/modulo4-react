@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -21,5 +21,5 @@ export const apiss = async () => {
   return data;
 };
 
-export const loginUser = (credentials) => api.post("/auth/ login", credentials);
+export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = async (userData) => api.post("/register", userData);
