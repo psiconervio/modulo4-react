@@ -6,9 +6,10 @@ import NotFound from "../pages/NotFound.jsx";
 import Layout from "../layout.jsx";
 import ItemListLIST from "../pages/ItemListLIST.jsx";
 import { useItem } from "../context/ItemContext.jsx";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
 
 const AppRouter = () => {
-  const { items, heroesfav, handleAddToFavorites } = useItem();
   return (
     <>
       <BrowserRouter>
@@ -19,6 +20,8 @@ const AppRouter = () => {
             <Route path="/items/:id" element={<ItemDetail />} />
             <Route path="/items/:id/edit" element={<ItemEdit />} />
             <Route path="/items/create" element={<ItemCreate />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
