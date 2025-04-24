@@ -1,12 +1,15 @@
-import { useState, useContext } from "react"; // Importa el hook useState para manejar el estado del menú
+import { useState, useContext, useEffect } from "react"; // Importa el hook useState para manejar el estado del menú
 import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router"; // Importa el componente Link para la navegación entre rutas
 import ItemCreate from "../pages/ItemCreate";
 import ItemList from "../pages/ItemList"; // Importa el componente ItemList para la navegación entre rutas
 import avatarbatman from "../assets/avatarbatman.svg"; // Importa una imagen desde la carpeta assets
+import { useAuth } from "../context/AuthContext"; // Importa el contexto de autenticación
+import Login from "../pages/Login"; // Importa el componente Login para la navegación entre rutas
 
 const NavBar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { login, logout, user } = useAuth(); // Importa el contexto de autenticación para manejar el inicio y cierre de sesión
 
   // Estado para controlar si el menú está abierto o cerrado (para la vista móvil)
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +24,7 @@ const NavBar = () => {
   const navbarLinks = [
     { id: 1, title: "create", link: "/items/create", element: <ItemCreate /> },
     { id: 2, title: "items", link: "/", element: <ItemList /> },
-    { id: 3, title: "Contacto", link: "/", element: <ItemCreate /> },
+    { id: 3, title: "Login", link: "/login", element: <Login /> },
     { id: 4, title: "Soporte", link: "/", element: <ItemCreate /> },
   ];
 
@@ -40,6 +43,9 @@ const NavBar = () => {
       icon: "bi bi-github",
     },
   ];
+  useEffect(() => {
+    console.log("user -> ", user);
+  }, [user]); // Muestra en consola el objeto user cada vez que cambia
 
   return (
     <nav
@@ -53,7 +59,14 @@ const NavBar = () => {
           <img src={avatarbatman} alt="Logo" className="w-[60px]" />
           <p className="text-white font-bold text-2xl ml-4">Super-Base</p>
         </div>
-
+        {user ? (
+          <div className="text-white font-bold text-xl ml-4">
+            Hola, {user.username}
+            <button className="cursor-pointer" onClick={logout}>cerrar sesion</button>
+          </div>
+        ) : (
+          <div className="text-white font-bold text-2xl ml-4"></div>
+        )}
         {/* Botón del menú hamburguesa para móviles */}
         <button
           className="md:hidden text-white p-2 cursor-pointer"
@@ -98,7 +111,6 @@ const NavBar = () => {
                 </Link>
               </li>
             ))}
-
           </ul>
         </div>
 
