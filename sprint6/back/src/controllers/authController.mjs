@@ -1,3 +1,4 @@
+//authcontroller.mjs
 import authService from '../services/authService.mjs';
 
 export const register = async (req, res) => {
@@ -21,6 +22,17 @@ export const login = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 };
+
+export const promote = async (req, res) => {
+    try {
+      // req.params.id es el usuario a promocionar
+      const promotedUser = await authService.promoteToAdmin(req.params.id);
+      res.json({ user: promotedUser, message: 'Usuario promovido a admin' });
+    } catch (error) {
+      console.error('Error al promocionar:', error);
+      res.status(400).json({ message: error.message });
+    }
+  };
 // //Creamos un controlador para la autenticacion
 // const authService = require('../services/authService');
 

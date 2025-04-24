@@ -1,3 +1,4 @@
+//authservice.mjs
 import User from '../models/User.mjs';
 import Role from '../models/Role.mjs';
 import bcrypt from 'bcryptjs';
@@ -51,6 +52,31 @@ class AuthService {
     // Retornamos el usuario (sin password) y su token
     return { user: userResponse, token };
   }
+
+    // Nuevo método para promocionar a admin
+    async promoteToAdmin(userId) {
+      // 1. Verificamos que exista el rol admin
+      const adminRole = await Role.findOne({ name: 'admin' });
+      if (!adminRole) {
+        throw new Error('Rol admin no encontrado');
+      }
+  
+      // 2. Actualizamos el usuario
+      const updated = await User.findByIdAndUpdate(
+        userId,
+        { role: adminRole._id },
+        { new: true }
+      );
+  
+      if (!updated) {
+        throw new Error('Usuario no encontrado');
+      }
+  
+      // 3. Retornamos la info sin contraseña
+      const userObj = updated.toObject();
+      delete userObj.password;
+      return userObj;
+    }
 
   // Método para iniciar sesión
   async login(email, password) {
