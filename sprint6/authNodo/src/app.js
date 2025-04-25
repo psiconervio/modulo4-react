@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/database");
 const routes = require("./routes");
-const migracion = require("./scripts/createRolesAndPermissions");
+// const migracion = require("./scripts/createRolesAndPermissions");
 
 require("dotenv").config();
 
@@ -12,7 +12,7 @@ require("./models/Role");
 require("./models/User");
 const app = express();
 
-migracion();
+// migracion();
 // Configuración de CORS más segura y específica
 //Intercambio de recursos de origen cruzado
 
