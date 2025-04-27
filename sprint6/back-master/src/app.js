@@ -2,14 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/database");
 const routes = require("./routes");
-const migracion = require("./scripts/createRolesAndPermissions");
-
-require("dotenv").config();
-
+// const migracion = require("./scripts/createRolesAndPermissions");
 // Cargar modelos
 require("./models/Permission");
 require("./models/Role");
 require("./models/User");
+const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+require("dotenv").config();
+
 const app = express();
 
 // migracion();
@@ -30,6 +32,10 @@ app.use(express.json());
 
 // Rutas
 app.use("/api", routes);
+//rutas negocio
+app.use("/api/auth", userRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/cart", cartRoutes);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
