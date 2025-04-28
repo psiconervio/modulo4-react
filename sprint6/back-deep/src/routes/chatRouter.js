@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const chatController = require('../controllers/chatController');
-const authMiddleware = require('../middleware/authMiddleware');
 
-router.use(authMiddleware.protect);
-
+router.post('/:productId/conversations', chatController.startConversation);
 router.get('/conversations', chatController.getConversations);
 router.get('/:conversationId/messages', chatController.getMessages);
 
