@@ -41,6 +41,70 @@ app.get("/", (req, res) => {
   res.json({ message: "API funcionando" });
 });
 
+// Agrega después de las rutas existentes
+const productRouter = require("./routes/productRouter");
+const cartRouter = require("./routes/cartRouter");
+const orderRouter = require("./routes/orderRouter");
+
+app.use("/api/products", productRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/orders", orderRouter);
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST"],
+  },
+});
+
+// Socket.io Logic
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  // Aquí deberías agregar la lógica de autenticación JWT
+  // similar a tu middleware de autenticación existente
+  next();
+});
+
+io.on("connection", (socket) => {
+  console.log("Usuario conectado:", socket.id);
+
+  // Unirse a la sala de conversación
+  socket.on("join_conversation", (conversationId) => {
+    socket.join(conversationId);
+  });
+
+  // Manejar mensajes
+  socket.on("send_message", async (data) => {
+    try {
+      const newMessage = new Message({
+        conversation: data.conversationId,
+        sender: data.senderId,
+        content: data.content,
+      });
+
+      const savedMessage = await newMessage.save();
+
+      // Actualizar última conversación
+      await Conversation.findByIdAndUpdate(data.conversationId, {
+        lastMessage: data.content,
+        updatedAt: new Date(),
+      });
+
+      // Emitir mensaje a los participantes
+      io.to(data.conversationId).emit("receive_message", {
+        ...savedMessage.toObject(),
+        sender: { _id: data.senderId, name: data.senderName },
+      });
+    } catch (error) {
+      console.error("Error al guardar mensaje:", error);
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Usuario desconectado:", socket.id);
+  });
+});
 // Iniciar conexión a MongoDB
 connectDB();
 

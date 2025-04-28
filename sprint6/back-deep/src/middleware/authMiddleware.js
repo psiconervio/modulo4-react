@@ -66,4 +66,28 @@ exports.hasPermission = (requiredPermission) => {
         }
     };
 };
+// Middleware para verificar si el usuario es administrador
+// exports.checkSeller = (req, res, next) => {
+//     if (!req.user.roles.includes('seller')) {
+//       return res.status(403).json({ error: 'Acceso restringido a vendedores' });
+//     }
+//     next();
+//   };
 
+
+// // Nuevo middleware para autenticación de sockets
+// exports.authenticateSocket = (socket, next) => {
+//     const token = socket.handshake.auth.token;
+    
+//     if (!token) {
+//       return next(new Error('Autenticación requerida'));
+//     }
+  
+//     try {
+//       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//       socket.user = decoded;
+//       next();
+//     } catch (error) {
+//       return next(new Error('Token inválido'));
+//     }
+//   };
