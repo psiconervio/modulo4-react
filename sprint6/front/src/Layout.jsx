@@ -11,8 +11,13 @@ import { PersonajesSearch } from "./components/PersonajesSearch";
 import { ToastContainer } from "react-toastify";
 import { FavPersonajeModal } from "./components/FavPersonajeModal";
 import FavSuperModal from "./components/FavSuperModal";
+import Chat from "./components/Chat";
 
 const Layout = () => {
+  const productId = "681002829e356fe6176d3ed0"; // ID del producto
+  const userId = "6810008f9e356fe6176d3ec6"; // ID del usuario autenticado
+  const username = "nuevo_usuario"; // Nombre del usuario autenticado
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MTAwMDhmOWUzNTZmZTYxNzZkM2VjNiIsInJvbGUiOiI2ODBmZmRjMDQ3ZGIyNWRlOTdhMzQwYjciLCJpYXQiOjE3NDU4NzkyMDIsImV4cCI6MTc0NTk2NTYwMn0.jkW_Otq2_uQUENm5PVa-QXtqUd3eoDfHBCheEwUgCy4"; // Token JWT del usuario autenticado
   const [isModalFav, setIsModalFav] = useState(false);
   const [personajes, setPersonajes] = useState([]);
 
@@ -24,6 +29,13 @@ const Layout = () => {
   }, []);
   return (
     <>
+      <h1>Chat del Producto</h1>
+      <Chat
+        productId={productId}
+        userId={userId}
+        username={username}
+        token={token}
+      />
       <Navbar />
       <Header isModalFav={isModalFav} setIsModalFav={setIsModalFav} />
       <ToastContainer />
@@ -38,10 +50,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <FavSuperModal
-      isModalFav={isModalFav}
-      setIsModalFav={setIsModalFav}
-      />
+      <FavSuperModal isModalFav={isModalFav} setIsModalFav={setIsModalFav} />
       {/* <FavPersonajeModal
         personajes={personajes}
         setPersonajes={setPersonajes}

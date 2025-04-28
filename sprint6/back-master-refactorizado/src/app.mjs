@@ -87,7 +87,7 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
   console.log(`🌍 Accede en: http://localhost:${PORT}`);
