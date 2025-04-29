@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const ProductCard = ({ product }) => {
   const { toggleSaveProduct, isProductSaved } = useProducts();
   const seller = getSellerById(product.seller);
-  const isSaved = isProductSaved(product.id);
+  const isSaved = isProductSaved(product._id);
 
   const handleSaveClick = (e) => {
     e.preventDefault();

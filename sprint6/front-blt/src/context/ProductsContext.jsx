@@ -61,7 +61,7 @@ export const ProductsProvider = ({ children }) => {
 
   // Find a product by ID
   const getProductById = (productId) => {
-    return products.find((product) => product.id === productId);
+    return products.find((product) => product._id === productId);
   };
 
   // Search products by term
