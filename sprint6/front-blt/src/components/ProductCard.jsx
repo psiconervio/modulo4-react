@@ -11,16 +11,18 @@ const ProductCard = ({ product }) => {
   const handleSaveClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    toggleSaveProduct(product.id)
+    // toggleSaveProduct(product._id)
   }
-  
+   console.log("ProductCart",product[0])
   return (
-    <Link to={`/product/${product.id}`} className="block">
+    <Link to=
+    {`/product/${product}`} 
+    className="block">
       <div className="card group hover:transform hover:scale-[1.02] transition-all duration-200 border rounded-lg border-gray-600">
         <div className="relative">
           <img 
-            src={product.images[0]} 
-            alt={product.title}
+            src={product.image} 
+            // alt={product.title}
             className="w-full h-48 object-cover rounded-md"
           />
           <button
@@ -40,13 +42,13 @@ const ProductCard = ({ product }) => {
             <h3 className="font-bold text-lg group-hover:text-fb-blue">${product.price}</h3>
             <span className="text-xs text-gray-500">{formatDate(product.createdAt)}</span>
           </div>
-          <h4 className="font-medium text-gray-800 mt-1 line-clamp-1">{product.title}</h4>
+          {/* <h4 className="font-medium text-gray-800 mt-1 line-clamp-1">{product.title}</h4> */}
           <p className="text-gray-500 text-sm mt-1 line-clamp-2">{product.description}</p>
           
           <div className="mt-3 flex items-center text-sm text-gray-600">
-            <span>{product.location}</span>
+            {/* <span>{product.location}</span> */}
             <span className="mx-2">•</span>
-            <span>{product.category}</span>
+            {/* <span>{product.category}</span> */}
           </div>
         </div>
       </div>

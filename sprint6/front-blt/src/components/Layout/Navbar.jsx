@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* Logo and search */}
           <div className="flex items-center flex-1">
             <Link to="/" className="font-bold text-xl flex items-center">
-              <FaShoppingCart className="mr-2" /> FBMarket
+              <FaShoppingCart className="mr-2" /> Marketplace
             </Link>
 
             <div className="hidden md:block ml-6 flex-1 max-w-md">
@@ -56,7 +56,7 @@ const Navbar = () => {
                   <FaEnvelope />
                 </Link>
                 <Link to="/create-listing" className="ml-2 btn-secondary">
-                  Sell
+                  Publicar Venta
                 </Link>
                 <div className="relative ml-3">
                   <button
