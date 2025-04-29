@@ -45,7 +45,7 @@ const HomePage = () => {
         {/* Main content area */}
         <div className="flex-1">
           {/* Categories section - visible on mobile and tablet */}
-          <div className="md:hidden mb-8">
+          {/* <div className="md:hidden mb-8">
             <h2 className="text-2xl font-bold mb-4">Categories</h2>
             <div className="flex overflow-x-auto pb-2 -mx-4 px-4 space-x-4">
               {featuredCategories.map(category => (
@@ -75,10 +75,10 @@ const HomePage = () => {
                 <span className="text-sm font-medium">See All</span>
               </Link>
             </div>
-          </div>
+          </div> */}
           
           {/* Mobile filters - expand/collapse */}
-          <div className="md:hidden mb-6">
+          {/* <div className="md:hidden mb-6">
             <button 
               className="btn-secondary w-full flex justify-between items-center"
               onClick={() => document.getElementById('mobile-filters').classList.toggle('hidden')}
@@ -108,10 +108,10 @@ const HomePage = () => {
                 Clear all filters
               </button>
             </div>
-          </div>
+          </div> */}
           
           {/* Recently added section */}
-          <div className="mb-12">
+          {/* <div className="mb-12">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold">Recently Added</h2>
               <Link to="/search" className="text-fb-blue text-sm hover:underline">
@@ -123,15 +123,15 @@ const HomePage = () => {
               products={filteredProducts.slice(0, 8)} 
               emptyMessage="No products match your filters. Try adjusting your search criteria."
             />
-          </div>
+          </div> */}
           
           {/* Featured items section */}
           <div className="mb-12">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Featured Items</h2>
-              <Link to="/search" className="text-fb-blue text-sm hover:underline">
+              <h2 className="text-2xl font-bold">Articulos Destacados</h2>
+              {/* <Link to="/search" className="text-fb-blue text-sm hover:underline">
                 See All
-              </Link>
+              </Link> */}
             </div>
             
             <ProductGrid 
@@ -142,7 +142,7 @@ const HomePage = () => {
         </div>
         
         {/* Sidebar filters on desktop - moved to the right */}
-        <div className="hidden md:block md:w-80">
+        {/* <div className="hidden md:block md:w-80">
           <div className="bg-white rounded-xl shadow-soft p-6 sticky top-20">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">Filters</h2>
@@ -167,7 +167,7 @@ const HomePage = () => {
               onChange={setMaxPrice} 
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
