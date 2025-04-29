@@ -6,10 +6,10 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 })
+export default api
+
 
 const urlbase = "http://localhost.com/api/character";
-
-export default api
 export const apiss = async () => {
   const response = await fetch(urlbase);
   const data = await response.json();
@@ -18,5 +18,13 @@ export const apiss = async () => {
 
 export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = async (userData) => api.post("/register", userData);
-
 export const getProducts = async () => api.get("/products");
+export const getProductById = async (id) => api.get(`/products/${id}`);
+export const getUserById = async (id) => api.get(`/users/${id}`);
+export const getUserProducts = async (userId) => api.get(`/users/${userId}/products`);
+export const createProduct = async (productData) => api.post("/products", productData);
+export const updateProduct = async (id, productData) => api.put(`/products/${id}`, productData);
+export const deleteProduct = async (id) => api.delete(`/products/${id}`);
+export const getCategories = async () => api.get("/categories");
+export const getConversations = async (userId) => api.get(`/users/${userId}/conversations`);
+export const getConversationById = async (conversationId) => api.get(`/conversations/${conversationId}`);
