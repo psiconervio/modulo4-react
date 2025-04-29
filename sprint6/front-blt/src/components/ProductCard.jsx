@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
   
   return (
     <Link to={`/product/${product.id}`} className="block">
-      <div className="card group hover:transform hover:scale-[1.02] transition-all duration-200">
+      <div className="card group hover:transform hover:scale-[1.02] transition-all duration-200 border rounded-lg border-gray-600">
         <div className="relative">
           <img 
             src={product.images[0]} 

@@ -19,7 +19,7 @@ const PriceFilter = ({ initialValue, onChange }) => {
   }
   
   return (
-    <div className="mb-8">
+    <div className="mb-8 hidden sm:block">
       <h3 className="font-medium mb-4">Price Range</h3>
       <div className="space-y-4">
         <input

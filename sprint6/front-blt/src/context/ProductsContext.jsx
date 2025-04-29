@@ -1,81 +1,96 @@
-import { createContext, useState, useContext, useEffect } from 'react'
-import { MOCK_PRODUCTS } from '../data/mockData'
+import { createContext, useState, useContext, useEffect } from "react";
+import { MOCK_PRODUCTS } from "../data/mockData";
+import { getProducts } from "../data/apis";
 
-const ProductsContext = createContext(null)
+const ProductsContext = createContext(null);
 
-export const useProducts = () => useContext(ProductsContext)
+export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([])
-  const [savedItems, setSavedItems] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [products, setProducts] = useState([]);
+  const [savedItems, setSavedItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch products from API
+    const productos = async () => {
+      try {
+        const response = await getProducts();
+        console.log(response.data);
+        // setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    productos();
+  }, []);
 
   useEffect(() => {
     // Simulate API fetch
     setTimeout(() => {
-      setProducts(MOCK_PRODUCTS)
-      
+      setProducts(MOCK_PRODUCTS);
+
       // Load saved items from localStorage
-      const saved = localStorage.getItem('savedItems')
+      const saved = localStorage.getItem("savedItems");
       if (saved) {
-        setSavedItems(JSON.parse(saved))
+        setSavedItems(JSON.parse(saved));
       }
-      
-      setIsLoading(false)
-    }, 500)
-  }, [])
+
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   // Save or unsave a product
   const toggleSaveProduct = (productId) => {
-    let updatedSavedItems = [...savedItems]
-    
+    let updatedSavedItems = [...savedItems];
+
     if (savedItems.includes(productId)) {
-      updatedSavedItems = savedItems.filter(id => id !== productId)
+      updatedSavedItems = savedItems.filter((id) => id !== productId);
     } else {
-      updatedSavedItems.push(productId)
+      updatedSavedItems.push(productId);
     }
-    
-    setSavedItems(updatedSavedItems)
-    localStorage.setItem('savedItems', JSON.stringify(updatedSavedItems))
-  }
+
+    setSavedItems(updatedSavedItems);
+    localStorage.setItem("savedItems", JSON.stringify(updatedSavedItems));
+  };
 
   // Check if a product is saved
   const isProductSaved = (productId) => {
-    return savedItems.includes(productId)
-  }
+    return savedItems.includes(productId);
+  };
 
   // Find a product by ID
   const getProductById = (productId) => {
-    return products.find(product => product.id === productId)
-  }
+    return products.find((product) => product.id === productId);
+  };
 
   // Search products by term
   const searchProducts = (searchTerm, filters = {}) => {
     if (!searchTerm && Object.keys(filters).length === 0) {
-      return products
+      return products;
     }
-    
-    return products.filter(product => {
+
+    return products.filter((product) => {
       // Search term filtering
-      const matchesSearch = searchTerm ? 
-        product.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        product.description.toLowerCase().includes(searchTerm.toLowerCase()) :
-        true
-      
+      const matchesSearch = searchTerm
+        ? product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.description.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
+
       // Category filtering
-      const matchesCategory = filters.category ? 
-        product.category === filters.category :
-        true
-      
+      const matchesCategory = filters.category
+        ? product.category === filters.category
+        : true;
+
       // Price filtering
-      const matchesPrice = filters.maxPrice ? 
-        product.price <= filters.maxPrice :
-        true
-      
-      return matchesSearch && matchesCategory && matchesPrice
-    })
-  }
-  
+      const matchesPrice = filters.maxPrice
+        ? product.price <= filters.maxPrice
+        : true;
+
+      return matchesSearch && matchesCategory && matchesPrice;
+    });
+  };
+
   const value = {
     products,
     isLoading,
@@ -83,12 +98,12 @@ export const ProductsProvider = ({ children }) => {
     toggleSaveProduct,
     isProductSaved,
     getProductById,
-    searchProducts
-  }
+    searchProducts,
+  };
 
   return (
     <ProductsContext.Provider value={value}>
       {children}
     </ProductsContext.Provider>
-  )
-}
+  );
+};

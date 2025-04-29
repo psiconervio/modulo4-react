@@ -1,8 +1,8 @@
-import { PRODUCT_CATEGORIES } from '../data/mockData'
+import { PRODUCT_CATEGORIES } from '../data/mockData';
 
 const CategoryFilter = ({ selectedCategory, onChange }) => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 hidden sm:block"> {/* Ocultar en pantallas pequeñas */}
       <h3 className="font-medium mb-4">Categories</h3>
       <div className="flex flex-col space-y-2">
         <button
@@ -31,7 +31,7 @@ const CategoryFilter = ({ selectedCategory, onChange }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryFilter
+export default CategoryFilter;
