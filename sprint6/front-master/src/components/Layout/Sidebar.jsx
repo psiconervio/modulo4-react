@@ -9,7 +9,7 @@ const Sidebar = () => {
   }
   
   return (
-    <div className="h-full p-4 ">
+    <div className="h-full p-4">
       <ul className="space-y-2">
         <li>
           <Link 

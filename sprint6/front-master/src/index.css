@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #F0F2F5;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-fb-blue text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-600 
+           transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md 
+           focus:outline-none focus:ring-2 focus:ring-fb-blue focus:ring-opacity-50;
+  }
+  
+  .btn-secondary {
+    @apply bg-fb-gray text-fb-dark font-medium px-4 py-2 rounded-lg 
+           hover:bg-gray-300 transition-all duration-300 transform hover:scale-[1.02]
+           focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-4
+           transform hover:scale-[1.02] hover:translate-y-[-2px];
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg 
+           focus:outline-none focus:ring-2 focus:ring-fb-blue focus:ring-opacity-50
+           transition-all duration-300 hover:border-gray-400;
+  }
+
+  .nav-link {
+    @apply flex items-center p-2 rounded-lg transition-all duration-300
+           hover:bg-gray-100 text-gray-700 hover:text-fb-blue;
+  }
+
+  .nav-link.active {
+    @apply bg-fb-blue text-white hover:bg-blue-600 hover:text-white;
+  }
+
+  .animate-fade {
+    @apply transition-opacity duration-300;
+  }
+
+  .animate-slide {
+    @apply transition-transform duration-300;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, textarea {
+  @apply transition-all duration-300;
+}
+
+/* Image hover effects */
+.product-image {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+/* Message bubbles */
+.message-bubble {
+  @apply rounded-2xl px-4 py-2 max-w-[80%] break-words;
+}
+
+.message-bubble.sent {
+  @apply bg-fb-blue text-white ml-auto rounded-tr-none;
+}
+
+.message-bubble.received {
+  @apply bg-gray-200 text-gray-800 rounded-tl-none;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply animate-spin rounded-full border-4 border-gray-200;
+  border-top-color: #1877F2;
+}
