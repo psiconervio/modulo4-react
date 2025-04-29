@@ -17,7 +17,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="product/:id" element={<ProductDetailPage />} />
+        <Route path="products/:id" element={<ProductDetailPage />} />
         <Route path="search" element={<SearchResultsPage />} />
         
         {/* Protected routes */}

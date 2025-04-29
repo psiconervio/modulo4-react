@@ -25,6 +25,7 @@ const ProductDetailPage = () => {
         setProduct(foundProduct)
         const productSeller = getSellerById(foundProduct.seller)
         setSeller(productSeller)
+        console.log()
       } else {
         // Product not found, navigate to 404
         navigate('/not-found')
@@ -52,7 +53,7 @@ const ProductDetailPage = () => {
     
     toggleSaveProduct(product.id)
   }
-  
+
   if (isLoading || !product) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -64,6 +65,7 @@ const ProductDetailPage = () => {
   const isSaved = isProductSaved(product.id)
   const isOwnProduct = currentUser && currentUser.id === product.seller
   
+
   return (
     <div>
       {/* Back button */}
