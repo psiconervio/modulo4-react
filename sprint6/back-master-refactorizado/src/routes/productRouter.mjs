@@ -1,14 +1,23 @@
-import express from 'express';
-import { getAllProducts, getProductById, createProduct } from '../controllers/ProductController.mjs';
-import { authenticateToken } from '../middleware/authMiddleware.mjs';
+import express from "express";
+import {
+  getAllProducts,
+  getProductById,
+  createProduct,
+} from "../controllers/productController.mjs";
+import { authenticateToken } from "../middleware/authMiddleware.mjs";
 
 const router = express.Router();
-
-router.get('/', getAllProducts); // Obtener todos los productos
-router.get('/:id', getProductById); // Obtener un producto por ID
-router.post('/', authenticateToken, createProduct); // Crear un nuevo producto (requiere autenticación)
+try {
+  router.get("/", getAllProducts); // Obtener todos los productos
+  console.log("getAllProducts");
+  router.get("/:id", getProductById); // Obtener un producto por ID
+  console.log("getProductById");
+  router.post("/", authenticateToken, createProduct); // Crear un nuevo producto (requiere autenticación)
+  console.log("createProduct");
+} catch (error) {}
 
 export default router;
+
 // import express from 'express';
 // import {
 //     getAllProducts,
