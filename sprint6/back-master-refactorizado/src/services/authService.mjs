@@ -21,7 +21,7 @@ class AuthService {
 
     // Buscamos el rol por defecto
     // const defaultRole = await Role.findOne({ name: "user" });
-    const defaultRole = await Role.findOne({ name: "admin" });
+    const defaultRole = await Role.findOne({ name: "user" });
 
     if (!defaultRole) {
       throw new Error("Rol por defecto no encontrado");
