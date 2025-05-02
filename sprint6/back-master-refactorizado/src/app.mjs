@@ -8,7 +8,7 @@ import chatRouter from "./routes/ChatRouter.mjs";
 import productRouter from "./routes/productRouter.mjs";
 import http from "http";
 // import initializeRolesAndPermissions from "./scripts/createRolesAndPermissions.mjs";
-
+// 
 // Cargar modelos
 import "./models/Permission.mjs";
 import "./models/Role.mjs";
