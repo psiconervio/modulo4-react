@@ -4,15 +4,15 @@ import {
   getProductById,
   createProduct,
 } from "../controllers/productController.mjs";
-import { authenticateToken } from "../middleware/authMiddleware.mjs";
+import { authenticateToken, hasPermission } from "../middleware/authMiddleware.mjs";
 
 const router = express.Router();
 try {
-  router.get("/", getAllProducts); // Obtener todos los productos
+  router.get("/",authenticateToken, hasPermission('read:products'), getAllProducts); // Obtener todos los productos
   console.log("getAllProducts");
   router.get("/:id", getProductById); // Obtener un producto por ID
   console.log("getProductById");
-  router.post("/", authenticateToken, createProduct); // Crear un nuevo producto (requiere autenticación)
+  router.post("/", authenticateToken, hasPermission('create:products'), createProduct); // Crear un nuevo producto (requiere autenticación)
   console.log("createProduct");
 } catch (error) {}
 

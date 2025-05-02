@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/app.mjs",
     "dev": "nodemon src/app.mjs",
+    "migrate": "node src/scripts/createRolesAndPermissions.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mkdir -p build && cp -r src/* build/ && npm install --production",
     "deploy": "npm run build && node build/app.js"

@@ -18,6 +18,7 @@ export const authenticateToken = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // Guardamos la información del usuario decodificada en el objeto request
         req.user = decoded;
+        console.log('Token decodificado:', decoded);
         // Continuamos con la siguiente función middleware
         next();
     } catch (error) {
@@ -29,6 +30,7 @@ export const authenticateToken = (req, res, next) => {
 // Middleware para verificar permisos
 export const hasPermission = (requiredPermission) => {
     return async (req, res, next) => {
+        
         try {
             if (!req.user) {
                 return res.status(401).json({ message: 'No autenticado' });
