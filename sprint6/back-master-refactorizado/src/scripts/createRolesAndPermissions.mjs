@@ -15,6 +15,7 @@ const initialPermissions = [
   { name: "update:superheros", description: "Puede actualizar superhéroes" },
   { name: "delete:superheros", description: "Puede eliminar superhéroes" },
   { name: "read:products", description: "Puede ver products" },
+  { name: "buy:products", description: "Puede Comprar" },
   { name: "create:products", description: "Puede crear products" },
   { name: "update:products", description: "Puede actualizar products" },
   { name: "delete:products", description: "Puede eliminar products" },
@@ -24,7 +25,7 @@ const initialRoles = [
   {
     name: "user",
     description: "Usuario básico",
-    permissions: ["read:superheros"],
+    permissions: ["read:superheros", "read:products", "buy:products"],
   },
   {
     name: "menor",
