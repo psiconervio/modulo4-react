@@ -15,9 +15,11 @@ export const apiss = async () => {
   const data = await response.json();
   return data;
 };
-
+//login y register
 export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = async (userData) => api.post("/register", userData);
+
+
 export const getProducts = async () => api.get("/products");
 export const getProductById = async (id) => api.get(`/products/${id}`);
 export const getUserById = async (id) => api.get(`/users/${id}`);
