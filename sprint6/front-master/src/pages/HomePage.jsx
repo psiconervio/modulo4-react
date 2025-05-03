@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ProductGrid from '../components/ProductGrid'
-import CategoryFilter from '../components/CategoryFilter'
-import PriceFilter from '../components/PriceFilter'
+// import CategoryFilter from '../components/CategoryFilter'
+// import PriceFilter from '../components/PriceFilter'
 import { useProducts } from '../context/ProductsContext'
 import { PRODUCT_CATEGORIES } from '../data/mockData'
 import { FaChevronRight, FaFilter, FaTimes } from 'react-icons/fa'
@@ -19,11 +19,11 @@ const HomePage = () => {
     if (products.length > 0) {
       let filtered = [...products]
       
-      if (selectedCategory) {
-        filtered = filtered.filter(product => product.category === selectedCategory)
-      }
+      // if (selectedCategory) {
+      //   filtered = filtered.filter(product => product.category === selectedCategory)
+      // }
       
-      filtered = filtered.filter(product => product.price <= maxPrice)
+      // filtered = filtered.filter(product => product.price <= maxPrice)
       
       setFilteredProducts(filtered)
     }

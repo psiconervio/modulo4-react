@@ -8,16 +8,44 @@ import {
   getProductsByCategory,
   // getProductsByPriceRange,
 } from "../controllers/productController.mjs";
-import { authenticateToken, hasPermission } from "../middleware/authMiddleware.mjs";
+import {
+  authenticateToken,
+  hasPermission,
+} from "../middleware/authMiddleware.mjs";
 
 const router = express.Router();
 try {
-  router.get("/",authenticateToken, hasPermission('read:products'), getAllProducts); // Obtener todos los productos
-  router.post("/", authenticateToken, hasPermission('create:products'), createProduct); // Crear un nuevo producto (requiere autenticación)
+  router.get(
+    "/",
+    authenticateToken,
+    hasPermission("read:products"),
+    getAllProducts
+  ); // Obtener todos los productos
+  router.post(
+    "/",
+    authenticateToken,
+    hasPermission("create:products"),
+    createProduct
+  ); // Crear un nuevo producto (requiere autenticación)
   router.get("/category/:category", authenticateToken, getProductsByCategory); // Obtener productos por categoría
-  router.get("/:id", authenticateToken, getProductById); // Obtener un producto por ID
-  router.put("/:id", authenticateToken, hasPermission('update:products'), updateProduct); // Actualizar un producto existente (requiere autenticación)
-  router.delete("/:id", authenticateToken, hasPermission('delete:products'), deleteProductbyid); // Eliminar un producto por ID (requiere autenticación)
+  router.get(
+    "/:id",
+    authenticateToken,
+    hasPermission("read:products"),
+    getProductById
+  ); // Obtener un producto por ID
+  router.put(
+    "/:id",
+    authenticateToken,
+    hasPermission("update:products"),
+    updateProduct
+  ); // Actualizar un producto existente (requiere autenticación)
+  router.delete(
+    "/:id",
+    authenticateToken,
+    hasPermission("delete:products"),
+    deleteProductbyid
+  ); // Eliminar un producto por ID (requiere autenticación)
 } catch (error) {
   console.error("Error en las rutas de productos:", error);
   throw error; // Lanza el error para que sea manejado por el middleware de errores

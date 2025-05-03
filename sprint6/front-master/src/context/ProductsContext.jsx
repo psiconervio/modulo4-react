@@ -1,44 +1,46 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { MOCK_PRODUCTS } from "../data/mockData";
 import { getProducts } from "../data/apis";
+import { useAuth } from "../context/AuthContext";
 
 const ProductsContext = createContext(null);
 
-export const useProducts = () => useContext(ProductsContext);
-
 export const ProductsProvider = ({ children }) => {
+  const { currentUser, isAuthenticated } = useAuth();
   const [products, setProducts] = useState([]);
   const [savedItems, setSavedItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Fetch products from API
-    const productos = async () => {
-      try {
-        const response = await getProducts();
-        console.log(response.data.data);
-        setProducts(response.data.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-    productos();
-  }, []);
-1
-  useEffect(() => {
-    // Simulate API fetch
-    setTimeout(() => {
-      // setProducts(MOCK_PRODUCTS);
+    console.log("isAuthenticated", isAuthenticated);
+    if (isAuthenticated) {
+      const productos = async () => {
+        try {
+          const response = await getProducts();
+          setProducts(response.data.data);
+          localStorage.setItem("products", JSON.stringify(response.data.data));
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        }
+      };
+      productos();
+    } else {
+      console.log("No hay usuario logueado");
+      setProducts([]);
+    }
+  }, [isAuthenticated]);
 
-      // Load saved items from localStorage
-      const saved = localStorage.getItem("savedItems");
-      if (saved) {
-        setSavedItems(JSON.parse(saved));
-      }
-
-      setIsLoading(false);
-    }, 500);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     // Load saved items from localStorage
+  //     // const saved = localStorage.getItem("savedItems");
+  //     // if (saved) {
+  //     //   setSavedItems(JSON.parse(saved));
+  //     // }
+  //     setIsLoading(false);
+  //   }, 500);
+  // }, []);
 
   // Save or unsave a product
   const toggleSaveProduct = (productId) => {
@@ -93,7 +95,7 @@ export const ProductsProvider = ({ children }) => {
 
   const value = {
     products,
-    isLoading,
+    // isLoading,
     savedItems,
     toggleSaveProduct,
     isProductSaved,
@@ -107,6 +109,7 @@ export const ProductsProvider = ({ children }) => {
     </ProductsContext.Provider>
   );
 };
+export const useProducts = () => useContext(ProductsContext);
 
 // import { createContext, useState, useContext, useEffect } from 'react'
 // import { MOCK_PRODUCTS } from '../data/mockData'
@@ -124,13 +127,13 @@ export const ProductsProvider = ({ children }) => {
 //     // Simulate API fetch
 //     setTimeout(() => {
 //       setProducts(MOCK_PRODUCTS)
-      
+
 //       // Load saved items from localStorage
 //       const saved = localStorage.getItem('savedItems')
 //       if (saved) {
 //         setSavedItems(JSON.parse(saved))
 //       }
-      
+
 //       setIsLoading(false)
 //     }, 500)
 //   }, [])
@@ -138,13 +141,13 @@ export const ProductsProvider = ({ children }) => {
 //   // Save or unsave a product
 //   const toggleSaveProduct = (productId) => {
 //     let updatedSavedItems = [...savedItems]
-    
+
 //     if (savedItems.includes(productId)) {
 //       updatedSavedItems = savedItems.filter(id => id !== productId)
 //     } else {
 //       updatedSavedItems.push(productId)
 //     }
-    
+
 //     setSavedItems(updatedSavedItems)
 //     localStorage.setItem('savedItems', JSON.stringify(updatedSavedItems))
 //   }
@@ -164,28 +167,28 @@ export const ProductsProvider = ({ children }) => {
 //     if (!searchTerm && Object.keys(filters).length === 0) {
 //       return products
 //     }
-    
+
 //     return products.filter(product => {
 //       // Search term filtering
-//       const matchesSearch = searchTerm ? 
-//         product.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+//       const matchesSearch = searchTerm ?
+//         product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
 //         product.description.toLowerCase().includes(searchTerm.toLowerCase()) :
 //         true
-      
+
 //       // Category filtering
-//       const matchesCategory = filters.category ? 
+//       const matchesCategory = filters.category ?
 //         product.category === filters.category :
 //         true
-      
+
 //       // Price filtering
-//       const matchesPrice = filters.maxPrice ? 
+//       const matchesPrice = filters.maxPrice ?
 //         product.price <= filters.maxPrice :
 //         true
-      
+
 //       return matchesSearch && matchesCategory && matchesPrice
 //     })
 //   }
-  
+
 //   const value = {
 //     products,
 //     isLoading,

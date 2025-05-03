@@ -20,7 +20,7 @@ export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = async (userData) => api.post("/register", userData);
 
 
-export const getProducts = async () => api.get("/products");
+export const getProducts = async (credentials) => api.get("/products",credentials);
 export const getProductById = async (id) => api.get(`/products/${id}`);
 export const getUserById = async (id) => api.get(`/users/${id}`);
 export const getUserProducts = async (userId) => api.get(`/users/${userId}/products`);

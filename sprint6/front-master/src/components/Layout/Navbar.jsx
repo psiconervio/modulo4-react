@@ -82,14 +82,15 @@ const Navbar = () => {
                 </Link>
                 <div className="relative ml-3">
                   <button onClick={toggleMenu} className="flex items-center">
-                    <img
+                    {/* <img
                       src={
                         currentUser.avatar ||
                         "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150"
                       }
                       alt={currentUser.name}
                       className="w-8 h-8 rounded-full"
-                    />
+                    /> */}
+                    <span className="ml-2">profile</span>
                   </button>
                   {isMenuOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">

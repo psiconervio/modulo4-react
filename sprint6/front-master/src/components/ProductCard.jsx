@@ -3,27 +3,35 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { useProducts } from "../context/ProductsContext";
 import { formatDate, getSellerById } from "../data/mockData";
 import { useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
+import { can } from "../utils/permissions";
 
 const ProductCard = ({ product }) => {
+  const { theme } = useTheme();
   const { toggleSaveProduct, isProductSaved } = useProducts();
   const seller = getSellerById(product.seller);
   const isSaved = isProductSaved(product._id);
+  const id = product._id;
 
   const handleSaveClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("ProductOO", product._id);
-    console.log("isSaved", isSaved);
-    console.log("seller", seller);
+    // console.log("ProductOO", product._id);
+    // console.log("isSaved", isSaved); // Ensure this line remains commented or remove it if not needed
+    // console.log("seller", seller);
     toggleSaveProduct(product._id);
   };
-  useEffect(() => {
-    console.log("ProductOO", product._id);
-  }, []);
+  // useEffect(() => {
+  //   console.log("ProductOO", product._id);
+  // }, []);
 
   return (
     <Link to={`/product/${product._id}`} className="block">
-      <div className="card group hover:transform hover:scale-[1.02] transition-all duration-200 border rounded-lg border-gray-600">
+      <div
+        className={`card group hover:transform hover:scale-[1.02] transition-all duration-200 ${
+          theme === "dark" ? "bg-gray-800/50 text-white" : "bg-white text-black"
+        }`}
+      >
         <div className="relative">
           <img
             src={product.image}
@@ -79,19 +87,19 @@ export default ProductCard;
 //   const { toggleSaveProduct, isProductSaved } = useProducts()
 //   const seller = getSellerById(product.seller)
 //   const isSaved = isProductSaved(product.id)
-  
+
 //   const handleSaveClick = (e) => {
 //     e.preventDefault()
 //     e.stopPropagation()
 //     toggleSaveProduct(product.id)
 //   }
-  
+
 //   return (
 //     <Link to={`/product/${product.id}`} className="block">
 //       <div className="card group hover:transform hover:scale-[1.02] transition-all duration-200">
 //         <div className="relative">
-//           <img 
-//             src={product.images[0]} 
+//           <img
+//             src={product.images[0]}
 //             alt={product.title}
 //             className="w-full h-48 object-cover rounded-md"
 //           />
@@ -106,7 +114,7 @@ export default ProductCard;
 //             )}
 //           </button>
 //         </div>
-        
+
 //         <div className="mt-3">
 //           <div className="flex justify-between items-start">
 //             <h3 className="font-bold text-lg group-hover:text-fb-blue">${product.price}</h3>
@@ -114,7 +122,7 @@ export default ProductCard;
 //           </div>
 //           <h4 className="font-medium text-gray-800 mt-1 line-clamp-1">{product.title}</h4>
 //           <p className="text-gray-500 text-sm mt-1 line-clamp-2">{product.description}</p>
-          
+
 //           <div className="mt-3 flex items-center text-sm text-gray-600">
 //             <span>{product.location}</span>
 //             <span className="mx-2">•</span>

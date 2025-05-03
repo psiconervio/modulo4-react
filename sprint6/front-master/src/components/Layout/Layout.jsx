@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useTheme } from '../../context/ThemeContext'
 
 const Layout = () => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
   const { theme } = useTheme()
   
   return (
