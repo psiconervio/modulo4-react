@@ -70,6 +70,9 @@ export const AuthProvider = ({ children }) => {
       const { token: newToken, user: rawUser } = data;
 
       const decoded = jwtDecode(newToken);
+      const roledata = rolemap[String(decoded.role)] || { name: "desconocido", permissions: [] };
+      const enriched = { ...rawUser, role: roledata.name, permissions: roledata.permissions };
+
       const { role } = decoded;
       const { name: roleName, permissions } = rolemap[role] || {
         name: "Unknown",
@@ -84,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
       // Persist
       localStorage.setItem("token", newToken);
-      localStorage.setItem("user", JSON.stringify(enrichedUser));
+      localStorage.setItem("user", JSON.stringify(enriched));
 
       // Apply
       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
