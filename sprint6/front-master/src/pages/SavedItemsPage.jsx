@@ -7,13 +7,38 @@ import { FaBookmark } from 'react-icons/fa'
 const SavedItemsPage = () => {
   const { products, savedItems, isLoading } = useProducts()
   const [savedProducts, setSavedProducts] = useState([])
-  
   useEffect(() => {
     if (!isLoading && products.length > 0) {
-      const saved = products.filter(product => savedItems.includes(product.id))
-      setSavedProducts(saved)
+      // 1) Normaliza savedItems a un array de strings (IDs)
+      const savedIds = savedItems.map(item =>
+        item && typeof item === 'object'
+          ? item._id        // extrae _id del objeto
+          : item            // ya era string
+      );
+      console.log("Normalized savedIds:", savedIds);
+  
+      // 2) Filtra tus products por esos IDs
+      const saved = products.filter(product =>
+        // Cámbia product._id por product.id si ese es tu campo
+        savedIds.includes(product._id)
+      );
+      console.log("Filtered saved products:", saved);
+  
+      setSavedProducts(saved);
     }
-  }, [products, savedItems, isLoading])
+  }, [products, savedItems, isLoading]);
+    
+  // useEffect(() => {
+  //   if (!isLoading && products.length > 0) {
+  //     console.log("Products:", products);
+  //     console.log("Saved Items:", savedItems);
+  
+  //     // const saved = products.filter(product => savedItems.includes(product.id))
+  //     const saved = products.filter(product => savedItems.includes(String(product.id)));
+  //     console.log('save', saved)
+  //     setSavedProducts(saved)
+  //   }
+  // }, [products, savedItems, isLoading])
   
   if (isLoading) {
     return (
@@ -42,7 +67,7 @@ const SavedItemsPage = () => {
   
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Saved Items</h1>
+      <h1 className="text-2xl font-bold mb-6">Productos Guardados</h1>
       <ProductGrid 
         products={savedProducts} 
         emptyMessage="You haven't saved any items yet."

@@ -20,6 +20,7 @@ const ProductCard = ({ product }) => {
     // console.log("isSaved", isSaved); // Ensure this line remains commented or remove it if not needed
     // console.log("seller", seller);
     toggleSaveProduct(product._id);
+    console.log
   };
   // useEffect(() => {
   //   console.log("ProductOO", product._id);

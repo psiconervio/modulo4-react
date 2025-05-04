@@ -6,13 +6,13 @@ import { MOCK_USERS } from "../data/mockData";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { login } = useAuth();
+  const { login, } = useAuth();
   const navigate = useNavigate();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -48,14 +48,14 @@ const LoginPage = () => {
   //   }
   // };
   const onSubmit = async (data) => {
-    const success = await login(data.email, data.password);
+    const success = await register(data.email, data.password);
     console.log(success);
     if (success) {
-      Swal.fire({
+ Swal.fire({
         icon: "success",
         title: "Bienvenido",
         text: "Has iniciado sesión correctamente.",
-      });
+ })
       navigate("/");
     } else {
       setError("Invalid email or password.");
@@ -144,12 +144,6 @@ const LoginPage = () => {
             Iniciar sesión
           </button>
         </form>
-        <button
-          onClick={() => console.log("registrar")}
-          className="bg-slate-700 w-full mb-4 text-white"
-        >
-          Registrarme
-        </button>
 
         {/* <div className="text-center my-4">
           <span className="text-gray-500">o</span>
@@ -181,4 +175,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

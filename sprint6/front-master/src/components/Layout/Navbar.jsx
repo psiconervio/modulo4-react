@@ -14,7 +14,7 @@ import { useTheme } from "../../context/ThemeContext";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useTheme();
-  const { currentUser, isAuthenticated, logout } = useAuth();
+  const { currentUser, isAuthenticated, logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,11 +41,11 @@ const Navbar = () => {
   return (
     <nav className="bg-fb-blue text-white shadow-md sticky top-0 z-10">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-start h-16">
           {/* Logo and search */}
-          <div className="flex items-center flex-1">
+          <div className="flex items-center justify-start flex-1">
             <Link to="/" className="font-bold text-xl flex items-center">
-              <FaShoppingCart className="mr-2" /> FBMarket
+              <FaShoppingCart className="mr-2 " /> FBMarket
             </Link>
 
             <div className="hidden md:block ml-6 flex-1 max-w-md">
@@ -78,19 +78,18 @@ const Navbar = () => {
                   <FaEnvelope />
                 </Link>
                 <Link to="/create-listing" className="ml-2 btn-secondary">
-                  Sell
+                  Vender
                 </Link>
                 <div className="relative ml-3">
                   <button onClick={toggleMenu} className="flex items-center">
-                    {/* <img
+                    <img
                       src={
-                        currentUser.avatar ||
                         "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150"
                       }
-                      alt={currentUser.name}
+                      alt={user.username}
                       className="w-8 h-8 rounded-full"
-                    /> */}
-                    <span className="ml-2">profile</span>
+                    />
+                    {/* <span className="ml-2">Perfil</span> */}
                   </button>
                   {isMenuOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
@@ -98,7 +97,7 @@ const Navbar = () => {
                         to="/profile"
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                       >
-                        Profile
+                        Perfil: {user.username}
                       </Link>
                       <Link
                         to="/saved"

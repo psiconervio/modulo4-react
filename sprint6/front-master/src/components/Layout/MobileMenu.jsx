@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { FaTimes, FaUser, FaBookmark, FaPlus, FaSignOutAlt } from 'react-icons/fa'
+import { useTheme } from "../../context/ThemeContext";
 
 const MobileMenu = ({ onClose }) => {
+  const {theme} =useTheme()
   const { currentUser, isAuthenticated, logout } = useAuth()
   
   const handleLogout = () => {
@@ -12,7 +14,7 @@ const MobileMenu = ({ onClose }) => {
   
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 md:hidden animate-fade-in">
-      <div className="bg-white h-full w-4/5 max-w-xs shadow-xl animate-slide-up">
+      <div className={`bg-white h-full w-4/5 max-w-xs shadow-xl animate-slide-up ${theme === 'dark' ? 'bg-slate-700':'bg-slate-400'}`}>
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="font-semibold">Menu</h2>
           <button onClick={onClose} className="p-2">
@@ -22,14 +24,14 @@ const MobileMenu = ({ onClose }) => {
         
         {isAuthenticated ? (
           <div>
-            <div className="p-4 border-b flex items-center">
+            <div className={`p-4 border-b flex items-center`}>
               <img
-                src={currentUser.avatar || "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150"}
-                alt={currentUser.name}
-                className="w-10 h-10 rounded-full mr-3"
+                // src={currentUser.avatar || "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150"}
+                // alt={currentUser.name}
+                // className="w-10 h-10 rounded-full mr-3"
               />
               <div>
-                <p className="font-medium">{currentUser.name}</p>
+                {/* <p className="font-medium">{currentUser.name}</p> */}
                 <p className="text-sm text-gray-500">View Profile</p>
               </div>
             </div>

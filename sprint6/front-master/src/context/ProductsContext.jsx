@@ -9,7 +9,7 @@ export const ProductsProvider = ({ children }) => {
   const { currentUser, isAuthenticated } = useAuth();
   const [products, setProducts] = useState([]);
   const [savedItems, setSavedItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Fetch products from API
@@ -31,16 +31,16 @@ export const ProductsProvider = ({ children }) => {
     }
   }, [isAuthenticated]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     // Load saved items from localStorage
-  //     // const saved = localStorage.getItem("savedItems");
-  //     // if (saved) {
-  //     //   setSavedItems(JSON.parse(saved));
-  //     // }
-  //     setIsLoading(false);
-  //   }, 500);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      // Load saved items from localStorage
+      const saved = localStorage.getItem("savedItems");
+      if (saved) {
+        setSavedItems(JSON.parse(saved));
+      }
+      setIsLoading(false);
+    }, 500);
+  }, []);
 
   // Save or unsave a product
   const toggleSaveProduct = (productId) => {
@@ -55,7 +55,9 @@ export const ProductsProvider = ({ children }) => {
     setSavedItems(updatedSavedItems);
     localStorage.setItem("savedItems", JSON.stringify(updatedSavedItems));
   };
+  //  const saveproduct =(product) =>{
 
+  //  }
   // Check if a product is saved
   const isProductSaved = (productId) => {
     return savedItems.includes(productId);

@@ -1,6 +1,12 @@
-import React, { createContext, useState, useContext, useEffect, useMemo } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 import api, { loginUser } from "../data/apis";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { rolemap } from "../utils/rolemap";
 
@@ -27,8 +33,19 @@ export const AuthProvider = ({ children }) => {
     if (storedToken && storedUser) {
       try {
         const decoded = jwtDecode(storedToken);
+        const roledata = rolemap[String(decoded.role)] || {
+          name: "desconocido",
+          permissions: [],
+        };
+        const parsedUser = JSON.parse(storedUser);
+        const enriched = {
+          ...parsedUser,
+          role: roledata.name,
+          permissions: roledata.permissions,
+        };
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
-        setToken(storedToken);
+        setToken(enriched);
+        // setToken(storedToken);
         setUser(JSON.parse(storedUser));
       } catch (err) {
         console.error("Invalid token in storage", err);
@@ -54,8 +71,10 @@ export const AuthProvider = ({ children }) => {
 
       const decoded = jwtDecode(newToken);
       const { role } = decoded;
-      const { name: roleName, permissions } =
-        rolemap[role] || { name: "Unknown", permissions: [] };
+      const { name: roleName, permissions } = rolemap[role] || {
+        name: "Unknown",
+        permissions: [],
+      };
 
       const enrichedUser = {
         ...rawUser,

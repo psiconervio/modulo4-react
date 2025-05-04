@@ -1,96 +1,133 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { PRODUCT_CATEGORIES } from '../data/mockData'
-import { FaUpload, FaTrash, FaExclamationCircle } from 'react-icons/fa'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { PRODUCT_CATEGORIES } from "../data/mockData";
+import { FaUpload, FaTrash, FaExclamationCircle } from "react-icons/fa";
+import { createProduct } from "../data/apis";
+import { useTheme } from "../context/ThemeContext";
 
 const CreateListingPage = () => {
-  const { currentUser } = useAuth()
-  const navigate = useNavigate()
-  
-  const [title, setTitle] = useState('')
+  const { theme } = useTheme();
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [description, setDescription] = useState('')
-  const [price, setPrice] = useState('')
-  const [category, setCategory] = useState('')
-  const [condition, setCondition] = useState('')
-  const [location, setLocation] = useState('')
-  const [images, setImages] = useState([])
-  const [imageUrls, setImageUrls] = useState([])
-  const [errors, setErrors] = useState({})
-  
+  const [price, setPrice] = useState("");
+  // const [category, setCategory] = useState('')
+  // const [condition, setCondition] = useState('')
+  // const [location, setLocation] = useState('')
+  const [images, setImages] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [errors, setErrors] = useState({});
+
   // Handle image selection (mock functionality)
   const handleImageChange = (e) => {
     if (images.length >= 5) {
-      setErrors({...errors, images: 'Maximum 5 images allowed'})
-      return
+      setErrors({ ...errors, images: "Maximum 5 images allowed" });
+      return;
     }
-    
-    setErrors({...errors, images: null})
-    
+
+    setErrors({ ...errors, images: null });
+
     // In a real app, you'd handle file upload here
     // For this demo, we'll just simulate with placeholder images
-    const newImages = [...images]
-    newImages.push(e.target.files[0])
-    setImages(newImages)
-    
+    const newImages = [...images];
+    newImages.push(e.target.files[0]);
+    setImages(newImages);
+
     // Mock image URL (using a placeholder)
-    const newImageUrls = [...imageUrls]
-    newImageUrls.push(`https://images.pexels.com/photos/5946/white-tablet-calling.jpg?auto=compress&cs=tinysrgb&w=500`)
-    setImageUrls(newImageUrls)
-  }
-  
+    const newImageUrls = [...imageUrls];
+    newImageUrls.push(
+      `https://images.pexels.com/photos/5946/white-tablet-calling.jpg?auto=compress&cs=tinysrgb&w=500`
+    );
+    setImageUrls(newImageUrls);
+  };
+
   const removeImage = (index) => {
-    const newImages = [...images]
-    newImages.splice(index, 1)
-    setImages(newImages)
-    
-    const newImageUrls = [...imageUrls]
-    newImageUrls.splice(index, 1)
-    setImageUrls(newImageUrls)
-  }
-  
-  const validateForm = () => {
-    const newErrors = {}
-    
-    if (!title.trim()) newErrors.title = 'Title is required'
-    if (!description.trim()) newErrors.description = 'Description is required'
-    if (!price || isNaN(price) || price <= 0) newErrors.price = 'Valid price is required'
-    if (!category) newErrors.category = 'Category is required'
-    if (!condition) newErrors.condition = 'Condition is required'
-    if (!location.trim()) newErrors.location = 'Location is required'
-    if (images.length === 0) newErrors.images = 'At least one image is required'
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-  
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    if (validateForm()) {
-      // In a real app, you would submit to your backend here
-      // For this demo, we'll just redirect back to the marketplace
-      navigate('/')
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+
+    const newImageUrls = [...imageUrls];
+    newImageUrls.splice(index, 1);
+    setImageUrls(newImageUrls);
+  };
+
+  // const validateForm = () => {
+  //   const newErrors = {}
+
+  //   if (!title.trim()) newErrors.title = 'Title is required'
+  //   if (!description.trim()) newErrors.description = 'Description is required'
+  //   if (!price || isNaN(price) || price <= 0) newErrors.price = 'Valid price is required'
+  //   if (!category) newErrors.category = 'Category is required'
+  //   if (!condition) newErrors.condition = 'Condition is required'
+  //   if (!location.trim()) newErrors.location = 'Location is required'
+  //   if (images.length === 0) newErrors.images = 'At least one image is required'
+
+  //   setErrors(newErrors)
+  //   return Object.keys(newErrors).length === 0
+  // }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // if (validateForm()) {
+    //   // In a real app, you would submit to your backend here
+    //   console.log()
+    //   // For this demo, we'll just redirect back to the marketplace
+    //   navigate('/')
+    // }
+
+    const productData = {
+      // title,
+      name,
+      description,
+      price: parseFloat(price), // Asegúrate de que el precio sea un número
+      // category,
+      // condition,
+      // location,
+      // images, // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
+      // userId: currentUser.id, // Incluye el ID del usuario actual si es necesario
+    };
+
+    try {
+      // Llamar a la función `createProduct` para enviar los datos al backend
+      const response = await createProduct(productData);
+      console.log("Product created successfully:", response.data);
+
+      // Redirigir al usuario después de crear el producto
+      navigate("/");
+    } catch (error) {
+      console.error("Error creating product:", error);
+      setErrors({ submit: "Failed to create product. Please try again." });
     }
-  }
-  
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h1 className="text-2xl font-bold mb-6">Create New Listing</h1>
-      
+    <div
+      className={`bg-white rounded-lg shadow-md p-6 ${
+        theme === "dark" ? "bg-slate-800" : "bg-slate-300"
+      }`}
+    >
+      <h1 className="text-2xl font-bold mb-6">Crear Nueva Publicacion</h1>
+
       <form onSubmit={handleSubmit}>
         {/* Title */}
         <div className="mb-4">
-          <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
-            Title*
+          <label
+            htmlFor="title"
+            className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white':'text-gray-700'}`}
+          >
+            Nombre Producto*
           </label>
           <input
             type="text"
             id="title"
-            className={`input-field ${errors.title ? 'border-red-500' : ''}`}
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="What are you selling?"
+            className={`input-field ${errors.title ? "border-red-500" : ""}`}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="¿Que estas vendiendo?"
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1 flex items-center">
@@ -98,18 +135,21 @@ const CreateListingPage = () => {
             </p>
           )}
         </div>
-        
+
         {/* Price */}
         <div className="mb-4">
-          <label htmlFor="price" className="block text-gray-700 font-medium mb-2">
-            Price* ($)
+          <label
+            htmlFor="price"
+            className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white':'text-gray-700'}`}
+          >
+            Precio* ($)
           </label>
           <input
             type="number"
             id="price"
             min="0"
             step="0.01"
-            className={`input-field ${errors.price ? 'border-red-500' : ''}`}
+            className={`input-field ${errors.price ? "border-red-500" : ""}`}
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="0.00"
@@ -120,9 +160,9 @@ const CreateListingPage = () => {
             </p>
           )}
         </div>
-        
+
         {/* Category */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="category" className="block text-gray-700 font-medium mb-2">
             Category*
           </label>
@@ -142,10 +182,10 @@ const CreateListingPage = () => {
               <FaExclamationCircle className="mr-1" /> {errors.category}
             </p>
           )}
-        </div>
-        
+        </div> */}
+
         {/* Condition */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="condition" className="block text-gray-700 font-medium mb-2">
             Condition*
           </label>
@@ -166,10 +206,10 @@ const CreateListingPage = () => {
               <FaExclamationCircle className="mr-1" /> {errors.condition}
             </p>
           )}
-        </div>
-        
+        </div> */}
+
         {/* Location */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label htmlFor="location" className="block text-gray-700 font-medium mb-2">
             Location*
           </label>
@@ -186,8 +226,8 @@ const CreateListingPage = () => {
               <FaExclamationCircle className="mr-1" /> {errors.location}
             </p>
           )}
-        </div>
-        
+        </div> */}
+
         {/* Description */}
         <div className="mb-4">
           <label htmlFor="description" className="block text-gray-700 font-medium mb-2">
@@ -207,15 +247,13 @@ const CreateListingPage = () => {
             </p>
           )}
         </div>
-        
-        {/* Image uploads */}
-        <div className="mb-6">
+
+        {/* <div className="mb-6">
           <label className="block text-gray-700 font-medium mb-2">
             Photos* (max 5)
           </label>
           
           <div className="flex flex-wrap gap-3 mb-2">
-            {/* Image preview area */}
             {imageUrls.map((url, index) => (
               <div key={index} className="relative w-24 h-24">
                 <img
@@ -233,7 +271,6 @@ const CreateListingPage = () => {
               </div>
             ))}
             
-            {/* Add image button */}
             {images.length < 5 && (
               <label className="w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50">
                 <FaUpload className="text-gray-400 mb-1" />
@@ -253,20 +290,17 @@ const CreateListingPage = () => {
               <FaExclamationCircle className="mr-1" /> {errors.images}
             </p>
           )}
-        </div>
-        
+        </div> */}
+
         {/* Submit button */}
         <div className="mt-6">
-          <button
-            type="submit"
-            className="btn-primary w-full"
-          >
-            List Item
+          <button type="submit" className="btn-primary w-full">
+            Publicar Producto
           </button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateListingPage
+export default CreateListingPage;

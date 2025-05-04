@@ -53,8 +53,8 @@ const ProductDetailPage = () => {
     }
 
     if (message.trim() && product && seller) {
-      startProductConversation(seller.id, message, product);
-      navigate("/messages/" + seller.id);
+      startProductConversation(user._id, message, product);
+      navigate("/messages/" + user._id);
     }
   };
 
@@ -86,9 +86,14 @@ const ProductDetailPage = () => {
       <div className="mb-4">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center text-gray-600 hover:text-fb-blue"
+          className={`flex items-center text-gray-600 hover:text-fb-blue ${
+            theme === "dark" ? "text-white" : "text-black"
+          }`}
         >
-          <FaArrowLeft className="mr-2" /> Back to Marketplace
+          <FaArrowLeft
+            className={`mr-2 ${theme === "dark" ? "text-white" : "text-black"}`}
+          />{" "}
+          Volver a las Publicaciones
         </button>
       </div>
 
@@ -111,7 +116,7 @@ const ProductDetailPage = () => {
           <div className="md:w-1/2 p-6">
             <div
               className={`flex items-center justify-between ${
-                theme === "dark" ? "text-white" : ""
+                theme === "dark" ? "text-white" : "text-black"
               }`}
             >
               <h1
@@ -119,7 +124,7 @@ const ProductDetailPage = () => {
                   theme === "dark" ? "text-white" : ""
                 }`}
               >
-                {product.title}
+                {product.name}
               </h1>
               <button onClick={toggleSave} className="text-xl">
                 {/* {isSaved ? (
@@ -132,7 +137,11 @@ const ProductDetailPage = () => {
 
             {/* <p className="text-2xl font-bold text-fb-blue mt-2">${product.price}</p> */}
 
-            <div className="mt-4 space-y-2 text-gray-600">
+            <div
+              className={`mt-4 space-y-2  ${
+                theme === "dark" ? "text-white" : "text-gray-600"
+              }`}
+            >
               <div className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" />
                 {/* <span>{product.location}</span> */}
@@ -148,8 +157,20 @@ const ProductDetailPage = () => {
             </div>
 
             <div className="border-t border-b py-4 my-4">
-              <h2 className={`font-semibold mb-2 ${theme === 'dark' ? 'text-white':""}`}>Description</h2>
-              <p className="text-gray-700">{product.description}</p>
+              <h2
+                className={`font-semibold mb-2 ${
+                  theme === "dark" ? "text-white" : ""
+                }`}
+              >
+                Descripcion
+              </h2>
+              <p
+                className={`${
+                  theme === "dark" ? "text-white" : "text-gray-700"
+                }`}
+              >
+                {product.description}
+              </p>
               {user && can(user, "read:product") ? (
                 <>
                   <h1 className="text-b text-black">HOLAA</h1>
@@ -174,12 +195,24 @@ const ProductDetailPage = () => {
                 className="w-10 h-10 rounded-full mr-3"
               />
               <div>
-                {/* <p className="font-medium">{seller.name}</p> */}
-                <p className="text-sm text-gray-500">Seller</p>
+                <p className="font-medium">{user.username}</p>
+                <p className="text-sm text-gray-500">Vendedor</p>
               </div>
             </div>
 
             <div className="mt-6">
+              {user && can(user, "read:products") ? (
+                <>
+                  <h1 className="text-white">menor edad</h1>
+                </>
+              ) : (
+                <button
+                  onClick={() => setIsMessageModalOpen(true)}
+                  className="btn-primary w-full"
+                >
+                  Message Seller
+                </button>
+              )}
               {/* {isOwnProduct ? (
                 <div className="text-gray-500 italic">This is your listing</div>
               ) : (
@@ -198,7 +231,11 @@ const ProductDetailPage = () => {
       {/* Message modal */}
       {isMessageModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
+          <div
+            className={`bg-white rounded-lg shadow-lg w-full max-w-md ${
+              theme === "dark" ? "bg-slate-800 text-white" : "bg-text-white"
+            }`}
+          >
             <div className="p-4 border-b">
               <h2 className="font-bold text-lg">Message Seller</h2>
             </div>
@@ -206,7 +243,7 @@ const ProductDetailPage = () => {
             <div className="p-4">
               <div className="flex items-center mb-4">
                 <img
-                  src={product.images[0]}
+                  src={product.image}
                   alt={product.title}
                   className="w-16 h-16 object-cover rounded mr-3"
                 />
@@ -217,7 +254,9 @@ const ProductDetailPage = () => {
               </div>
 
               <textarea
-                className="w-full border rounded-lg p-3 focus:ring focus:ring-fb-blue focus:ring-opacity-50"
+                className={`w-full  border rounded-lg p-3 focus:ring focus:ring-fb-blue focus:ring-opacity-50 ${
+                  theme === "dark" ? "bg-slate-700" : "bg-slate-300"
+                }`}
                 rows="4"
                 placeholder="Ask about this product..."
                 value={message}
@@ -236,7 +275,7 @@ const ProductDetailPage = () => {
                   className="btn-primary"
                   disabled={!message.trim()}
                 >
-                  Send Message
+                  Enviar Mensaje
                 </button>
               </div>
             </div>

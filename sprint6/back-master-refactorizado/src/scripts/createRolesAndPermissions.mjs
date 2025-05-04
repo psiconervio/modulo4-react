@@ -16,6 +16,7 @@ const initialPermissions = [
   { name: "delete:superheros", description: "Puede eliminar superhéroes" },
   { name: "read:products", description: "Puede ver products" },
   { name: "buy:products", description: "Puede Comprar" },
+  { name: "contactar:products", description: "Puede contactar" },
   { name: "create:products", description: "Puede crear products" },
   { name: "update:products", description: "Puede actualizar products" },
   { name: "delete:products", description: "Puede eliminar products" },
@@ -25,7 +26,14 @@ const initialRoles = [
   {
     name: "user",
     description: "Usuario básico",
-    permissions: ["read:superheros", "read:products", "buy:products"],
+    permissions: [
+      "read:superheros",
+      "read:products",
+      "create:products",
+      "update:products",
+      "delete:products",
+      "contactar:products",
+    ],
   },
   {
     name: "menor",
@@ -102,31 +110,31 @@ const initialProducts = [
   {
     name: "Producto 1",
     price: 100,
-    image: "https://example.com/product1.jpg",
+    image: "https://cdn.pixabay.com/photo/2021/08/24/07/42/spa-6569843_640.jpg",
     description: "Descripción del producto 1",
   },
   {
     name: "Producto 2",
     price: 200,
-    image: "https://example.com/product2.jpg",
+    image: "https://cdn.pixabay.com/photo/2020/08/26/14/29/smartphone-5519652_640.jpg",
     description: "Descripción del producto 2",
   },
   {
     name: "Producto 3",
     price: 300,
-    image: "https://example.com/product3.jpg",
+    image: "https://cdn.pixabay.com/photo/2017/09/23/00/58/crafts-2777660_640.jpg",
     description: "Descripción del producto 3",
   },
   {
     name: "Producto 4",
     price: 300,
-    image: "https://example.com/product3.jpg",
+    image: "https://cdn.pixabay.com/photo/2015/04/05/10/25/shelf-shop-707592_640.jpg",
     description: "Descripción del producto 3",
   },
   {
     name: "Producto 5",
     price: 300,
-    image: "https://example.com/product3.jpg",
+    image: "https://cdn.pixabay.com/photo/2019/11/01/07/59/lens-4593546_640.jpg",
     description: "Descripción del producto 3",
   },
 ];

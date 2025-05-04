@@ -55,8 +55,8 @@ const HomePage = () => {
         <div className="flex-1">
           {/* Categories section - visible on mobile and tablet */}
           <div className="md:hidden mb-8">
-            <h2 className="text-2xl font-bold mb-4">Categories</h2>
-            <div className="flex overflow-x-auto pb-2 -mx-4 px-4 space-x-4">
+            <h2 className="text-2xl font-bold">Categories</h2>
+            {/* <div className="flex overflow-x-auto pb-2 -mx-4 px-4 space-x-4">
               {featuredCategories.map(category => (
                 <Link 
                   key={category}
@@ -83,7 +83,7 @@ const HomePage = () => {
                 </div>
                 <span className="text-sm font-medium">See All</span>
               </Link>
-            </div>
+            </div> */}
           </div>
           
           {/* Recently added section */}
