@@ -51,21 +51,21 @@ const ProductCard = ({ product }) => {
 
         <div className="mt-3">
           <div className="flex justify-between items-start">
-            <h3 className="font-bold text-lg group-hover:text-fb-blue">
+            <h3 className={`font-bold text-lg group-hover:text-fb-blue ${theme === 'dark' ? 'text-white' : ''}`}>
               ${product.price}
             </h3>
-            <span className="text-xs text-gray-500">
+            <span className={`text-xs text-gray-500 ${theme === 'dark' ? 'text-white' : ''}`}>
               {formatDate(product.createdAt)}
             </span>
           </div>
-          <h4 className="font-medium text-gray-800 mt-1 line-clamp-1">
+          <h4 className={`font-medium text-gray-800 mt-1 line-clamp-1 ${theme === 'dark' ? 'text-white' : ''}`}>
             {product.name}
           </h4>
-          <p className="text-gray-500 text-sm mt-1 line-clamp-2">
+          <p className={`text-gray-500 text-sm mt-1 line-clamp-2 ${theme === 'dark' ? 'text-white' : ''}`}>
             {product.description}
           </p>
 
-          <div className="mt-3 flex items-center text-sm text-gray-600">
+          <div className={`mt-3 flex items-center text-sm text-gray-600 ${theme === 'dark' ? 'text-white' : ''}`}>
             {/* <span>{product.location}</span> */}
             <span className="mx-2">•</span>
             {/* <span>{product.category}</span> */}

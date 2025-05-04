@@ -12,9 +12,11 @@ import {
   FaClock,
   FaArrowLeft,
 } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 import { can } from "../utils/permissions";
 
 const ProductDetailPage = () => {
+  const { theme } = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const { getProductById, isLoading, toggleSaveProduct, isProductSaved } =
@@ -79,7 +81,7 @@ const ProductDetailPage = () => {
   // codigo prueba endpoint  return <h1>Product Detail Page</h1>
 
   return (
-    <div>
+    <div className={`min-h-screen ${theme === "dark" ? "text-white" : ""}`}>
       {/* Back button */}
       <div className="mb-4">
         <button
@@ -90,12 +92,16 @@ const ProductDetailPage = () => {
         </button>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div
+        className={`container mx-auto p-4 ${
+          theme === "dark" ? "bg-gray-800" : ""
+        }`}
+      >
         <div className="md:flex">
           {/* Product image */}
           <div className="md:w-1/2">
             <img
-              // src={product.images[0]}
+              src={product.image}
               // alt={product.title}
               className="w-full h-80 md:h-96 object-cover"
             />
@@ -103,8 +109,18 @@ const ProductDetailPage = () => {
 
           {/* Product details */}
           <div className="md:w-1/2 p-6">
-            <div className="flex justify-between items-start">
-              <h1 className="text-2xl font-bold">{product.title}</h1>
+            <div
+              className={`flex items-center justify-between ${
+                theme === "dark" ? "text-white" : ""
+              }`}
+            >
+              <h1
+                className={`text-2xl font-bold${
+                  theme === "dark" ? "text-white" : ""
+                }`}
+              >
+                {product.title}
+              </h1>
               <button onClick={toggleSave} className="text-xl">
                 {/* {isSaved ? (
                   <FaBookmark className="text-fb-blue" />
@@ -132,7 +148,7 @@ const ProductDetailPage = () => {
             </div>
 
             <div className="border-t border-b py-4 my-4">
-              <h2 className="font-semibold mb-2">Description</h2>
+              <h2 className={`font-semibold mb-2 ${theme === 'dark' ? 'text-white':""}`}>Description</h2>
               <p className="text-gray-700">{product.description}</p>
               {user && can(user, "read:product") ? (
                 <>
