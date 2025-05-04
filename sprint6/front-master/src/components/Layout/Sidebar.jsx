@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import { FaHome, FaBookmark, FaEnvelope, FaUser, FaPlus } from 'react-icons/fa'
+import { useTheme } from "../../context/ThemeContext";
 
 const Sidebar = () => {
+  const {theme}=useTheme()
   const location = useLocation()
   
   const isActive = (path) => {
@@ -9,7 +11,7 @@ const Sidebar = () => {
   }
   
   return (
-    <div className="h-full p-4 border rounded-lg mb-40 pb-20">
+    <div className={`h-full p-4 border rounded-lg mb-40 pb-20 ${theme === 'dark'? 'text-white':'text-black'}`}>
       <ul className="space-y-2">
         <li>
           <Link 

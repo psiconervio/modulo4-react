@@ -1,5 +1,5 @@
 export const rolemap = {
-  "6815405a64257fcbe0ba7a2c": {
+  "6817da160e8cfaaa23a61a1a": {
     name: "admin",
     permissions: [
       "create:product",
@@ -17,7 +17,7 @@ export const rolemap = {
       "delete:product",
     ],
   },
-  "6815405a64257fcbe0ba7a2a": {
+  "6817ac41ca22d7be3410ef89": {
     name: "nopermiso",
     permissions: [],
   },
@@ -25,8 +25,15 @@ export const rolemap = {
     name: "menoredad",
     permissions: ["read:product"],
   },
-  "6815405a64257fcbe0ba7a28": {
+  "6817c1cd33cc7b9de01c263f": {
     name: "user",
-    permissions: ["read:product"],
+    permissions: [
+      "read:superheros",
+      "read:products",
+      "create:products",
+      "update:products",
+      "delete:products",
+      "contactar:products",
+    ],
   },
 };

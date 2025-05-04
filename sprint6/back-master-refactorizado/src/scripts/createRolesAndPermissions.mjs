@@ -79,30 +79,35 @@ const initialUsers = [
     email: "admin@example.com",
     password: "admin123", // En un entorno real, encripta las contraseñas
     role: "admin",
+    avatar: "https://cdn-icons-png.freepik.com/512/219/219966.png?ga=GA1.1.1104822936.1744935310",
   },
   {
     username: "editor",
     email: "seller1@example.com",
     password: "seller123",
     role: "editor",
+    avatar: "https://cdn-icons-png.freepik.com/512/219/219966.png?ga=GA1.1.1104822936.1744935310",
   },
   {
     username: "usuario",
     email: "usuario@example.com",
     password: "seller123",
     role: "user",
+    avatar: "https://cdn-icons-png.freepik.com/512/219/219966.png?ga=GA1.1.1104822936.1744935310",
   },
   {
     username: "nopermiso",
     email: "nopermiso@example.com",
     password: "seller123",
     role: "nopermiso",
+    avatar: "https://cdn-icons-png.freepik.com/512/219/219966.png?ga=GA1.1.1104822936.1744935310",
   },
   {
     username: "menor",
     email: "menoredad@example.com",
     password: "seller123",
     role: "menor",
+    avatar: "https://cdn-icons-png.freepik.com/512/219/219966.png?ga=GA1.1.1104822936.1744935310",
   },
 ];
 
@@ -112,30 +117,44 @@ const initialProducts = [
     price: 100,
     image: "https://cdn.pixabay.com/photo/2021/08/24/07/42/spa-6569843_640.jpg",
     description: "Descripción del producto 1",
+    category: "Electronics",
+    condition: "usado",
   },
   {
     name: "Producto 2",
     price: 200,
-    image: "https://cdn.pixabay.com/photo/2020/08/26/14/29/smartphone-5519652_640.jpg",
+    image:
+      "https://cdn.pixabay.com/photo/2020/08/26/14/29/smartphone-5519652_640.jpg",
     description: "Descripción del producto 2",
+    category: "Vehicles",
+    condition: "usado",
   },
   {
     name: "Producto 3",
     price: 300,
-    image: "https://cdn.pixabay.com/photo/2017/09/23/00/58/crafts-2777660_640.jpg",
+    image:
+      "https://cdn.pixabay.com/photo/2017/09/23/00/58/crafts-2777660_640.jpg",
     description: "Descripción del producto 3",
+    category: "Books",
+    condition: "usado",
   },
   {
     name: "Producto 4",
     price: 300,
-    image: "https://cdn.pixabay.com/photo/2015/04/05/10/25/shelf-shop-707592_640.jpg",
+    image:
+      "https://cdn.pixabay.com/photo/2015/04/05/10/25/shelf-shop-707592_640.jpg",
     description: "Descripción del producto 3",
+    category: "Clothing",
+    condition: "usado",
   },
   {
     name: "Producto 5",
     price: 300,
-    image: "https://cdn.pixabay.com/photo/2019/11/01/07/59/lens-4593546_640.jpg",
+    image:
+      "https://cdn.pixabay.com/photo/2019/11/01/07/59/lens-4593546_640.jpg",
     description: "Descripción del producto 3",
+    category: "Furniture",
+    condition: "usado",
   },
 ];
 

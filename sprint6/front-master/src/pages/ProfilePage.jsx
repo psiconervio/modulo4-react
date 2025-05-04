@@ -12,19 +12,27 @@ const ProfilePage = () => {
   const { products, isLoading } = useProducts();
   const [userProducts, setUserProducts] = useState([]);
 
-  console.log("currentUser", currentUser);
-  console.log("isAuthenticated", isAhutenticated);
-  console.log("usuario", user);
+
   useEffect(() => {
-    if (!isLoading && products.length > 0 && currentUser) {
+    console.log("currentUser", currentUser);
+    console.log("isAuthenticated", isAhutenticated);
+    console.log('PRODUCTS',products)
+    console.log("currentUser", currentUser);
+    console.log("isAuthenticated", isAhutenticated);
+    console.log("usuario", user);
+    const storedUser = localStorage.getItem("user");
+
+    if (!isLoading && products.length > 0 && user) {
       const userListings = products.filter(
-        (product) => product.seller === currentUser.id
+        (products) => products.seller.username === user.username
       );
+      console.log('lista',userListings)
       setUserProducts(userListings);
+      console.log('lista',userListings)
+
     }
   }, [products, currentUser, isLoading]);
-  console.log("currentUser", currentUser);
-  console.log("isAuthenticated", isAhutenticated);
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -37,7 +45,7 @@ const ProfilePage = () => {
     <div>
       {/* Profile header */}
       <div
-        className={`bg-white rounded-lg shadow-md p-6 mb-6 ${
+        className={`rounded-lg shadow-md p-6 mb-6 ${
           theme === "dark" ? "bg-slate-800" : "bg-slate-500"
         }`}
       >

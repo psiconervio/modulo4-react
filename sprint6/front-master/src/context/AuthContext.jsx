@@ -1,12 +1,6 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { createContext, useState, useContext, useEffect, useMemo } from "react";
 import api, { loginUser } from "../data/apis";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { rolemap } from "../utils/rolemap";
 
@@ -25,28 +19,27 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Initialize auth from localStorage
+  // Carga inicial desde localStorage
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
-
     if (storedToken && storedUser) {
       try {
         const decoded = jwtDecode(storedToken);
-        const roledata = rolemap[String(decoded.role)] || {
-          name: "desconocido",
-          permissions: [],
+        const roleKey = String(decoded.role);
+        const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+        const rawUser = JSON.parse(storedUser);
+        const enrichedUser = {
+          ...rawUser,
+          role: roleInfo.name,
+          permissions: roleInfo.permissions,
         };
-        const parsedUser = JSON.parse(storedUser);
-        const enriched = {
-          ...parsedUser,
-          role: roledata.name,
-          permissions: roledata.permissions,
-        };
+
+        // Aplica header
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
-        setToken(enriched);
-        // setToken(storedToken);
-        setUser(JSON.parse(storedUser));
+        // Actualiza estado
+        setToken(storedToken);
+        setUser(enrichedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
         clearAuth();
@@ -58,9 +51,9 @@ export const AuthProvider = ({ children }) => {
   const clearAuth = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    delete api.defaults.headers.common["Authorization"];
     setToken(null);
     setUser(null);
-    delete api.defaults.headers.common["Authorization"];
   };
 
   const login = async (email, password) => {
@@ -68,28 +61,20 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await loginUser({ email, password });
       const { token: newToken, user: rawUser } = data;
-
       const decoded = jwtDecode(newToken);
-      const roledata = rolemap[String(decoded.role)] || { name: "desconocido", permissions: [] };
-      const enriched = { ...rawUser, role: roledata.name, permissions: roledata.permissions };
-
-      const { role } = decoded;
-      const { name: roleName, permissions } = rolemap[role] || {
-        name: "Unknown",
-        permissions: [],
-      };
-
+      const roleKey = String(decoded.role);
+      const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
       const enrichedUser = {
         ...rawUser,
-        role: roleName,
-        permissions,
+        role: roleInfo.name,
+        permissions: roleInfo.permissions,
       };
 
-      // Persist
+      // Persistir en localStorage
       localStorage.setItem("token", newToken);
-      localStorage.setItem("user", JSON.stringify(enriched));
+      localStorage.setItem("user", JSON.stringify(enrichedUser));
 
-      // Apply
+      // Aplica header
       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
       setToken(newToken);
       setUser(enrichedUser);
@@ -117,6 +102,126 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+
+// import React, {
+//   createContext,
+//   useState,
+//   useContext,
+//   useEffect,
+//   useMemo,
+// } from "react";
+// import api, { loginUser } from "../data/apis";
+// import { jwtDecode } from "jwt-decode";
+// import { useNavigate } from "react-router-dom";
+// import { rolemap } from "../utils/rolemap";
+
+// const AuthContext = createContext({
+//   user: null,
+//   token: null,
+//   isAuthenticated: false,
+//   isLoading: true,
+//   login: async () => {},
+//   logout: () => {},
+// });
+
+// export const AuthProvider = ({ children }) => {
+//   const navigate = useNavigate();
+//   const [user, setUser] = useState(null);
+//   const [token, setToken] = useState(null);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   // Initialize auth from localStorage
+//   useEffect(() => {
+//     const storedToken = localStorage.getItem("token");
+//     const storedUser = localStorage.getItem("user");
+
+//     if (storedToken && storedUser) {
+//       try {
+//         const decoded = jwtDecode(storedToken);
+//         const roledata = rolemap[String(decoded.role)] || {
+//           name: "desconocido",
+//           permissions: [],
+//         };
+//         const parsedUser = JSON.parse(storedUser);
+//         const enriched = {
+//           ...parsedUser,
+//           role: roledata.name,
+//           permissions: roledata.permissions,
+//         };
+//         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
+//         setToken(enriched);
+//         // setToken(storedToken);
+//         setUser(JSON.parse(enriched));
+//       } catch (err) {
+//         console.error("Invalid token in storage", err);
+//         clearAuth();
+//       }
+//     }
+//     setIsLoading(false);
+//   }, []);
+
+//   const clearAuth = () => {
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("user");
+//     setToken(null);
+//     setUser(null);
+//     delete api.defaults.headers.common["Authorization"];
+//   };
+
+//   const login = async (email, password) => {
+//     setIsLoading(true);
+//     try {
+//       const { data } = await loginUser({ email, password });
+//       const { token: newToken, user: rawUser } = data;
+
+//       const decoded = jwtDecode(newToken);
+//       const roledata = rolemap[String(decoded.role)] || { name: "desconocido", permissions: [] };
+//       const enriched = { ...rawUser, role: roledata.name, permissions: roledata.permissions };
+
+//       const { role } = decoded;
+//       const { name: roleName, permissions } = rolemap[role] || {
+//         name: "Unknown",
+//         permissions: [],
+//       };
+
+//       const enrichedUser = {
+//         ...rawUser,
+//         role: roleName,
+//         permissions,
+//       };
+
+//       // Persist
+//       localStorage.setItem("token", newToken);
+//       localStorage.setItem("user", JSON.stringify(enriched));
+
+//       // Apply
+//       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+//       setToken(newToken);
+//       setUser(enriched);
+
+//       return enriched;
+//     } catch (error) {
+//       console.error("Login failed:", error.response || error);
+//       throw error;
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const logout = () => {
+//     clearAuth();
+//     navigate("/login");
+//   };
+
+//   const value = useMemo(
+//     () => ({ user, token, isAuthenticated: !!user, isLoading, login, logout }),
+//     [user, token, isLoading]
+//   );
+
+//   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+// };
+
+// export const useAuth = () => useContext(AuthContext);
 
 // import { createContext, useState, useContext, useEffect } from "react";
 // import api, { loginUser } from "../data/apis";

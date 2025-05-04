@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { FaBookmark, FaEdit, FaRegBookmark } from "react-icons/fa";
 import { useProducts } from "../context/ProductsContext";
 import { formatDate, getSellerById } from "../data/mockData";
 import { useEffect } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { can } from "../utils/permissions";
+import { useAuth } from "../context/AuthContext";
 
 const ProductCard = ({ product }) => {
   const { theme } = useTheme();
+  const { user } = useAuth();
+  const { products } = useProducts();
+
   const { toggleSaveProduct, isProductSaved } = useProducts();
   const seller = getSellerById(product.seller);
   const isSaved = isProductSaved(product._id);
@@ -16,15 +20,9 @@ const ProductCard = ({ product }) => {
   const handleSaveClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    // console.log("ProductOO", product._id);
-    // console.log("isSaved", isSaved); // Ensure this line remains commented or remove it if not needed
-    // console.log("seller", seller);
     toggleSaveProduct(product._id);
-    console.log
+    console.log;
   };
-  // useEffect(() => {
-  //   console.log("ProductOO", product._id);
-  // }, []);
 
   return (
     <Link to={`/product/${product._id}`} className="block">
@@ -52,24 +50,46 @@ const ProductCard = ({ product }) => {
 
         <div className="mt-3">
           <div className="flex justify-between items-start">
-            <h3 className={`font-bold text-lg group-hover:text-fb-blue ${theme === 'dark' ? 'text-white' : ''}`}>
+            <h3
+              className={`font-bold text-lg group-hover:text-fb-blue ${
+                theme === "dark" ? "text-white" : ""
+              }`}
+            >
               ${product.price}
             </h3>
-            <span className={`text-xs text-gray-500 ${theme === 'dark' ? 'text-white' : ''}`}>
+            <span
+              className={`text-xs text-gray-500 ${
+                theme === "dark" ? "text-white" : ""
+              }`}
+            >
               {formatDate(product.createdAt)}
             </span>
           </div>
-          <h4 className={`font-medium text-gray-800 mt-1 line-clamp-1 ${theme === 'dark' ? 'text-white' : ''}`}>
+          <h4
+            className={`font-medium text-gray-800 mt-1 line-clamp-1 ${
+              theme === "dark" ? "text-white" : ""
+            }`}
+          >
             {product.name}
           </h4>
-          <p className={`text-gray-500 text-sm mt-1 line-clamp-2 ${theme === 'dark' ? 'text-white' : ''}`}>
+          <p
+            className={`text-gray-500 text-sm mt-1 line-clamp-2 ${
+              theme === "dark" ? "text-white" : ""
+            }`}
+          >
             {product.description}
           </p>
 
-          <div className={`mt-3 flex items-center text-sm text-gray-600 ${theme === 'dark' ? 'text-white' : ''}`}>
+          <div
+            className={`mt-3 flex items-center text-sm text-gray-600 ${
+              theme === "dark" ? "text-white" : ""
+            }`}
+          >
             {/* <span>{product.location}</span> */}
             <span className="mx-2">•</span>
             {/* <span>{product.category}</span> */}
+
+            
           </div>
         </div>
       </div>

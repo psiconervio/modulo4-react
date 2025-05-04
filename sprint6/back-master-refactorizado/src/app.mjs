@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { Server } from "socket.io";
 import chatRouter from "./routes/ChatRouter.mjs";
 import productRouter from "./routes/productRouter.mjs";
+import roleRoutes from "./routes/roleRoutes.mjs";
 import http from "http";
 // import initializeRolesAndPermissions from "./scripts/createRolesAndPermissions.mjs";
 // 
@@ -55,6 +56,8 @@ connectDB();
 app.use("/api/chat", chatRouter);
 app.use("/api", routes);
 app.use("/api/products", productRouter);
+app.use("/api/roles", roleRoutes);
+
 // Configuración de Socket.IO
 io.on("connection", (socket) => {
   console.log("Usuario conectado:", socket.id);

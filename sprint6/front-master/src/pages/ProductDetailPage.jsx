@@ -11,6 +11,7 @@ import {
   FaTags,
   FaClock,
   FaArrowLeft,
+  FaEdit,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 import { can } from "../utils/permissions";
@@ -171,16 +172,6 @@ const ProductDetailPage = () => {
               >
                 {product.description}
               </p>
-              {user && can(user, "read:product") ? (
-                <>
-                  <h1 className="text-b text-black">HOLAA</h1>
-                </>
-              ) : (
-                <p className="text-red-500">
-                  You do not have permission to view this content.
-                </p>
-              )}
-
               <div className="mt-3">
                 <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
                   {product.condition}
@@ -202,15 +193,15 @@ const ProductDetailPage = () => {
 
             <div className="mt-6">
               {user && can(user, "read:products") ? (
-                <>
-                  <h1 className="text-white">menor edad</h1>
-                </>
-              ) : (
                 <button
                   onClick={() => setIsMessageModalOpen(true)}
                   className="btn-primary w-full"
                 >
-                  Message Seller
+                  Contactar vendedor
+                </button>
+              ) : (
+                <button className="btn-primary w-full">
+                  No tienes Permisos
                 </button>
               )}
               {/* {isOwnProduct ? (
@@ -223,6 +214,16 @@ const ProductDetailPage = () => {
                   Message Seller
                 </button>
               )} */}
+              {product.seller.username === user.username && (
+                <div className="mt-3">
+                  <Link
+                    to={`/edit-product/${product._id}`}
+                    className="btn-secondary flex items-center"
+                  >
+                    <FaEdit className="mr-2" /> Editar
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -232,12 +233,12 @@ const ProductDetailPage = () => {
       {isMessageModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div
-            className={`bg-white rounded-lg shadow-lg w-full max-w-md ${
+            className={`rounded-lg shadow-lg w-full max-w-md ${
               theme === "dark" ? "bg-slate-800 text-white" : "bg-text-white"
             }`}
           >
             <div className="p-4 border-b">
-              <h2 className="font-bold text-lg">Message Seller</h2>
+              <h2 className="font-bold text-lg">Enviar Mensaje al Vendedor</h2>
             </div>
 
             <div className="p-4">

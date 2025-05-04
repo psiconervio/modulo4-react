@@ -5,6 +5,7 @@ import { FaShoppingCart, FaExclamationCircle } from "react-icons/fa";
 import { MOCK_USERS } from "../data/mockData";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useTheme } from "../context/ThemeContext";
 
 const RegisterPage = () => {
   const {
@@ -12,8 +13,9 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { login, } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const { theme } = useTheme();
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -48,14 +50,9 @@ const RegisterPage = () => {
   //   }
   // };
   const onSubmit = async (data) => {
-    const success = await register(data.email, data.password);
+    const success = await login(data.email, data.password);
     console.log(success);
     if (success) {
- Swal.fire({
-        icon: "success",
-        title: "Bienvenido",
-        text: "Has iniciado sesión correctamente.",
- })
       navigate("/");
     } else {
       setError("Invalid email or password.");
@@ -63,9 +60,23 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-fb-gray flex flex-col justify-center items-center p-4">
-      <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
-        <div className="text-center mb-6">
+    <div
+      className={`min-h-screen flex flex-col justify-center items-center p-4 ${
+        theme === "dark" ? "bg-gray-800" : "bg-gray-200"
+      }`}
+    >
+      <div
+        className={`bg-white rounded-lg shadow-md p-8 w-full max-w-md ${
+          theme === "dark" ? "bg-gray-700" : "bg-gray-200"
+        }`}
+      >
+        <div
+          className={`text-center mb-6 ${
+            theme === "dark"
+              ? "bg-gray-700 text-white"
+              : "bg-slate-200 text-black"
+          }`}
+        >
           <Link
             to="/"
             className="inline-flex items-center text-fb-blue text-2xl font-bold"
@@ -73,7 +84,11 @@ const RegisterPage = () => {
             <FaShoppingCart className="mr-2" />
             FBMarket
           </Link>
-          <p className="text-gray-600 mt-2">
+          <p
+            className={` mt-2 ${
+              theme === "dark" ? "text-white" : "text-black"
+            }`}
+          >
             Compra y vende artículos con personas de tu comunidad
           </p>
         </div>
@@ -89,7 +104,9 @@ const RegisterPage = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-gray-700 font-medium mb-2"
+              className={`block  font-medium mb-2 ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
             >
               Correo electrónico
             </label>
@@ -102,21 +119,12 @@ const RegisterPage = () => {
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
-            {/* <input
-              type="email"
-              id="email"
-              className="input-field"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Introduce tu correo electrónico"
-              required
-            /> */}
           </div>
 
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-gray-700 font-medium mb-2"
+              className={`block font-medium mb-2 ${theme === 'dark'? 'text-white':'text-black'}`}
             >
               Contraseña
             </label>
@@ -129,21 +137,17 @@ const RegisterPage = () => {
             {errors.password && (
               <span className="text-red-500">{errors.password.message}</span>
             )}
-            {/* <input
-              type="password"
-              id="password"
-              className="input-field"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Introduce tu contraseña"
-              required
-            /> */}
           </div>
-
           <button type="submit" className="btn-primary w-full mb-4">
             Iniciar sesión
           </button>
         </form>
+        <button
+          onClick={() => console.log("registrar")}
+          className="bg-slate-700 w-full mb-4 text-white"
+        >
+          Registrarme
+        </button>
 
         {/* <div className="text-center my-4">
           <span className="text-gray-500">o</span>

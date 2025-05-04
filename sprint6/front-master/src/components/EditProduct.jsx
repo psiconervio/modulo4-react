@@ -3,10 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { PRODUCT_CATEGORIES } from "../data/mockData";
 import { FaUpload, FaTrash, FaExclamationCircle } from "react-icons/fa";
-import { createProduct } from "../data/apis";
+import { createProduct,updateProduct } from "../data/apis";
 import { useTheme } from "../context/ThemeContext";
+import { useParams } from "react-router-dom";
 
-const CreateListingPage = () => {
+
+const EditProduct = () => {
+  const { id } = useParams(); // Extrae el id de los parámetros de la URL
+  console.log(id)
+
   const { theme } = useTheme();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
@@ -17,6 +22,7 @@ const CreateListingPage = () => {
   // const [category, setCategory] = useState('')
   // const [condition, setCondition] = useState('')
   // const [location, setLocation] = useState('')
+  // const [id, setid] = useState('')
   const [images, setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [errors, setErrors] = useState({});
@@ -56,6 +62,7 @@ const CreateListingPage = () => {
 
   // const validateForm = () => {
   //   const newErrors = {}
+
   //   if (!title.trim()) newErrors.title = 'Title is required'
   //   if (!description.trim()) newErrors.description = 'Description is required'
   //   if (!price || isNaN(price) || price <= 0) newErrors.price = 'Valid price is required'
@@ -63,6 +70,7 @@ const CreateListingPage = () => {
   //   if (!condition) newErrors.condition = 'Condition is required'
   //   if (!location.trim()) newErrors.location = 'Location is required'
   //   if (images.length === 0) newErrors.images = 'At least one image is required'
+
   //   setErrors(newErrors)
   //   return Object.keys(newErrors).length === 0
   // }
@@ -76,9 +84,9 @@ const CreateListingPage = () => {
     //   // For this demo, we'll just redirect back to the marketplace
     //   navigate('/')
     // }
-
     const productData = {
       // title,
+      // _id:id,
       name,
       description,
       price: parseFloat(price), // Asegúrate de que el precio sea un número
@@ -88,10 +96,11 @@ const CreateListingPage = () => {
       // images, // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
       // userId: currentUser.id, // Incluye el ID del usuario actual si es necesario
     };
+    console.log(productData)
 
     try {
       // Llamar a la función `createProduct` para enviar los datos al backend
-      const response = await createProduct(productData);
+      const response = await updateProduct(id ,productData);
       console.log("Product created successfully:", response.data);
 
       // Redirigir al usuario después de crear el producto
@@ -108,7 +117,7 @@ const CreateListingPage = () => {
         theme === "dark" ? "bg-slate-800" : "bg-slate-300"
       }`}
     >
-      <h1 className="text-2xl font-bold mb-6">Crear Nueva Publicacion</h1>
+      <h1 className="text-2xl font-bold mb-6">Editar Publicacion</h1>
 
       <form onSubmit={handleSubmit}>
         {/* Title */}
@@ -301,4 +310,4 @@ const CreateListingPage = () => {
   );
 };
 
-export default CreateListingPage;
+export default EditProduct;

@@ -17,6 +17,15 @@ const ProductSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        category:{
+            type:String
+        },
+        location:{
+            type:String
+        },
+        condition:{
+            type:String
+        },
         seller: {
             type: mongoose.Schema.Types.ObjectId, // Relación con el modelo User
             ref: 'User', // Nombre del modelo relacionado

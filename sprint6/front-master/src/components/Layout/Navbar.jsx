@@ -112,14 +112,37 @@ const Navbar = () => {
                         Logout
                       </button>
                       <button
-                        className={
-                          theme === "dark"
-                            ? "bg-gray-900 text-white"
-                            : " text-white"
-                        }
+                        className={`px-4 py-2{
+                          ${
+                            theme === "dark"
+                              ? " text-black"
+                              : " text-black"
+                          }`}
                         onClick={toggleTheme}
                       >
-                        {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                        {theme === "dark" ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-toggle-off"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5" />
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            className="bi bi-toggle-on"
+                            viewBox="0 0 16 16"
+                          >
+                            <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
+                          </svg>
+                        )}
                       </button>
                     </div>
                   )}

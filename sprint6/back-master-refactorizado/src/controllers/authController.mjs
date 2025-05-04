@@ -21,6 +21,7 @@ export const login = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 };
+
 // //Creamos un controlador para la autenticacion
 // const authService = require('../services/authService');
 

@@ -14,7 +14,7 @@ const MobileMenu = ({ onClose }) => {
   
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 md:hidden animate-fade-in">
-      <div className={`bg-white h-full w-4/5 max-w-xs shadow-xl animate-slide-up ${theme === 'dark' ? 'bg-slate-700':'bg-slate-400'}`}>
+      <div className={`h-full w-4/5 max-w-xs shadow-xl animate-slide-up ${theme === 'dark' ? 'bg-slate-700':'bg-slate-400'}`}>
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="font-semibold">Menu</h2>
           <button onClick={onClose} className="p-2">

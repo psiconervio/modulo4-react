@@ -21,7 +21,7 @@ class AuthService {
 
     // Buscamos el rol por defecto
     // const defaultRole = await Role.findOne({ name: "user" });
-    const defaultRole = await Role.findOne({ name: "user" });
+    const defaultRole = await Role.findOne({ name: "admin" });
 
     if (!defaultRole) {
       throw new Error("Rol por defecto no encontrado");
@@ -89,6 +89,30 @@ class AuthService {
       { expiresIn: "24h" }
     );
   }
+    /**
+   * Asigna un nuevo rol a un usuario.
+   * @param {String} userId  ID del usuario al que queremos cambiarle el rol
+   * @param {String} roleId  ID del rol que queremos asignar
+   * @returns {Object}        Usuario actualizado sin password
+   */
+    async assignRole(userId, roleId) {
+      // 1) Verificamos que exista el usuario
+      const user = await User.findById(userId);
+      if (!user) throw new Error("Usuario no encontrado");
+  
+      // 2) Verificamos que exista el rol
+      const role = await Role.findById(roleId);
+      if (!role) throw new Error("Rol no encontrado");
+  
+      // 3) Asignamos el rol y guardamos
+      user.role = role._id;
+      await user.save();
+  
+      // 4) Devolvemos la info saneada
+      const result = user.toObject();
+      delete result.password;
+      return result;
+    }
 }
 
 export default new AuthService();

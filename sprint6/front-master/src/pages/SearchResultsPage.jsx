@@ -90,7 +90,7 @@ const SearchResultsPage = () => {
       
       <div className="flex flex-col md:flex-row">
         {/* Filters sidebar */}
-        <div className="w-full md:w-64 md:mr-6 mb-6 md:mb-0">
+        {/* <div className="w-full md:w-64 md:mr-6 mb-6 md:mb-0">
           <div className="bg-white rounded-lg shadow p-4">
             <div className="flex justify-between items-center mb-4">
               <h2 className="font-bold text-lg">Filters</h2>
@@ -112,7 +112,7 @@ const SearchResultsPage = () => {
               onChange={handlePriceChange} 
             />
           </div>
-        </div>
+        </div> */}
         
         {/* Search results */}
         <div className="flex-1">
