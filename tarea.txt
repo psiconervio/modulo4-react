@@ -1,11 +1,23 @@
-(X)Login (guardar token) 
-()Vista principal con selector de perfiles
-(X)Componente para ver catálogo de películas
-()Componente de administración de perfiles
-(X)CRUD completo de entidades conectadas al backend
-()Watchlist persistente por perfil
-()Visualización y funcionamiento condicional según el tipo de perfil (ejemplo: niño solo ve contenido apto)
-()Rutas protegidas
-()Ruteo dinámico
-()Formularios (ejemplo: de edición de perfil)
-()Páginas controladas por React Router DOM
+
+
+
+
+
+
+
+
+
+
+                        ()Vista principal con selector de perfiles
+                        ()Componente de administración de perfiles
+                        ()Visualización y funcionamiento condicional según el tipo de perfil (ejemplo: niño solo ve contenido apto)
+                        ()Formularios (ejemplo: de edición de perfil)
+
+VERIFICAR               (x)Watchlist persistente por perfil
+AGREGAR FILTROS         (X)Componente para ver catálogo de películas
+        
+                        (X)Login (guardar token) 
+                        (X)CRUD completo de entidades conectadas al backend
+                        (x)Rutas protegidas
+                        (x)Ruteo dinámico
+                        (x)Páginas controladas por React Router DOM

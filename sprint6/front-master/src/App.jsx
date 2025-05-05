@@ -11,11 +11,13 @@ import CreateListingPage from "./pages/CreateListingPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditProduct from "./components/EditProduct";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage/>}/>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
 

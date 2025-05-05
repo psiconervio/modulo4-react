@@ -139,41 +139,15 @@ const RegisterPage = () => {
             )}
           </div>
           <button type="submit" className="btn-primary w-full mb-4">
-            Iniciar sesión
+            Registrarme
           </button>
         </form>
         <button
-          onClick={() => console.log("registrar")}
+          onClick={navigate('login')}
           className="bg-slate-700 w-full mb-4 text-white"
         >
-          Registrarme
+          Login
         </button>
-
-        {/* <div className="text-center my-4">
-          <span className="text-gray-500">o</span>
-        </div> */}
-
-        {/* <div className="mb-4">
-          <p className="text-center text-gray-700 mb-2">
-            Inicio rápido de sesión para demostración:
-          </p>
-          <div className="grid grid-cols-2 gap-2">
-            {MOCK_USERS.map((user) => (
-              <button
-                key={user.id}
-                onClick={() => handleDemoLogin(user.id)}
-                className="flex items-center p-2 border rounded-md hover:bg-gray-50"
-              >
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-8 h-8 rounded-full mr-2"
-                />
-                <span className="text-sm">{user.name}</span>
-              </button>
-            ))}
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -42,13 +42,14 @@ const LoginPage = () => {
   // };
 
   // // For demo purposes, provide a quick login option
-  // const handleDemoLogin = (userId) => {
-  //   const user = MOCK_USERS.find((user) => user.id === userId);
-  //   if (user) {
-  //     login(user);
-  //     navigate("/");
-  //   }
-  // };
+  const handleDemoLogin = (userId) => {
+    const usernew = MOCK_USERS.find((user) => user.id === userId);
+    if (usernew) {
+      console.log(usernew,usernew.email, usernew.password);
+      login(usernew.email, usernew.password);
+      navigate("/");
+    }
+  };
   const onSubmit = async (data) => {
     const success = await login(data.email, data.password);
     console.log(success);
@@ -129,7 +130,9 @@ const LoginPage = () => {
           <div className="mb-6">
             <label
               htmlFor="password"
-              className={`block font-medium mb-2 ${theme === 'dark'? 'text-white':'text-black'}`}
+              className={`block font-medium mb-2 ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
             >
               Contraseña
             </label>
@@ -154,13 +157,13 @@ const LoginPage = () => {
           Registrarme
         </button>
 
-        {/* <div className="text-center my-4">
+        <div className="text-center my-4">
           <span className="text-gray-500">o</span>
-        </div> */}
+        </div>
 
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <p className="text-center text-gray-700 mb-2">
-            Inicio rápido de sesión para demostración:
+            Administrador de usuarios
           </p>
           <div className="grid grid-cols-2 gap-2">
             {MOCK_USERS.map((user) => (
@@ -178,7 +181,7 @@ const LoginPage = () => {
               </button>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
