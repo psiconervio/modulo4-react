@@ -12,6 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditProduct from "./components/EditProduct";
 import RegisterPage from "./pages/RegisterPage";
+import  EditProfile  from "./components/EditProfile";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="product/:id" element={<ProductDetailPage />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
+          <Route path="edit-profile/:id" element={<EditProfile />} />
           <Route path="search" element={<SearchResultsPage />} />
 
           <Route path="messages" element={<MessagesPage />} />

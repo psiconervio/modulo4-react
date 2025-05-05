@@ -80,6 +80,37 @@ class AuthService {
     const token = this.generateToken(user);
     return { user: userResponse, token };
   }
+  async updateUser(userId, updateData) {
+    // Buscamos el usuario por ID
+    const user = await User.findById(userId).populate("role");
+    if (!user) {
+      throw new Error("Usuario no encontrado");
+    }
+
+    // Si se proporciona una nueva contraseña, la encriptamos
+    if (updateData.password) {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
+    }
+
+    // Actualizamos los datos del usuario
+    Object.assign(user, updateData);
+    await user.save();
+
+    // Convertimos el usuario a objeto plano y eliminamos la contraseña
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    // Obtenemos los permisos del rol actualizado
+    const role = await Role.findById(user.role._id).populate("permissions");
+    userResponse.role = {
+      name: role.name,
+      permissions: role.permissions,
+    };
+
+    // Generamos un nuevo token y retornamos la respuesta
+    const token = this.generateToken(user);
+    return { user: userResponse, token };
+  }
 
   // Método auxiliar para generar tokens JWT
   generateToken(user) {
@@ -96,30 +127,30 @@ class AuthService {
       { expiresIn: "24h" }
     );
   }
-    /**
+  /**
    * Asigna un nuevo rol a un usuario.
    * @param {String} userId  ID del usuario al que queremos cambiarle el rol
    * @param {String} roleId  ID del rol que queremos asignar
    * @returns {Object}        Usuario actualizado sin password
    */
-    async assignRole(userId, roleId) {
-      // 1) Verificamos que exista el usuario
-      const user = await User.findById(userId);
-      if (!user) throw new Error("Usuario no encontrado");
-  
-      // 2) Verificamos que exista el rol
-      const role = await Role.findById(roleId);
-      if (!role) throw new Error("Rol no encontrado");
-  
-      // 3) Asignamos el rol y guardamos
-      user.role = role._id;
-      await user.save();
-  
-      // 4) Devolvemos la info saneada
-      const result = user.toObject();
-      delete result.password;
-      return result;
-    }
+  async assignRole(userId, roleId) {
+    // 1) Verificamos que exista el usuario
+    const user = await User.findById(userId);
+    if (!user) throw new Error("Usuario no encontrado");
+
+    // 2) Verificamos que exista el rol
+    const role = await Role.findById(roleId);
+    if (!role) throw new Error("Rol no encontrado");
+
+    // 3) Asignamos el rol y guardamos
+    user.role = role._id;
+    await user.save();
+
+    // 4) Devolvemos la info saneada
+    const result = user.toObject();
+    delete result.password;
+    return result;
+  }
 }
 
 export default new AuthService();

@@ -6,6 +6,7 @@ import { MOCK_USERS } from "../data/mockData";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useTheme } from "../context/ThemeContext";
+import { registerUser } from "../data/apis";
 
 const RegisterPage = () => {
   const {
@@ -16,44 +17,14 @@ const RegisterPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { theme } = useTheme();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setError("");
-
-  //   // For the demo, we'll accept any email that matches a mock user
-  //   const user = MOCK_USERS.find(
-  //     (user) => user.email.toLowerCase() === email.toLowerCase()
-  //   );
-
-  //   if (user && password) {
-  //     const success = login(user);
-  //     if (success) {
-  //       navigate("/");
-  //     } else {
-  //       setError("Something went wrong. Please try again.");
-  //     }
-  //   } else {
-  //     setError("Invalid email or password.");
-  //   }
-  // };
-
-  // // For demo purposes, provide a quick login option
-  // const handleDemoLogin = (userId) => {
-  //   const user = MOCK_USERS.find((user) => user.id === userId);
-  //   if (user) {
-  //     login(user);
-  //     navigate("/");
-  //   }
-  // };
   const onSubmit = async (data) => {
-    const success = await login(data.email, data.password);
+    const registro = JSON.stringify(data);
+    const success = await registerUser(registro);
     console.log(success);
     if (success) {
-      navigate("/");
+      navigate("/login");
     } else {
       setError("Invalid email or password.");
     }
@@ -66,7 +37,7 @@ const RegisterPage = () => {
       }`}
     >
       <div
-        className={`bg-white rounded-lg shadow-md p-8 w-full max-w-md ${
+        className={`rounded-lg shadow-md p-8 w-full max-w-md ${
           theme === "dark" ? "bg-gray-700" : "bg-gray-200"
         }`}
       >
@@ -92,14 +63,12 @@ const RegisterPage = () => {
             Compra y vende artículos con personas de tu comunidad
           </p>
         </div>
-
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 flex items-center">
             <FaExclamationCircle className="mr-2" />
             <span>{error}</span>
           </div>
         )}
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label
@@ -120,11 +89,50 @@ const RegisterPage = () => {
               <span className="text-red-500">{errors.email.message}</span>
             )}
           </div>
-
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className={`block  font-medium mb-2 ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
+              Nombre de Usuario
+            </label>
+            <input
+              {...register("username", { required: "username requerido" })}
+              type="username"
+              className="input-field"
+              placeholder="Introduce tu nombre de usuario"
+            />
+            {errors.username && (
+              <span className="text-red-500">{errors.username.message}</span>
+            )}
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className={`block  font-medium mb-2 ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
+            >
+              Nombre de Usuario
+            </label>
+            <input
+              {...register("name", { required: "name requerido" })}
+              type="name"
+              className="input-field"
+              placeholder="Introduce tu nombre "
+            />
+            {errors.username && (
+              <span className="text-red-500">{errors.username.message}</span>
+            )}
+          </div>
           <div className="mb-6">
             <label
               htmlFor="password"
-              className={`block font-medium mb-2 ${theme === 'dark'? 'text-white':'text-black'}`}
+              className={`block font-medium mb-2 ${
+                theme === "dark" ? "text-white" : "text-black"
+              }`}
             >
               Contraseña
             </label>
@@ -143,7 +151,7 @@ const RegisterPage = () => {
           </button>
         </form>
         <button
-          onClick={navigate('login')}
+          onClick={() => navigate("/login")}
           className="bg-slate-700 w-full mb-4 text-white"
         >
           Login

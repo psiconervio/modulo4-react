@@ -1,6 +1,6 @@
-import  { createContext, useState, useContext, useEffect, useMemo } from "react";
+import { createContext, useState, useContext, useEffect, useMemo } from "react";
 import api, { loginUser } from "../data/apis";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 // import { rolemap } from "../utils/rolemap";
 
@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setToken(storedToken);
         setUser(enrichedUser);
+        // setUser(enrichedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
         clearAuth();
@@ -76,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       // Aplica header
       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
       setToken(newToken);
-      setUser(user);
+      setUser(enrichedUser);
       // setUser(enrichedUser);
 
       return enrichedUser;
