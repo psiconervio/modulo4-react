@@ -132,8 +132,8 @@ const LoginPage = () => {
         <div className="text-center my-4">
           <span className="text-gray-500">o</span>
         </div>
-        <div className="mb-4">
-          <p className="text-center text-gray-700 mb-2">
+        <div className={`mb-4 ${theme === 'dark' ? 'text-white':'text-black'}`}>
+          <p className="text-center mb-2">
             Administrador de usuarios
           </p>
           <div className="grid grid-cols-2 gap-2">

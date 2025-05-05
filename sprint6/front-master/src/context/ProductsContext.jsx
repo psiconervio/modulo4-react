@@ -1,11 +1,13 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { MOCK_PRODUCTS } from "../data/mockData";
-import { getProducts } from "../data/apis";
+import { deleteProduct, getProducts } from "../data/apis";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const ProductsContext = createContext(null);
 
 export const ProductsProvider = ({ children }) => {
+  const navigate = useNavigate();
   const { currentUser, isAuthenticated } = useAuth();
   const [products, setProducts] = useState([]);
   const [savedItems, setSavedItems] = useState([]);
@@ -17,7 +19,7 @@ export const ProductsProvider = ({ children }) => {
       const productos = async () => {
         try {
           const response = await getProducts();
-          console.log(response)
+          console.log(response);
           setProducts(response.data.data);
           localStorage.setItem("products", JSON.stringify(response.data.data));
         } catch (error) {
@@ -42,6 +44,18 @@ export const ProductsProvider = ({ children }) => {
     }, 500);
   }, []);
 
+  const deleteproductid = async (idproduct) => {
+    try {
+      console.log("idproducto", idproduct);
+      const borrar = await deleteProduct(idproduct);
+      console.log("se borró correctamente", borrar);
+      navigate("/profile");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error al eliminar el producto:", error);
+      alert("No se pudo eliminar el producto. Inténtalo de nuevo.");
+    }
+  };
   // Save or unsave a product
   const toggleSaveProduct = (productId) => {
     let updatedSavedItems = [...savedItems];
@@ -103,6 +117,7 @@ export const ProductsProvider = ({ children }) => {
     isProductSaved,
     getProductById,
     searchProducts,
+    deleteproductid,
   };
 
   return (

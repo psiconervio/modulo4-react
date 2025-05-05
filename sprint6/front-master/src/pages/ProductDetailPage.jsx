@@ -4,6 +4,7 @@ import { useProducts } from "../context/ProductsContext";
 import { useMessages } from "../context/MessagesContext";
 import { useAuth } from "../context/AuthContext";
 import { formatDate, getSellerById } from "../data/mockData";
+import { deleteProduct } from "../data/apis";
 import {
   FaBookmark,
   FaRegBookmark,
@@ -17,18 +18,17 @@ import { useTheme } from "../context/ThemeContext";
 import { can } from "../utils/permissions";
 
 const ProductDetailPage = () => {
-  const { theme } = useTheme();
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { getProductById, isLoading, toggleSaveProduct, isProductSaved } =
+  const { getProductById, isLoading, toggleSaveProduct, isProductSaved,deleteproductid } =
     useProducts();
   const { startProductConversation } = useMessages();
   const { currentUser, isAuthenticated, user } = useAuth();
-
   const [product, setProduct] = useState(null);
   const [seller, setSeller] = useState(null);
   const [message, setMessage] = useState("");
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const { theme } = useTheme();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isLoading) {
@@ -41,7 +41,6 @@ const ProductDetailPage = () => {
         const productSeller = getSellerById(foundProduct.seller);
         setSeller(productSeller);
       } else {
-        // Product not found, navigate to 404
         navigate("/not-found");
       }
     }
@@ -52,7 +51,6 @@ const ProductDetailPage = () => {
       navigate("/login");
       return;
     }
-
     if (message.trim() && product && seller) {
       startProductConversation(user._id, message, product);
       navigate("/messages/" + user._id);
@@ -64,7 +62,6 @@ const ProductDetailPage = () => {
       navigate("/login");
       return;
     }
-
     toggleSaveProduct(product.id);
   };
 
@@ -75,11 +72,8 @@ const ProductDetailPage = () => {
       </div>
     );
   }
-
   const isSaved = isProductSaved(product.id);
   const isOwnProduct = currentUser && currentUser.id === product.seller;
-
-  // codigo prueba endpoint  return <h1>Product Detail Page</h1>
 
   return (
     <div className={`min-h-screen ${theme === "dark" ? "text-white" : ""}`}>
@@ -221,6 +215,17 @@ const ProductDetailPage = () => {
                     className="btn-secondary flex items-center"
                   >
                     <FaEdit className="mr-2" /> Editar
+                  </Link>
+                </div>
+              )}
+              {product.seller.username === user.username && (
+                <div className="mt-3">
+                  <Link
+                    // to={`/edit-product/${product._id}`}
+                    className="btn-red flex items-center"
+                    onClick={() => deleteproductid(`${product._id}`)}
+                  >
+                    <FaEdit className="mr-2" /> Eliminar Publicacion
                   </Link>
                 </div>
               )}
