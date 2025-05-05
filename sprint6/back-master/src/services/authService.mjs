@@ -21,7 +21,7 @@ class AuthService {
 
     // Buscamos el rol por defecto
     // const defaultRole = await Role.findOne({ name: "user" });
-    const defaultRole = await Role.findOne({ name: "admin" });
+    const defaultRole = await Role.findOne({ name: "user" });
 
     if (!defaultRole) {
       throw new Error("Rol por defecto no encontrado");
@@ -53,7 +53,7 @@ class AuthService {
   // Método para iniciar sesión
   async login(email, password) {
     // Buscamos el usuario por email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("role");
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
@@ -68,6 +68,13 @@ class AuthService {
     // Convertimos el usuario a objeto plano y eliminamos la contraseña
     const userResponse = user.toObject();
     delete userResponse.password;
+
+    // Obtenemos los permisos del rol
+    const role = await Role.findById(user.role._id).populate("permissions");
+    userResponse.role = {
+      name: role.name,
+      permissions: role.permissions,
+    };
 
     // Generamos un nuevo token y retornamos la respuesta
     const token = this.generateToken(user);

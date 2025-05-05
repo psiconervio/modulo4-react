@@ -27,7 +27,8 @@ export const AuthProvider = ({ children }) => {
       try {
         const decoded = jwtDecode(storedToken);
         const roleKey = String(decoded.role);
-        const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+        // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+        const roleInfo = roleKey || { name: "desconocido", permissions: [] };
         const rawUser = JSON.parse(storedUser);
         const enrichedUser = {
           ...rawUser,
@@ -63,13 +64,14 @@ export const AuthProvider = ({ children }) => {
       const { token: newToken, user: rawUser } = data;
       const decoded = jwtDecode(newToken);
       const roleKey = String(decoded.role);
-      const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+      // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+      const roleInfo = roleKey || { name: "desconocido", permissions: [] };
       const enrichedUser = {
         ...rawUser,
         role: roleInfo.name,
         permissions: roleInfo.permissions,
       };
-
+      console.log('rawuser',rawUser)
       // Persistir en localStorage
       localStorage.setItem("token", newToken);
       localStorage.setItem("user", JSON.stringify(enrichedUser));
@@ -77,7 +79,8 @@ export const AuthProvider = ({ children }) => {
       // Aplica header
       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
       setToken(newToken);
-      setUser(enrichedUser);
+      setUser(rawUser);
+      // setUser(enrichedUser);
 
       return enrichedUser;
     } catch (error) {

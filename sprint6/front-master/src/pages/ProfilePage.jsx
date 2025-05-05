@@ -12,14 +12,12 @@ const ProfilePage = () => {
   const { products, isLoading } = useProducts();
   const [userProducts, setUserProducts] = useState([]);
 
-
   useEffect(() => {
-    console.log("currentUser", currentUser);
-    console.log("isAuthenticated", isAhutenticated);
     console.log('PRODUCTS',products)
     console.log("currentUser", currentUser);
     console.log("isAuthenticated", isAhutenticated);
-    console.log("usuario", user);
+    console.log("usuario", user.username);
+    console.log("usuariooo", products.username);
     const storedUser = localStorage.getItem("user");
 
     if (!isLoading && products.length > 0 && user) {
