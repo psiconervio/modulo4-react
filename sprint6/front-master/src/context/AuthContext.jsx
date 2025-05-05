@@ -1,8 +1,8 @@
-import React, { createContext, useState, useContext, useEffect, useMemo } from "react";
+import  { createContext, useState, useContext, useEffect, useMemo } from "react";
 import api, { loginUser } from "../data/apis";
 import {jwtDecode} from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import { rolemap } from "../utils/rolemap";
+// import { rolemap } from "../utils/rolemap";
 
 const AuthContext = createContext({
   user: null,
@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Carga inicial desde localStorage
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
@@ -36,9 +35,7 @@ export const AuthProvider = ({ children }) => {
           permissions: roleInfo.permissions,
         };
 
-        // Aplica header
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
-        // Actualiza estado
         setToken(storedToken);
         setUser(enrichedUser);
       } catch (err) {
@@ -71,7 +68,7 @@ export const AuthProvider = ({ children }) => {
         role: roleInfo.name,
         permissions: roleInfo.permissions,
       };
-      console.log('rawuser',rawUser)
+      // console.log('rawuser',rawUser)
       // Persistir en localStorage
       localStorage.setItem("token", newToken);
       localStorage.setItem("user", JSON.stringify(enrichedUser));
@@ -79,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       // Aplica header
       api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
       setToken(newToken);
-      setUser(rawUser);
+      setUser(user);
       // setUser(enrichedUser);
 
       return enrichedUser;

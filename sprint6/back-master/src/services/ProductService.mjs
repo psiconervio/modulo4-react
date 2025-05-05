@@ -2,23 +2,24 @@ import Product from '../models/ProductN.mjs';
 
 class ProductService {
     // Obtener todos los productos con datos del vendedor
-    async getAll(page = 1, limit = 10) {
-        const skip = (page - 1) * limit;
+    // async getAll(page = 1, limit = 10) {
+    async getAll() {
+        // const skip = (page - 1) * limit;
 
         const products = await Product.find()
             .populate('seller', 'username email') // Incluye datos del vendedor
             .skip(skip)
             .limit(limit);
 
-        const total = await Product.countDocuments();
+        // const total = await Product.countDocuments();
 
         return {
             data: products,
-            pagination: {
-                currentPage: page,
-                totalPages: Math.ceil(total / limit),
-                totalItems: total,
-            },
+            // pagination: {
+            //     currentPage: page,
+            //     totalPages: Math.ceil(total / limit),
+            //     totalItems: total,
+            // },
         };
     }
 

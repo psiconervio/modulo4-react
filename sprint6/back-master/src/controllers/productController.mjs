@@ -3,10 +3,10 @@ import productService from "../services/ProductService.mjs";
 // Obtener todos los productos
 export const getAllProducts = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    // const { page = 1, limit = 10 } = req.query;
     const products = await productService.getAll(
-      parseInt(page),
-      parseInt(limit)
+      // parseInt(page),
+      // parseInt(limit)
     );
     res.json(products);
   } catch (error) {

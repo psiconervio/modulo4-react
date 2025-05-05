@@ -12,12 +12,12 @@ export const ProductsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch products from API
     console.log("isAuthenticated", isAuthenticated);
     if (isAuthenticated) {
       const productos = async () => {
         try {
           const response = await getProducts();
+          console.log(response)
           setProducts(response.data.data);
           localStorage.setItem("products", JSON.stringify(response.data.data));
         } catch (error) {
