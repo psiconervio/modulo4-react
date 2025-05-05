@@ -9,7 +9,7 @@ import productRouter from "./routes/productRouter.mjs";
 import roleRoutes from "./routes/roleRoutes.mjs";
 import http from "http";
 // import initializeRolesAndPermissions from "./scripts/createRolesAndPermissions.mjs";
-// 
+//
 // Cargar modelos
 import "./models/Permission.mjs";
 import "./models/Role.mjs";
@@ -28,7 +28,8 @@ const io = new Server(server, {
 
 // Configuración de CORS más segura y específica
 const corsOptions = {
-  origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
+  origin: "*",
+  // origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   exposedHeaders: ["Content-Range", "X-Content-Range"],
@@ -59,38 +60,38 @@ app.use("/api/products", productRouter);
 app.use("/api/roles", roleRoutes);
 
 // Configuración de Socket.IO
-io.on("connection", (socket) => {
-  console.log("Usuario conectado:", socket.id);
+// io.on("connection", (socket) => {
+//   console.log("Usuario conectado:", socket.id);
 
-  // Unirse a una sala de chat basada en el producto
-  socket.on("join_room", ({ productId, userId }) => {
-    const room = `product_${productId}`;
-    socket.join(room);
-    console.log(`Usuario ${userId} se unió a la sala ${room}`);
-  });
+//   // Unirse a una sala de chat basada en el producto
+//   socket.on("join_room", ({ productId, userId }) => {
+//     const room = `product_${productId}`;
+//     socket.join(room);
+//     console.log(`Usuario ${userId} se unió a la sala ${room}`);
+//   });
 
-  // Manejar mensajes enviados por los usuarios
-  socket.on("send_message", ({ productId, senderId, message }) => {
-    const room = `product_${productId}`;
-    const chatMessage = {
-      senderId,
-      message,
-      timestamp: new Date(),
-    };
+//   // Manejar mensajes enviados por los usuarios
+//   socket.on("send_message", ({ productId, senderId, message }) => {
+//     const room = `product_${productId}`;
+//     const chatMessage = {
+//       senderId,
+//       message,
+//       timestamp: new Date(),
+//     };
 
-    // Emitir el mensaje a todos los usuarios en la sala
-    io.to(room).emit("receive_message", chatMessage);
-    console.log(`Mensaje enviado en sala ${room}:`, chatMessage);
-  });
+//     // Emitir el mensaje a todos los usuarios en la sala
+//     io.to(room).emit("receive_message", chatMessage);
+//     console.log(`Mensaje enviado en sala ${room}:`, chatMessage);
+//   });
 
-  // Desconexión del usuario
-  socket.on("disconnect", () => {
-    console.log("Usuario desconectado:", socket.id);
-  });
-});
+//   // Desconexión del usuario
+//   socket.on("disconnect", () => {
+//     console.log("Usuario desconectado:", socket.id);
+//   });
+// });
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
   console.log(`✅ Servidor corriendo en puerto ${PORT}`);
   console.log(`🌍 Accede en: http://localhost:${PORT}`);
