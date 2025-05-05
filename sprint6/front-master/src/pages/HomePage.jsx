@@ -51,7 +51,8 @@ const HomePage = () => {
           
           <div className="mb-12">
             <ProductGrid 
-              products={filteredProducts.slice(0, 8)} 
+              // products={filteredProducts.slice(0, 8)} 
+              products={filteredProducts} 
               emptyMessage="No products match your filters. Try adjusting your search criteria."
             />
           </div>

@@ -8,8 +8,8 @@ class ProductService {
 
         const products = await Product.find()
             .populate('seller', 'username email') // Incluye datos del vendedor
-            .skip(skip)
-            .limit(limit);
+            // .skip(skip)
+            // .limit(limit);
 
         // const total = await Product.countDocuments();
 
