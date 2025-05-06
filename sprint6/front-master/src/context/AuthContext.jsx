@@ -69,7 +69,8 @@ export const AuthProvider = ({ children }) => {
         // };
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setToken(storedToken);
-        setUser(storedUser);
+        setUser(JSON.parse(storedUser));
+        // setUser(storedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
         clearAuth();
