@@ -17,42 +17,9 @@ const CreateListingPage = () => {
   // const [category, setCategory] = useState('')
   // const [condition, setCondition] = useState('')
   // const [location, setLocation] = useState('')
-  const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [image, setImage] = useState([]);
+  // const [imageUrls, setImageUrls] = useState([]);
   const [errors, setErrors] = useState({});
-
-  // Handle image selection (mock functionality)
-  const handleImageChange = (e) => {
-    if (images.length >= 5) {
-      setErrors({ ...errors, images: "Maximum 5 images allowed" });
-      return;
-    }
-
-    setErrors({ ...errors, images: null });
-
-    // In a real app, you'd handle file upload here
-    // For this demo, we'll just simulate with placeholder images
-    const newImages = [...images];
-    newImages.push(e.target.files[0]);
-    setImages(newImages);
-
-    // Mock image URL (using a placeholder)
-    const newImageUrls = [...imageUrls];
-    newImageUrls.push(
-      `https://images.pexels.com/photos/5946/white-tablet-calling.jpg?auto=compress&cs=tinysrgb&w=500`
-    );
-    setImageUrls(newImageUrls);
-  };
-
-  const removeImage = (index) => {
-    const newImages = [...images];
-    newImages.splice(index, 1);
-    setImages(newImages);
-
-    const newImageUrls = [...imageUrls];
-    newImageUrls.splice(index, 1);
-    setImageUrls(newImageUrls);
-  };
 
   // const validateForm = () => {
   //   const newErrors = {}
@@ -85,7 +52,7 @@ const CreateListingPage = () => {
       // category,
       // condition,
       // location,
-      // images, // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
+      image // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
       // userId: currentUser.id, // Incluye el ID del usuario actual si es necesario
     };
 
@@ -93,8 +60,6 @@ const CreateListingPage = () => {
       // Llamar a la función `createProduct` para enviar los datos al backend
       const response = await createProduct(productData);
       console.log("Product created successfully:", response.data);
-
-      // Redirigir al usuario después de crear el producto
       navigate("/");
     } catch (error) {
       console.error("Error creating product:", error);
@@ -109,7 +74,6 @@ const CreateListingPage = () => {
       }`}
     >
       <h1 className="text-2xl font-bold mb-6">Crear Nueva Publicacion</h1>
-
       <form onSubmit={handleSubmit}>
         {/* Title */}
         <div className="mb-4">
@@ -155,6 +119,27 @@ const CreateListingPage = () => {
           {errors.price && (
             <p className="text-red-500 text-sm mt-1 flex items-center">
               <FaExclamationCircle className="mr-1" /> {errors.price}
+            </p>
+          )}
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white':'text-gray-700'}`}
+          >
+            Imagen Producto*
+          </label>
+          <input
+            type="text"
+            id="title"
+            className={`input-field ${errors.title ? "border-red-500" : ""}`}
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            placeholder="Ingresar URL imagen"
+          />
+          {errors.title && (
+            <p className="text-red-500 text-sm mt-1 flex items-center">
+              <FaExclamationCircle className="mr-1" /> {errors.title}
             </p>
           )}
         </div>
