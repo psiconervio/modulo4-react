@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const login = async (email, password) => {
-    setIsLoading(true);
     try {
       //login sin desencriptar usuario, porque ya trae los roles de la base de datos
       // pero este es un ejemplo de como se puede enriqueser el roll y los permisos al usuario
@@ -68,11 +67,9 @@ export const AuthProvider = ({ children }) => {
         //   role: roleInfo.name,
         //   permissions: roleInfo.permissions,
         // };
-        // console.log("usefectJWTDECODIFICADO RAUSER", enrichedUser)
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setToken(storedToken);
         setUser(storedUser);
-        // setUser(enrichedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
         clearAuth();

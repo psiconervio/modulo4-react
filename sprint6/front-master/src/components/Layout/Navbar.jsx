@@ -14,9 +14,9 @@ import { useTheme } from "../../context/ThemeContext";
 
 const Navbar = () => {
   const { toggleTheme, theme } = useTheme();
-  const { currentUser, isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
-  // useEffect(() => {
-  //   console.log(theme);
-  // }, [theme]);
+
   return (
     <nav className="bg-fb-blue text-white shadow-md sticky top-0 z-10">
       <div className="container mx-auto px-4">

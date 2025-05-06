@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import { FaShoppingCart, FaExclamationCircle } from "react-icons/fa";
 import { MOCK_USERS } from "../data/mockData";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
 import { useTheme } from "../context/ThemeContext";
 
 const LoginPage = () => {
@@ -122,20 +121,18 @@ const LoginPage = () => {
             Iniciar sesión
           </button>
         </form>
-        <Link to='/register'>
-          <button
-            className="bg-slate-700 w-full mb-4 text-white"
-          >
+        <Link to="/register">
+          <button className="bg-slate-700 w-full mb-4 text-white">
             Registrarme
           </button>
         </Link>
         <div className="text-center my-4">
           <span className="text-gray-500">o</span>
         </div>
-        <div className={`mb-4 ${theme === 'dark' ? 'text-white':'text-black'}`}>
-          <p className="text-center mb-2">
-            Administrador de usuarios
-          </p>
+        <div
+          className={`mb-4 ${theme === "dark" ? "text-white" : "text-black"}`}
+        >
+          <p className="text-center mb-2">Administrador de usuarios</p>
           <div className="grid grid-cols-2 gap-2">
             {MOCK_USERS.map((user) => (
               <button

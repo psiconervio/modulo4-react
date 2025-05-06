@@ -8,17 +8,11 @@ import { useTheme } from "../context/ThemeContext";
 
 const ProfilePage = () => {
   const { theme } = useTheme();
-  const { currentUser, isAhutenticated, user } = useAuth();
+  const {  isAhutenticated, user } = useAuth();
   const { products, isLoading } = useProducts();
   const [userProducts, setUserProducts] = useState([]);
 
   useEffect(() => {
-    console.log("PRODUCTS", products);
-    console.log("currentUser", currentUser);
-    console.log("isAuthenticated", isAhutenticated);
-    console.log("usuario", user);
-    console.log("usuariooo", products.username);
-    const storedUser = localStorage.getItem("user");
     //filtro para mostrar los productos de el venedor
     if (!isLoading && products.length > 0 && user) {
       const userListings = products.filter(
@@ -28,7 +22,7 @@ const ProfilePage = () => {
       setUserProducts(userListings);
       console.log("lista", userListings);
     }
-  }, [products, currentUser, isLoading]);
+  }, [products, user, isLoading]);
 
   if (isLoading) {
     return (
