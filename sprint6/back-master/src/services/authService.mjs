@@ -80,6 +80,7 @@ class AuthService {
     const token = this.generateToken(user);
     return { user: userResponse, token };
   }
+  
   async updateUser(userId, updateData) {
     // Buscamos el usuario por ID
     const user = await User.findById(userId).populate("role");

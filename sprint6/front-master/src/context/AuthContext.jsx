@@ -19,25 +19,59 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const login = async (email, password) => {
+    setIsLoading(true);
+    try {
+      //login sin desencriptar usuario, porque ya trae los roles de la base de datos
+      // pero este es un ejemplo de como se puede enriqueser el roll y los permisos al usuario
+      // para hacer mas segura la aplicacion
+      const { data } = await loginUser({ email, password });
+      const { token: newToken, user: rawUser } = data;
+      // const decoded = jwtDecode(newToken);
+      // const roleKey = String(decoded.role);
+      // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+      // const roleInfo = roleKey || { name: "desconocido", permissions: [] };
+      // const enrichedUser = {
+      //   ...rawUser,
+      //   role: roleInfo.name,
+      //   permissions: roleInfo.permissions,
+      // };
+      // Persistir en localStorage
+      localStorage.setItem("token", newToken);
+      localStorage.setItem("user", JSON.stringify(rawUser));
+
+      // Aplica header
+      api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+      setToken(newToken);
+      setUser(rawUser);
+      return rawUser;
+    } catch (error) {
+      console.error("Login failed:", error.response || error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
     if (storedToken && storedUser) {
       try {
-        const decoded = jwtDecode(storedToken);
-        const roleKey = String(decoded.role);
-        // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
-        const roleInfo = roleKey || { name: "desconocido", permissions: [] };
-        const rawUser = JSON.parse(storedUser);
-        const enrichedUser = {
-          ...rawUser,
-          role: roleInfo.name,
-          permissions: roleInfo.permissions,
-        };
-
+        // const decoded = jwtDecode(storedToken);
+        // const roleKey = String(decoded.role);
+        // // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
+        // const roleInfo = roleKey || { name: "desconocido", permissions: [] };
+        // console.log(roleInfo)
+        // const rawUser = JSON.parse(storedUser);
+        // const enrichedUser = {
+        //   ...rawUser,
+        //   role: roleInfo.name,
+        //   permissions: roleInfo.permissions,
+        // };
+        // console.log("usefectJWTDECODIFICADO RAUSER", enrichedUser)
         api.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
         setToken(storedToken);
-        setUser(enrichedUser);
+        setUser(storedUser);
         // setUser(enrichedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
@@ -50,43 +84,10 @@ export const AuthProvider = ({ children }) => {
   const clearAuth = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    // localStorage.removeItem("products");
     delete api.defaults.headers.common["Authorization"];
     setToken(null);
     setUser(null);
-  };
-
-  const login = async (email, password) => {
-    setIsLoading(true);
-    try {
-      const { data } = await loginUser({ email, password });
-      const { token: newToken, user: rawUser } = data;
-      const decoded = jwtDecode(newToken);
-      const roleKey = String(decoded.role);
-      // const roleInfo = rolemap[roleKey] || { name: "desconocido", permissions: [] };
-      const roleInfo = roleKey || { name: "desconocido", permissions: [] };
-      const enrichedUser = {
-        ...rawUser,
-        role: roleInfo.name,
-        permissions: roleInfo.permissions,
-      };
-      // console.log('rawuser',rawUser)
-      // Persistir en localStorage
-      localStorage.setItem("token", newToken);
-      localStorage.setItem("user", JSON.stringify(enrichedUser));
-
-      // Aplica header
-      api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
-      setToken(newToken);
-      setUser(enrichedUser);
-      // setUser(enrichedUser);
-
-      return enrichedUser;
-    } catch (error) {
-      console.error("Login failed:", error.response || error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   const logout = () => {

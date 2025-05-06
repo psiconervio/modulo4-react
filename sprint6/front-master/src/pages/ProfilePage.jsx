@@ -16,7 +16,7 @@ const ProfilePage = () => {
     console.log("PRODUCTS", products);
     console.log("currentUser", currentUser);
     console.log("isAuthenticated", isAhutenticated);
-    console.log("usuario", user.username);
+    console.log("usuario", user);
     console.log("usuariooo", products.username);
     const storedUser = localStorage.getItem("user");
     //filtro para mostrar los productos de el venedor

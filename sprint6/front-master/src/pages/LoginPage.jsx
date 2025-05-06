@@ -21,20 +21,20 @@ const LoginPage = () => {
   const handleDemoLogin = (userId) => {
     const usernew = MOCK_USERS.find((user) => user.id === userId);
     if (usernew) {
-      console.log(usernew, usernew.email, usernew.password);
+      // console.log(usernew, usernew.email, usernew.password);
       login(usernew.email, usernew.password);
       navigate("/");
     }
   };
   const onSubmit = async (data) => {
     const success = await login(data.email, data.password);
-    console.log(success);
+    // console.log(success);
     if (success) {
-      Swal.fire({
-        icon: "success",
-        title: "Bienvenido",
-        text: "Has iniciado sesión correctamente.",
-      });
+      // Swal.fire({
+      //   icon: "success",
+      //   title: "Bienvenido",
+      //   text: "Has iniciado sesión correctamente.",
+      // });
       navigate("/");
     } else {
       setError("Invalid email or password.");
