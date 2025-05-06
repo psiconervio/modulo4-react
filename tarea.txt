@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
                         ()Vista principal con selector de perfiles
                         ()Componente de administración de perfiles
                         ()Visualización y funcionamiento condicional según el tipo de perfil (ejemplo: niño solo ve contenido apto)
