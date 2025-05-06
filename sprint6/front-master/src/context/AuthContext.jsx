@@ -73,7 +73,6 @@ export const AuthProvider = ({ children }) => {
         // setUser(storedUser);
       } catch (err) {
         console.error("Invalid token in storage", err);
-        clearAuth();
       }
     }
     setIsLoading(false);
