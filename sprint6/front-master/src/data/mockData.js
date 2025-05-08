@@ -1,37 +1,39 @@
 // Mock users
 export const MOCK_USERS = [
   {
-    id: 'user1',
+    id: "user1",
     name: "Ramon",
     username: "Ramon",
     email: "ramon@example.com",
     // avatar:
     //   "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=150",
     password: "123456",
+    //RAMON ES ADMIN
   },
   {
-    id: 'user2',
+    id: "user2",
     name: "useradmin",
     email: "useradmin@example.com",
     avatar:
       "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150",
     password: "123456",
+    //ADMIN ES USUARIO
   },
   {
-    id: 'user3',
+    id: "user3",
     name: "menoredad",
-    email: "menoredad@example.com",
+    email: "menoredad@gmail.com",
     avatar:
       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150",
-    password: "123456",
+    password: "menoredad",
   },
   {
-    id: 'asd',
-    name: "asd Chen",
-    email: "asd@example.com",
+    id: "asd",
+    name: "notengopermiso",
+    email: "notengopermiso@gmail.com",
     avatar:
       "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150",
-    password: "123456",
+    password: "notengopermiso",
   },
 ];
 

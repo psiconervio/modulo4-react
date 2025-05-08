@@ -10,10 +10,6 @@ dotenv.config();
 
 // Datos iniciales
 const initialPermissions = [
-  { name: "read:superheros", description: "Puede ver superhéroes" },
-  { name: "create:superheros", description: "Puede crear superhéroes" },
-  { name: "update:superheros", description: "Puede actualizar superhéroes" },
-  { name: "delete:superheros", description: "Puede eliminar superhéroes" },
   { name: "read:products", description: "Puede ver products" },
   { name: "buy:products", description: "Puede Comprar" },
   { name: "contactar:products", description: "Puede contactar" },
@@ -27,7 +23,6 @@ const initialRoles = [
     name: "user",
     description: "Usuario básico",
     permissions: [
-      "read:superheros",
       "read:products",
       "create:products",
       "update:products",
@@ -38,7 +33,7 @@ const initialRoles = [
   {
     name: "menor",
     description: "menor de edad",
-    permissions: ["read:superheros"],
+    permissions: ["read:products"],
   },
   {
     name: "nopermiso",
@@ -49,9 +44,6 @@ const initialRoles = [
     name: "editor",
     description: "Editor de contenido",
     permissions: [
-      "read:superheros",
-      "create:superheros",
-      "update:superheros",
       "read:products",
       "create:products",
       "update:products",
@@ -61,10 +53,6 @@ const initialRoles = [
     name: "admin",
     description: "Administrador del sistema",
     permissions: [
-      "read:superheros",
-      "create:superheros",
-      "update:superheros",
-      "delete:superheros",
       "read:products",
       "create:products",
       "update:products",

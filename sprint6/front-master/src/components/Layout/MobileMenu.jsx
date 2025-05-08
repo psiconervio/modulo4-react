@@ -5,7 +5,7 @@ import { useTheme } from "../../context/ThemeContext";
 
 const MobileMenu = ({ onClose }) => {
   const {theme} =useTheme()
-  const { currentUser, isAuthenticated, logout } = useAuth()
+  const { currentUser, isAuthenticated, user, logout } = useAuth()
   
   const handleLogout = () => {
     logout()
@@ -22,7 +22,7 @@ const MobileMenu = ({ onClose }) => {
           </button>
         </div>
         
-        {isAuthenticated ? (
+        {user ? (
           <div>
             <div className={`p-4 border-b flex items-center`}>
               <img

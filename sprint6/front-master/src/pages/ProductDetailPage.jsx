@@ -18,8 +18,13 @@ import { useTheme } from "../context/ThemeContext";
 import { can } from "../utils/permissions";
 
 const ProductDetailPage = () => {
-  const { getProductById, isLoading, toggleSaveProduct, isProductSaved,deleteproductid } =
-    useProducts();
+  const {
+    getProductById,
+    isLoading,
+    toggleSaveProduct,
+    isProductSaved,
+    deleteproductid,
+  } = useProducts();
   const { startProductConversation } = useMessages();
   const { currentUser, isAuthenticated, user } = useAuth();
   const [product, setProduct] = useState(null);
@@ -57,7 +62,6 @@ const ProductDetailPage = () => {
     }
   };
 
-
   if (isLoading || !product) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -65,7 +69,6 @@ const ProductDetailPage = () => {
       </div>
     );
   }
-
 
   return (
     <div className={`min-h-screen ${theme === "dark" ? "text-white" : ""}`}>
@@ -111,9 +114,10 @@ const ProductDetailPage = () => {
               >
                 {product.name}
               </h1>
-
             </div>
-            <p className="text-2xl font-bold text-fb-blue mt-2">${product.price}</p>
+            <p className="text-2xl font-bold text-fb-blue mt-2">
+              ${product.price}
+            </p>
             <div
               className={`mt-4 space-y-2  ${
                 theme === "dark" ? "text-white" : "text-gray-600"
@@ -156,12 +160,12 @@ const ProductDetailPage = () => {
                 className="w-10 h-10 rounded-full mr-3"
               />
               <div>
-                <p className="font-medium">{user.username}</p>
+                <p className="font-medium">{product.seller.username}</p>
                 <p className="text-sm text-gray-500">Vendedor</p>
               </div>
             </div>
             <div className="mt-6">
-              {user && can(user, "read:products") ? (
+              {user && can(user, "contactar:products") ? (
                 <button
                   onClick={() => setIsMessageModalOpen(true)}
                   className="btn-primary w-full"
@@ -173,7 +177,53 @@ const ProductDetailPage = () => {
                   No tienes Permisos
                 </button>
               )}
-              {product.seller.username === user.username && (
+              {/* {user ? (
+                can(user, "read:products") ? (
+                  <button
+                    onClick={() => setIsMessageModalOpen(true)}
+                    className="btn-primary w-full"
+                  >
+                    Contactar vendedor
+                  </button>
+                ) : can(user, "read:products") || can(user, "read:") ? (
+                  <button
+                    onClick={() => solicitarPermiso()}
+                    className="btn-secondary w-full"
+                  >
+                    Solicitar acceso
+                  </button>
+                ) : (
+                  <button disabled className="btn-disabled w-full">
+                    No tienes permisos
+                  </button>
+                )
+              ) : (
+                <p>No tienes permiso</p>
+              )} */}
+              {/* si es el el dueño de el producto y tiene los permisos contactar:products y red:superheros*/}
+              {(product.seller.username === user.username ||
+                (can(user, "contactar:products") &&
+                  can(user, "all:permiso"))) && (
+                <>
+                  <div className="mt-3">
+                    <Link
+                      to={`/edit-product/${product._id}`}
+                      className="btn-secondary flex items-center"
+                    >
+                      <FaEdit className="mr-2" /> Editar
+                    </Link>
+                  </div>
+                  <div className="mt-3">
+                    <button
+                      className="btn-red flex items-center"
+                      onClick={() => deleteproductid(`${product._id}`)}
+                    >
+                      <FaEdit className="mr-2" /> Eliminar Publicación
+                    </button>
+                  </div>
+                </>
+              )}
+              {/* {product.seller.username === user.username && (
                 <div className="mt-3">
                   <Link
                     to={`/edit-product/${product._id}`}
@@ -192,7 +242,7 @@ const ProductDetailPage = () => {
                     <FaEdit className="mr-2" /> Eliminar Publicacion
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
