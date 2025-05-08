@@ -24,7 +24,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 const ProtectedRoute = () => {
-  const { isAuthenticated, isLoading } = useAuth()
+  const { isAuthenticated, isLoading, user } = useAuth()
 
   // Show loading state while checking authentication
   if (isLoading) {
@@ -36,7 +36,10 @@ const ProtectedRoute = () => {
   }
 
   // If not authenticated, redirect to login
-  if (!isAuthenticated) {
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" replace />
+  // }
+  if (!user) {
     return <Navigate to="/login" replace />
   }
 

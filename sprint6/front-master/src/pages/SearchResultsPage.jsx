@@ -1,60 +1,127 @@
-// src/pages/SearchResultsPage.jsx
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { FaSearch } from 'react-icons/fa'  // opcional, sólo si quieres mostrar un ícono en el título
-import { useProducts } from '../context/ProductsContext'
-import ProductGrid from '../components/ProductGrid'
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+import { useProducts } from "../context/ProductsContext";
+import ProductGrid from "../components/ProductGrid";
 
 const SearchResultsPage = () => {
-  const [searchParams] = useSearchParams()
-  const { products, isLoading } = useProducts()
-  const [results, setResults] = useState([])
+  const [searchParams] = useSearchParams();
+  const { products, isLoading } = useProducts();
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
-    const term = (searchParams.get('q') || '').trim().toLowerCase()
-    if (term) {
-      setResults(
-        products.filter((p) =>
-          p.name?.toLowerCase().includes(term)
-        )
-      )
-    } else {
-      setResults(products)
-    }
-  }, [products, searchParams])
+    // Obtener los parámetros de búsqueda
+    const term = (searchParams.get("q") || "").trim().toLowerCase();
+    const category = (searchParams.get("category") || "").trim().toLowerCase();
+
+    // Filtrar productos por nombre y/o categoría
+    setResults(
+      products.filter((p) => {
+        const matchesName = term
+          ? p.name?.toLowerCase().includes(term)
+          : true;
+
+        const matchesCategory = category
+          ? p.category?.toLowerCase() === category
+          : true;
+
+        return matchesName && matchesCategory;
+      })
+    );
+  }, [products, searchParams]);
 
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
       </div>
-    )
+    );
   }
 
-  const term = searchParams.get('q') || ''
+  // Obtener parámetros de búsqueda para mostrar en la UI
+  const term = searchParams.get("q") || "";
+  const category = searchParams.get("category") || "";
 
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4 flex items-center">
         <FaSearch className="mr-2 text-gray-600" />
-        {term
-          ? `Resultados para "${term}"`
+        {term || category
+          ? `Resultados para "${term}" en categoría "${category}"`
           : `Todos los productos (${results.length})`}
       </h2>
 
       <ProductGrid
         products={results}
         emptyMessage={
-          term
-            ? `No se encontraron productos que coincidan con "${term}".`
-            : 'No hay productos disponibles.'
+          term || category
+            ? `No se encontraron productos que coincidan con "${term}" en la categoría "${category}".`
+            : "No hay productos disponibles."
         }
       />
     </div>
-  )
-}
+  );
+};
 
-export default SearchResultsPage
+export default SearchResultsPage;
+
+// // src/pages/SearchResultsPage.jsx
+// import { useState, useEffect } from 'react'
+// import { useSearchParams } from 'react-router-dom'
+// import { FaSearch } from 'react-icons/fa'  // opcional, sólo si quieres mostrar un ícono en el título
+// import { useProducts } from '../context/ProductsContext'
+// import ProductGrid from '../components/ProductGrid'
+
+// const SearchResultsPage = () => {
+//   const [searchParams] = useSearchParams()
+//   const { products, isLoading } = useProducts()
+//   const [results, setResults] = useState([])
+
+//   useEffect(() => {
+//     const term = (searchParams.get('q') || '').trim().toLowerCase()
+//     if (term) {
+//       setResults(
+//         products.filter((p) =>
+//           p.name?.toLowerCase().includes(term)
+//         )
+//       )
+//     } else {
+//       setResults(products)
+//     }
+//   }, [products, searchParams])
+
+//   if (isLoading) {
+//     return (
+//       <div className="flex justify-center items-center h-64">
+//         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
+//       </div>
+//     )
+//   }
+
+//   const term = searchParams.get('q') || ''
+
+//   return (
+//     <div className="p-4">
+//       <h2 className="text-2xl font-bold mb-4 flex items-center">
+//         <FaSearch className="mr-2 text-gray-600" />
+//         {term
+//           ? `Resultados para "${term}"`
+//           : `Todos los productos (${results.length})`}
+//       </h2>
+
+//       <ProductGrid
+//         products={results}
+//         emptyMessage={
+//           term
+//             ? `No se encontraron productos que coincidan con "${term}".`
+//             : 'No hay productos disponibles.'
+//         }
+//       />
+//     </div>
+//   )
+// }
+
+// export default SearchResultsPage
 
 
 // import { useState, useEffect } from 'react'

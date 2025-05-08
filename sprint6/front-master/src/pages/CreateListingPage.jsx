@@ -14,11 +14,8 @@ const CreateListingPage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState("");
-  // const [category, setCategory] = useState('')
-  // const [condition, setCondition] = useState('')
-  // const [location, setLocation] = useState('')
+  const [category, setCategory] = useState('')
   const [image, setImage] = useState([]);
-  // const [imageUrls, setImageUrls] = useState([]);
   const [errors, setErrors] = useState({});
 
   // const validateForm = () => {
@@ -49,10 +46,8 @@ const CreateListingPage = () => {
       name,
       description,
       price: parseFloat(price), // Asegúrate de que el precio sea un número
-      // category,
-      // condition,
-      // location,
-      image // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
+      image, // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
+      category
       // userId: currentUser.id, // Incluye el ID del usuario actual si es necesario
     };
 
@@ -86,7 +81,7 @@ const CreateListingPage = () => {
           <input
             type="text"
             id="title"
-            className={`input-field ${errors.title ? "border-red-500" : ""}`}
+            className={`input-field text-black${errors.title ? "border-red-500" : ""}`}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="¿Que estas vendiendo?"
@@ -111,7 +106,7 @@ const CreateListingPage = () => {
             id="price"
             min="0"
             step="0.01"
-            className={`input-field ${errors.price ? "border-red-500" : ""}`}
+            className={`input-field text-black${errors.price ? "border-red-500" : ""}`}
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="0.00"
@@ -132,7 +127,7 @@ const CreateListingPage = () => {
           <input
             type="text"
             id="title"
-            className={`input-field ${errors.title ? "border-red-500" : ""}`}
+            className={`input-field text-black ${errors.title ? "border-red-500" : ""}`}
             value={image}
             onChange={(e) => setImage(e.target.value)}
             placeholder="Ingresar URL imagen"
@@ -143,83 +138,35 @@ const CreateListingPage = () => {
             </p>
           )}
         </div>
-
-        {/* Category */}
-        {/* <div className="mb-4">
-          <label htmlFor="category" className="block text-gray-700 font-medium mb-2">
-            Category*
-          </label>
-          <select
-            id="category"
-            className={`input-field ${errors.category ? 'border-red-500' : ''}`}
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+        <div className="mb-4">
+          <label
+            htmlFor="title"
+            className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white':'text-gray-700'}`}
           >
-            <option value="">Select a category</option>
-            {PRODUCT_CATEGORIES.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          {errors.category && (
-            <p className="text-red-500 text-sm mt-1 flex items-center">
-              <FaExclamationCircle className="mr-1" /> {errors.category}
-            </p>
-          )}
-        </div> */}
-
-        {/* Condition */}
-        {/* <div className="mb-4">
-          <label htmlFor="condition" className="block text-gray-700 font-medium mb-2">
-            Condition*
-          </label>
-          <select
-            id="condition"
-            className={`input-field ${errors.condition ? 'border-red-500' : ''}`}
-            value={condition}
-            onChange={(e) => setCondition(e.target.value)}
-          >
-            <option value="">Select condition</option>
-            <option value="New">New</option>
-            <option value="Used - Like New">Used - Like New</option>
-            <option value="Used - Good">Used - Good</option>
-            <option value="Used - Fair">Used - Fair</option>
-          </select>
-          {errors.condition && (
-            <p className="text-red-500 text-sm mt-1 flex items-center">
-              <FaExclamationCircle className="mr-1" /> {errors.condition}
-            </p>
-          )}
-        </div> */}
-
-        {/* Location */}
-        {/* <div className="mb-4">
-          <label htmlFor="location" className="block text-gray-700 font-medium mb-2">
-            Location*
+            Categoria
           </label>
           <input
             type="text"
-            id="location"
-            className={`input-field ${errors.location ? 'border-red-500' : ''}`}
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="City, State"
+            id="title"
+            className={`input-field text-black ${errors.title ? "border-red-500" : ""}`}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            placeholder="Ingresar una categoria"
           />
-          {errors.location && (
+          {errors.title && (
             <p className="text-red-500 text-sm mt-1 flex items-center">
-              <FaExclamationCircle className="mr-1" /> {errors.location}
+              <FaExclamationCircle className="mr-1" /> {errors.title}
             </p>
           )}
-        </div> */}
-
-        {/* Description */}
+        </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block text-gray-700 font-medium mb-2">
+          <label htmlFor="description" className="block font-medium mb-2">
             Description*
           </label>
           <textarea
             id="description"
             rows="4"
-            className={`input-field ${errors.description ? 'border-red-500' : ''}`}
+            className={`input-field text-black ${errors.description ? 'border-red-500' : ''}`}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe your item in detail"
@@ -230,52 +177,6 @@ const CreateListingPage = () => {
             </p>
           )}
         </div>
-
-        {/* <div className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">
-            Photos* (max 5)
-          </label>
-          
-          <div className="flex flex-wrap gap-3 mb-2">
-            {imageUrls.map((url, index) => (
-              <div key={index} className="relative w-24 h-24">
-                <img
-                  src={url}
-                  alt={`Preview ${index + 1}`}
-                  className="w-24 h-24 object-cover rounded-lg"
-                />
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-1 right-1 bg-white text-red-500 rounded-full p-1 shadow-md"
-                >
-                  <FaTrash size={12} />
-                </button>
-              </div>
-            ))}
-            
-            {images.length < 5 && (
-              <label className="w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50">
-                <FaUpload className="text-gray-400 mb-1" />
-                <span className="text-xs text-gray-500">Add Photo</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleImageChange}
-                />
-              </label>
-            )}
-          </div>
-          
-          {errors.images && (
-            <p className="text-red-500 text-sm mt-1 flex items-center">
-              <FaExclamationCircle className="mr-1" /> {errors.images}
-            </p>
-          )}
-        </div> */}
-
-        {/* Submit button */}
         <div className="mt-6">
           <button type="submit" className="btn-primary w-full">
             Publicar Producto

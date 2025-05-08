@@ -57,13 +57,6 @@ const ProductDetailPage = () => {
     }
   };
 
-  const toggleSave = () => {
-    if (!isAuthenticated) {
-      navigate("/login");
-      return;
-    }
-    toggleSaveProduct(product.id);
-  };
 
   if (isLoading || !product) {
     return (
@@ -72,8 +65,7 @@ const ProductDetailPage = () => {
       </div>
     );
   }
-  const isSaved = isProductSaved(product.id);
-  const isOwnProduct = currentUser && currentUser.id === product.seller;
+
 
   return (
     <div className={`min-h-screen ${theme === "dark" ? "text-white" : ""}`}>
@@ -93,7 +85,7 @@ const ProductDetailPage = () => {
       </div>
 
       <div
-        className={`container mx-auto p-4 ${
+        className={`container mx-auto p-4 rounded-lg ${
           theme === "dark" ? "bg-gray-800" : ""
         }`}
       >
@@ -106,8 +98,6 @@ const ProductDetailPage = () => {
               className="w-full h-80 md:h-96 object-cover"
             />
           </div>
-
-          {/* Product details */}
           <div className="md:w-1/2 p-6">
             <div
               className={`flex items-center justify-between ${
@@ -121,36 +111,23 @@ const ProductDetailPage = () => {
               >
                 {product.name}
               </h1>
-              <button onClick={toggleSave} className="text-xl">
-                {/* {isSaved ? (
-                  <FaBookmark className="text-fb-blue" />
-                ) : (
-                  <FaRegBookmark />
-                )} */}
-              </button>
+
             </div>
-
-            {/* <p className="text-2xl font-bold text-fb-blue mt-2">${product.price}</p> */}
-
+            <p className="text-2xl font-bold text-fb-blue mt-2">${product.price}</p>
             <div
               className={`mt-4 space-y-2  ${
                 theme === "dark" ? "text-white" : "text-gray-600"
               }`}
             >
               <div className="flex items-center">
-                <FaMapMarkerAlt className="mr-2" />
-                {/* <span>{product.location}</span> */}
-              </div>
-              <div className="flex items-center">
                 <FaTags className="mr-2" />
-                {/* <span>{product.category}</span> */}
+                <span>{product.category}</span>
               </div>
               <div className="flex items-center">
                 <FaClock className="mr-2" />
                 <span>Listed {formatDate(product.createdAt)}</span>
               </div>
             </div>
-
             <div className="border-t border-b py-4 my-4">
               <h2
                 className={`font-semibold mb-2 ${
@@ -172,10 +149,9 @@ const ProductDetailPage = () => {
                 </span>
               </div>
             </div>
-
             <div className="flex items-center mt-4">
               <img
-                // src={seller.avatar}
+                src={user.avatar}
                 // alt={seller.name}
                 className="w-10 h-10 rounded-full mr-3"
               />
@@ -184,7 +160,6 @@ const ProductDetailPage = () => {
                 <p className="text-sm text-gray-500">Vendedor</p>
               </div>
             </div>
-
             <div className="mt-6">
               {user && can(user, "read:products") ? (
                 <button
@@ -198,16 +173,6 @@ const ProductDetailPage = () => {
                   No tienes Permisos
                 </button>
               )}
-              {/* {isOwnProduct ? (
-                <div className="text-gray-500 italic">This is your listing</div>
-              ) : (
-                <button 
-                  onClick={() => setIsMessageModalOpen(true)} 
-                  className="btn-primary w-full"
-                >
-                  Message Seller
-                </button>
-              )} */}
               {product.seller.username === user.username && (
                 <div className="mt-3">
                   <Link
@@ -221,7 +186,6 @@ const ProductDetailPage = () => {
               {product.seller.username === user.username && (
                 <div className="mt-3">
                   <Link
-                    // to={`/edit-product/${product._id}`}
                     className="btn-red flex items-center"
                     onClick={() => deleteproductid(`${product._id}`)}
                   >
@@ -233,7 +197,6 @@ const ProductDetailPage = () => {
           </div>
         </div>
       </div>
-
       {/* Message modal */}
       {isMessageModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -258,7 +221,6 @@ const ProductDetailPage = () => {
                   <p className="text-fb-blue font-bold">${product.price}</p>
                 </div>
               </div>
-
               <textarea
                 className={`w-full  border rounded-lg p-3 focus:ring focus:ring-fb-blue focus:ring-opacity-50 ${
                   theme === "dark" ? "bg-slate-700" : "bg-slate-300"
@@ -268,7 +230,6 @@ const ProductDetailPage = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
-
               <div className="flex justify-end mt-4 space-x-3">
                 <button
                   onClick={() => setIsMessageModalOpen(false)}

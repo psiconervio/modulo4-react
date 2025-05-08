@@ -57,19 +57,14 @@ export const ProductsProvider = ({ children }) => {
   // Save or unsave a product
   const toggleSaveProduct = (productId) => {
     let updatedSavedItems = [...savedItems];
-
     if (savedItems.includes(productId)) {
       updatedSavedItems = savedItems.filter((id) => id !== productId);
     } else {
       updatedSavedItems.push(productId);
     }
-
     setSavedItems(updatedSavedItems);
     localStorage.setItem("savedItems", JSON.stringify(updatedSavedItems));
   };
-  //  const saveproduct =(product) =>{
-
-  //  }
   // Check if a product is saved
   const isProductSaved = (productId) => {
     return savedItems.includes(productId);
@@ -98,24 +93,20 @@ export const ProductsProvider = ({ children }) => {
         ? product.category === filters.category
         : true;
 
-      // Price filtering
-      const matchesPrice = filters.maxPrice
-        ? product.price <= filters.maxPrice
-        : true;
-
-      return matchesSearch && matchesCategory && matchesPrice;
+      return matchesSearch && matchesCategory ;
     });
   };
 
   const value = {
     products,
-    // isLoading,
+    isLoading,
     savedItems,
     toggleSaveProduct,
     isProductSaved,
     getProductById,
     searchProducts,
     deleteproductid,
+    setProducts
   };
 
   return (

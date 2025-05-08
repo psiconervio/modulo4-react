@@ -10,12 +10,9 @@ import { useAuth } from "../context/AuthContext";
 const ProductCard = ({ product }) => {
   const { theme } = useTheme();
   const { user } = useAuth();
-  const { products } = useProducts();
 
   const { toggleSaveProduct, isProductSaved } = useProducts();
-  const seller = getSellerById(product.seller);
   const isSaved = isProductSaved(product._id);
-  const id = product._id;
 
   const handleSaveClick = (e) => {
     e.preventDefault();
@@ -38,7 +35,9 @@ const ProductCard = ({ product }) => {
           />
           <button
             onClick={handleSaveClick}
-            className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md opacity-90 hover:opacity-100"
+            className={`absolute top-2 right-2 rounded-full p-2 shadow-md opacity-90 hover:opacity-100 ${
+              theme === "dark" ? "bg-gray-700" : "bg-gray-200"
+            }`}
           >
             {isSaved ? (
               <FaBookmark className="text-fb-blue" />
@@ -47,7 +46,6 @@ const ProductCard = ({ product }) => {
             )}
           </button>
         </div>
-
         <div className="mt-3">
           <div className="flex justify-between items-start">
             <h3
@@ -79,17 +77,13 @@ const ProductCard = ({ product }) => {
           >
             {product.description}
           </p>
-
           <div
             className={`mt-3 flex items-center text-sm text-gray-600 ${
               theme === "dark" ? "text-white" : ""
             }`}
           >
-            {/* <span>{product.location}</span> */}
             <span className="mx-2">•</span>
-            {/* <span>{product.category}</span> */}
-
-            
+            <span>{product.category}</span>
           </div>
         </div>
       </div>

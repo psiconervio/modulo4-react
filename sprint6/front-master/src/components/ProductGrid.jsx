@@ -1,7 +1,6 @@
 import ProductCard from "./ProductCard";
 import { useTheme } from "../context/ThemeContext";
 
-
 const ProductGrid = ({ products, title, emptyMessage }) => {
   const { theme } = useTheme();
   if (!products || products.length === 0) {
@@ -36,7 +35,7 @@ export default ProductGrid;
 //       </div>
 //     )
 //   }
-  
+
 //   return (
 //     <div>
 //       {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}

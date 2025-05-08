@@ -81,15 +81,17 @@ export const AuthProvider = ({ children }) => {
   const clearAuth = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    // localStorage.removeItem("products");
+    localStorage.removeItem("products");
     delete api.defaults.headers.common["Authorization"];
     setToken(null);
     setUser(null);
+    
   };
 
   const logout = () => {
     clearAuth();
-    navigate("/login");
+    navigate("/");
+    window.location.reload(); // Recarga la página
   };
 
   const value = useMemo(

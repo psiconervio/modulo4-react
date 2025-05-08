@@ -17,7 +17,7 @@ const Sidebar = () => {
           <Link 
             to="/" 
             className={`flex items-center p-2 rounded-lg ${
-              isActive('/') ? 'bg-fb-blue text-white' : 'hover:bg-gray-100'
+              isActive('/') ? 'bg-blue-950 text-white' : 'hover:bg-gray-100'
             }`}
           >
             <FaHome className="mr-3" />
@@ -32,7 +32,7 @@ const Sidebar = () => {
             }`}
           >
             <FaEnvelope className="mr-3" />
-            <span>Messages</span>
+            <span>Mensajes</span>
           </Link>
         </li>
         <li>
@@ -43,7 +43,7 @@ const Sidebar = () => {
             }`}
           >
             <FaBookmark className="mr-3" />
-            <span>Saved Items</span>
+            <span>Productos Guardados</span>
           </Link>
         </li>
         <li>
@@ -54,7 +54,7 @@ const Sidebar = () => {
             }`}
           >
             <FaUser className="mr-3" />
-            <span>Your Listings</span>
+            <span>Perfil</span>
           </Link>
         </li>
         <li className="pt-4">
@@ -63,42 +63,42 @@ const Sidebar = () => {
             className="flex items-center p-2 bg-fb-green text-white rounded-lg hover:bg-green-600"
           >
             <FaPlus className="mr-3" />
-            <span>Create Listing</span>
+            <span>Crear Publicacion</span>
           </Link>
         </li>
       </ul>
       
       <div className="mt-8">
-        <h3 className="font-medium text-gray-500 mb-2">Categories</h3>
+        <h3 className="font-medium text-gray-500 mb-2">Categorias</h3>
         <ul className="space-y-1">
           <li>
-            <Link to="/search?category=Electronics" className="block py-1 hover:text-fb-blue">
-              Electronics
+            <Link to="/search?category=electronicos" className="block py-1 hover:text-fb-blue">
+              Electronicos
             </Link>
           </li>
           <li>
-            <Link to="/search?category=Furniture" className="block py-1 hover:text-fb-blue">
-              Furniture
+            <Link to="/search?category=muebles" className="block py-1 hover:text-fb-blue">
+              Muebles
             </Link>
           </li>
           <li>
-            <Link to="/search?category=Clothing" className="block py-1 hover:text-fb-blue">
-              Clothing
+            <Link to="/search?category=ropa" className="block py-1 hover:text-fb-blue">
+              Ropa
             </Link>
           </li>
           <li>
-            <Link to="/search?category=Vehicles" className="block py-1 hover:text-fb-blue">
-              Vehicles
+            <Link to="/search?category=vehiculos" className="block py-1 hover:text-fb-blue">
+              Vehiculos
             </Link>
           </li>
           <li>
-            <Link to="/search?category=Sports & Outdoors" className="block py-1 hover:text-fb-blue">
-              Sports & Outdoors
+            <Link to="/search?category=deportes" className="block py-1 hover:text-fb-blue">
+              Deportes
             </Link>
           </li>
           <li>
             <Link to="/search" className="block py-1 text-fb-blue font-medium">
-              See All Categories
+              Ver todo
             </Link>
           </li>
         </ul>

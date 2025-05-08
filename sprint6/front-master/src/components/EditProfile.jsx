@@ -67,7 +67,7 @@ const EditProfile = () => {
             {...register("name", { required: "El nombre es obligatorio" })}
             type="text"
             id="name"
-            className={`input-field ${errors.name ? "border-red-500" : ""}`}
+            className={`input-field text-black${errors.name ? "border-red-500" : ""}`}
             placeholder="Tu nombre"
           />
           {errors.name && (
@@ -97,7 +97,7 @@ const EditProfile = () => {
             })}
             type="email"
             id="email"
-            className={`input-field ${errors.email ? "border-red-500" : ""}`}
+            className={`input-field text-black ${errors.email ? "border-red-500" : ""}`}
             placeholder="Tu correo electrónico"
           />
           {errors.email && (
@@ -126,7 +126,7 @@ const EditProfile = () => {
             })}
             type="password"
             id="password"
-            className={`input-field ${errors.password ? "border-red-500" : ""}`}
+            className={`input-field text-black${errors.password ? "border-red-500" : ""}`}
             placeholder="Deja en blanco para no cambiarla"
           />
           {errors.password && (
