@@ -23,7 +23,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        setValue("name", user.name);
+        setValue("username", user.username);
         setValue("email", user.email);
       } catch (error) {
         console.error("Error al cargar el perfil:", error);
@@ -37,7 +37,7 @@ const EditProfile = () => {
   const onSubmit = async (data) => {
     try {
       await updateUser(id || user._id, data); // Actualiza el perfil
-      console.log("Perfil actualizado correctamente");
+      console.log("Perfil actualizado correctamente data:", data);
       navigate("/profile"); // Redirige al perfil del usuario
     } catch (error) {
       console.error("Error al actualizar el perfil:", error);
@@ -64,15 +64,15 @@ const EditProfile = () => {
             Nombre*
           </label>
           <input
-            {...register("name", { required: "El nombre es obligatorio" })}
+            {...register("username", { required: "El nombre de usuario es obligatorio" })}
             type="text"
             id="name"
-            className={`input-field text-black${errors.name ? "border-red-500" : ""}`}
+            className={`input-field text-black${errors.username ? "border-red-500" : ""}`}
             placeholder="Tu nombre"
           />
-          {errors.name && (
+          {errors.username && (
             <p className="text-red-500 text-sm mt-1 flex items-center">
-              <FaExclamationCircle className="mr-1" /> {errors.name.message}
+              <FaExclamationCircle className="mr-1" /> {errors.username.message}
             </p>
           )}
         </div>

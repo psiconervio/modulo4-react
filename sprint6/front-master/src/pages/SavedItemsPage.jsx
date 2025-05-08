@@ -28,17 +28,6 @@ const SavedItemsPage = () => {
     }
   }, [products, savedItems, isLoading]);
     
-  // useEffect(() => {
-  //   if (!isLoading && products.length > 0) {
-  //     console.log("Products:", products);
-  //     console.log("Saved Items:", savedItems);
-  
-  //     // const saved = products.filter(product => savedItems.includes(product.id))
-  //     const saved = products.filter(product => savedItems.includes(String(product.id)));
-  //     console.log('save', saved)
-  //     setSavedProducts(saved)
-  //   }
-  // }, [products, savedItems, isLoading])
   
   if (isLoading) {
     return (
@@ -50,16 +39,16 @@ const SavedItemsPage = () => {
   
   if (savedProducts.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md p-8 text-center">
+      <div className="bg-gray-800/50 rounded-lg shadow-md p-8 text-center">
         <div className="text-fb-blue text-6xl mb-4">
           <FaBookmark />
         </div>
-        <h2 className="text-2xl font-bold mb-2">No saved items yet</h2>
-        <p className="text-gray-600 mb-6">
-          Save items you're interested in to view them later.
+        <h2 className="text-2xl font-bold mb-2">No tienes Publicaciones Guardadas</h2>
+        <p className="text-gray-400 mb-6">
+          Guarda tus Publicaciones para verlas despues
         </p>
         <Link to="/" className="btn-primary inline-block">
-          Browse Marketplace
+          Buscar en Marketplace
         </Link>
       </div>
     )

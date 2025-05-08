@@ -53,6 +53,7 @@ const initialRoles = [
     name: "admin",
     description: "Administrador del sistema",
     permissions: [
+      "all:permiso",
       "read:products",
       "create:products",
       "update:products",

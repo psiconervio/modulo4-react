@@ -19,12 +19,13 @@ export const apiss = async () => {
 //login y register
 export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const registerUser = async (userData) => api.post("/auth/register", userData);
+export const updateUser = async (id) => api.put(`auth/users/${id}`);
+
 
 
 export const getProducts = async (credentials) => api.get("/products",credentials);
 export const getProductById = async (id) => api.get(`/products/${id}`);
 export const getUserById = async (id) => api.get(`/users/${id}`);
-export const updateUser = async (id) => api.put(`auth/users/${id}`);
 export const getUserProducts = async (userId) => api.get(`/users/${userId}/products`);
 export const createProduct = async (productData) => api.post("/products", productData);
 export const updateProduct = async (id, productData) => api.put(`/products/${id}`, productData);

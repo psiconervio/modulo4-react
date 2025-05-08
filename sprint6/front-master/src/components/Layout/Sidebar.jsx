@@ -17,7 +17,7 @@ const Sidebar = () => {
           <Link 
             to="/" 
             className={`flex items-center p-2 rounded-lg ${
-              isActive('/') ? 'bg-blue-950 text-white' : 'hover:bg-gray-100'
+              isActive('/') ? 'bg-fb-blue text-white' : 'hover:bg-gray-600'
             }`}
           >
             <FaHome className="mr-3" />
@@ -28,7 +28,7 @@ const Sidebar = () => {
           <Link 
             to="/messages" 
             className={`flex items-center p-2 rounded-lg ${
-              isActive('/messages') ? 'bg-fb-blue text-white' : 'hover:bg-gray-100'
+              isActive('/messages') ? 'bg-fb-blue text-white' : 'hover:bg-gray-600'
             }`}
           >
             <FaEnvelope className="mr-3" />
@@ -39,7 +39,7 @@ const Sidebar = () => {
           <Link 
             to="/saved" 
             className={`flex items-center p-2 rounded-lg ${
-              isActive('/saved') ? 'bg-fb-blue text-white' : 'hover:bg-gray-100'
+              isActive('/saved') ? 'bg-fb-blue text-white' : 'hover:bg-gray-600'
             }`}
           >
             <FaBookmark className="mr-3" />
@@ -50,7 +50,7 @@ const Sidebar = () => {
           <Link 
             to="/profile" 
             className={`flex items-center p-2 rounded-lg ${
-              isActive('/profile') ? 'bg-fb-blue text-white' : 'hover:bg-gray-100'
+              isActive('/profile') ? 'bg-fb-blue text-white' : 'hover:bg-gray-600'
             }`}
           >
             <FaUser className="mr-3" />

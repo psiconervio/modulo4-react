@@ -12,34 +12,33 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditProduct from "./components/EditProduct";
 import RegisterPage from "./pages/RegisterPage";
-import  EditProfile  from "./components/EditProfile";
+import EditProfile from "./components/EditProfile";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage/>}/>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-
-        {/* Protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="product/:id" element={<ProductDetailPage />} />
-          <Route path="edit-product/:id" element={<EditProduct />} />
-          <Route path="edit-profile/:id" element={<EditProfile />} />
-          <Route path="search" element={<SearchResultsPage />} />
-
-          <Route path="messages" element={<MessagesPage />} />
-          <Route path="messages/:userId" element={<MessagesPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="saved" element={<SavedItemsPage />} />
-          <Route path="create-listing" element={<CreateListingPage />} />
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="product/:id" element={<ProductDetailPage />} />
+            <Route path="edit-product/:id" element={<EditProduct />} />
+            <Route path="edit-profile/:id" element={<EditProfile />} />
+            <Route path="search" element={<SearchResultsPage />} />
+            <Route path="messages" element={<MessagesPage />} />
+            <Route path="messages/:userId" element={<MessagesPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="saved" element={<SavedItemsPage />} />
+            <Route path="create-listing" element={<CreateListingPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
-
-        {/* 404 page */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 

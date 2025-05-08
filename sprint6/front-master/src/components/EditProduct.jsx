@@ -30,17 +30,16 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (validateForm()) {
-    //   console.log()
-    //   navigate('/')
-    // }
+    if (validateForm()) {
+      console.log()
+      navigate('/')
+    }
     const productData = {
       name,
       description,
       price: parseFloat(price), // Asegúrate de que el precio sea un número
       image, // Aquí puedes enviar las imágenes como URLs o archivos, según tu backend
       category
-      // userId: currentUser.id, // Incluye el ID del usuario actual si es necesario
     };
     console.log(productData);
     try {
