@@ -161,72 +161,72 @@ export const MOCK_PRODUCTS = [
   },
 ];
 
-// Mock message conversations
-export const MOCK_MESSAGES = [
-  {
-    id: "conv1",
-    participants: ["user1", "user2"],
-    messages: [
-      {
-        id: "msg1",
-        sender: "user1",
-        content: "Hi, is the record player still available?",
-        timestamp: "2023-10-16T13:30:00Z",
-        productId: "product1",
-      },
-      {
-        id: "msg2",
-        sender: "user2",
-        content: "Yes, it is! Are you interested in seeing it?",
-        timestamp: "2023-10-16T13:45:00Z",
-        productId: "product1",
-      },
-      {
-        id: "msg3",
-        sender: "user1",
-        content: "Definitely. Does it have any issues I should know about?",
-        timestamp: "2023-10-16T14:00:00Z",
-        productId: "product1",
-      },
-      {
-        id: "msg4",
-        sender: "user2",
-        content: "It works perfectly. Just minor cosmetic wear on the case.",
-        timestamp: "2023-10-16T14:15:00Z",
-        productId: "product1",
-      },
-    ],
-    lastUpdated: "2023-10-16T14:15:00Z",
-  },
-  {
-    id: "conv2",
-    participants: ["user1", "user3"],
-    messages: [
-      {
-        id: "msg5",
-        sender: "user1",
-        content: "Is the sofa still for sale?",
-        timestamp: "2023-10-21T09:30:00Z",
-        productId: "product2",
-      },
-      {
-        id: "msg6",
-        sender: "user3",
-        content: "Yes it is! When would you like to come see it?",
-        timestamp: "2023-10-21T10:45:00Z",
-        productId: "product2",
-      },
-      {
-        id: "msg7",
-        sender: "user1",
-        content: "Would tomorrow afternoon work?",
-        timestamp: "2023-10-21T11:00:00Z",
-        productId: "product2",
-      },
-    ],
-    lastUpdated: "2023-10-21T11:00:00Z",
-  },
-];
+  // Mock message conversations
+  export const MOCK_MESSAGES = [
+    {
+      id: "conv1",
+      participants: ["user1", "user2"],
+      messages: [
+        {
+          id: "msg1",
+          sender: "user1",
+          content: "Hi, is the record player still available?",
+          timestamp: "2023-10-16T13:30:00Z",
+          productId: "product1",
+        },
+        {
+          id: "msg2",
+          sender: "user2",
+          content: "Yes, it is! Are you interested in seeing it?",
+          timestamp: "2023-10-16T13:45:00Z",
+          productId: "product1",
+        },
+        {
+          id: "msg3",
+          sender: "user1",
+          content: "Definitely. Does it have any issues I should know about?",
+          timestamp: "2023-10-16T14:00:00Z",
+          productId: "product1",
+        },
+        {
+          id: "msg4",
+          sender: "user2",
+          content: "It works perfectly. Just minor cosmetic wear on the case.",
+          timestamp: "2023-10-16T14:15:00Z",
+          productId: "product1",
+        },
+      ],
+      lastUpdated: "2023-10-16T14:15:00Z",
+    },
+    {
+      id: "conv2",
+      participants: ["user1", "user3"],
+      messages: [
+        {
+          id: "msg5",
+          sender: "user1",
+          content: "Is the sofa still for sale?",
+          timestamp: "2023-10-21T09:30:00Z",
+          productId: "product2",
+        },
+        {
+          id: "msg6",
+          sender: "user3",
+          content: "Yes it is! When would you like to come see it?",
+          timestamp: "2023-10-21T10:45:00Z",
+          productId: "product2",
+        },
+        {
+          id: "msg7",
+          sender: "user1",
+          content: "Would tomorrow afternoon work?",
+          timestamp: "2023-10-21T11:00:00Z",
+          productId: "product2",
+        },
+      ],
+      lastUpdated: "2023-10-21T11:00:00Z",
+    },
+  ];
 
 // Mock categories
 export const PRODUCT_CATEGORIES = [

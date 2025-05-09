@@ -12,7 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 const MessagesPage = () => {
   const { userId } = useParams()
   const navigate = useNavigate()
-  const { currentUser } = useAuth()
+  const { currentUser, user } = useAuth()
   const { conversations, isLoading, getConversation, sendMessage } = useMessages()
   const { getProductById } = useProducts()
   
@@ -81,7 +81,7 @@ const MessagesPage = () => {
                 <ConversationItem
                   key={conversation.id}
                   conversation={conversation}
-                  currentUserId={currentUser.id}
+                  currentUserId={user.id}
                   onClick={handleSelectConversation}
                   isActive={activeConversation?.id === conversation.id}
                 />
@@ -122,7 +122,7 @@ const MessagesPage = () => {
                   <MessageItem 
                     key={message.id}
                     message={message}
-                    currentUserId={currentUser.id}
+                    currentUserId={user._id}
                     showProduct={index === 0}
                   />
                 ))}

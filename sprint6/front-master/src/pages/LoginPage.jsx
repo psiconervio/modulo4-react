@@ -5,6 +5,7 @@ import { FaShoppingCart, FaExclamationCircle } from "react-icons/fa";
 import { MOCK_USERS } from "../data/mockData";
 import { useForm } from "react-hook-form";
 import { useTheme } from "../context/ThemeContext";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const {
@@ -26,19 +27,17 @@ const LoginPage = () => {
     }
   };
   const onSubmit = async (data) => {
-    const success = await login(data.email, data.password);
-    // console.log(success);
-    if (success) {
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "Bienvenido",
-      //   text: "Has iniciado sesión correctamente.",
-      // });
+    try {
+      await login(data.email, data.password);
+      toast.success("Bienvenido de nuevo!");
       navigate("/");
-    } else {
-      setError("Invalid email or password.");
+    } catch (error) {
+      const backendMessage =
+        error?.response?.data?.message || "Error al iniciar sesión";
+      setError(backendMessage);
     }
   };
+
   return (
     <div
       className={`min-h-screen flex flex-col justify-center items-center p-4 ${
@@ -95,7 +94,9 @@ const LoginPage = () => {
               placeholder="Introduce tu correo electrónico"
             />
             {errors.email && (
-              <span className="text-red-500">{errors.email.message}</span>
+              <span className="text-red-500 text-xl mt-1">
+                {errors.email.message}error
+              </span>
             )}
           </div>
           <div className="mb-6">
@@ -114,7 +115,9 @@ const LoginPage = () => {
               placeholder="Introduce tu contraseña"
             />
             {errors.password && (
-              <span className="text-red-500">{errors.password.message}</span>
+              <span className="text-red-500 text-xl mt-1">
+                {errors.password.message}
+              </span>
             )}
           </div>
           <button type="submit" className="btn-primary w-full mb-4">

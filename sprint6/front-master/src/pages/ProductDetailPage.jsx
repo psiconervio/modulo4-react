@@ -21,8 +21,8 @@ const ProductDetailPage = () => {
   const {
     getProductById,
     isLoading,
-    toggleSaveProduct,
-    isProductSaved,
+    // toggleSaveProduct,
+    // isProductSaved,
     deleteproductid,
   } = useProducts();
   const { startProductConversation } = useMessages();
@@ -52,11 +52,11 @@ const ProductDetailPage = () => {
   }, [id, isLoading, getProductById, navigate]);
 
   const handleSendMessage = () => {
-    if (!isAuthenticated) {
+    if (!user) {
       navigate("/login");
       return;
     }
-    if (message.trim() && product && seller) {
+    if (message.trim() && product && user) {
       startProductConversation(user._id, message, product);
       navigate("/messages/" + user._id);
     }
@@ -160,7 +160,7 @@ const ProductDetailPage = () => {
                 className="w-10 h-10 rounded-full mr-3"
               />
               <div>
-                <p className="font-medium">{product.seller.username}</p>
+                <p className="font-medium">{product.seller?.username || "No hay un vendedor"}</p>
                 <p className="text-sm text-gray-500">Vendedor</p>
               </div>
             </div>
@@ -177,30 +177,6 @@ const ProductDetailPage = () => {
                   No tienes Permisos
                 </button>
               )}
-              {/* {user ? (
-                can(user, "read:products") ? (
-                  <button
-                    onClick={() => setIsMessageModalOpen(true)}
-                    className="btn-primary w-full"
-                  >
-                    Contactar vendedor
-                  </button>
-                ) : can(user, "read:products") || can(user, "read:") ? (
-                  <button
-                    onClick={() => solicitarPermiso()}
-                    className="btn-secondary w-full"
-                  >
-                    Solicitar acceso
-                  </button>
-                ) : (
-                  <button disabled className="btn-disabled w-full">
-                    No tienes permisos
-                  </button>
-                )
-              ) : (
-                <p>No tienes permiso</p>
-              )} */}
-              {/* si es el el dueño de el producto y tiene los permisos contactar:products y red:superheros*/}
               {(product.seller.username === user.username ||
                 (can(user, "contactar:products") &&
                   can(user, "all:permiso"))) && (
@@ -223,26 +199,6 @@ const ProductDetailPage = () => {
                   </div>
                 </>
               )}
-              {/* {product.seller.username === user.username && (
-                <div className="mt-3">
-                  <Link
-                    to={`/edit-product/${product._id}`}
-                    className="btn-secondary flex items-center"
-                  >
-                    <FaEdit className="mr-2" /> Editar
-                  </Link>
-                </div>
-              )}
-              {product.seller.username === user.username && (
-                <div className="mt-3">
-                  <Link
-                    className="btn-red flex items-center"
-                    onClick={() => deleteproductid(`${product._id}`)}
-                  >
-                    <FaEdit className="mr-2" /> Eliminar Publicacion
-                  </Link>
-                </div>
-              )} */}
             </div>
           </div>
         </div>
@@ -258,7 +214,6 @@ const ProductDetailPage = () => {
             <div className="p-4 border-b">
               <h2 className="font-bold text-lg">Enviar Mensaje al Vendedor</h2>
             </div>
-
             <div className="p-4">
               <div className="flex items-center mb-4">
                 <img

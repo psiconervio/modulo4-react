@@ -80,7 +80,7 @@ class AuthService {
     const token = this.generateToken(user);
     return { user: userResponse, token };
   }
-  
+
   async updateUser(userId, updateData) {
     // Buscamos el usuario por ID
     const user = await User.findById(userId).populate("role");
@@ -111,6 +111,28 @@ class AuthService {
     // Generamos un nuevo token y retornamos la respuesta
     const token = this.generateToken(user);
     return { user: userResponse, token };
+  }
+
+  // Método para eliminar un usuario
+  async deleteUser(userId) {
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("Usuario no encontrado");
+    }
+
+    await User.findByIdAndDelete(userId);
+    return { message: "Usuario eliminado correctamente" };
+  }
+  async getAllUsers() {
+    // Obtenemos todos los usuarios de la base de datos
+    const users = await User.find().populate("role");
+    // Convertimos los documentos mongoose a objetos planos y eliminamos las contraseñas
+    const usersResponse = users.map((user) => {
+      const userResponse = user.toObject();
+      delete userResponse.password;
+      return userResponse;
+    });
+    return usersResponse;
   }
 
   // Método auxiliar para generar tokens JWT

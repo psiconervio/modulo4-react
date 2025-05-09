@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('')
 
   const login = async (email, password) => {
     try {
@@ -45,6 +46,9 @@ export const AuthProvider = ({ children }) => {
       setUser(rawUser);
       return rawUser;
     } catch (error) {
+      const backendMessage =
+        error.response?.data?.message || "Error al iniciar sesión";
+      setError(backendMessage); // Esto sí se muestra en pantalla
       console.error("Login failed:", error.response || error);
       throw error;
     } finally {
@@ -85,7 +89,6 @@ export const AuthProvider = ({ children }) => {
     delete api.defaults.headers.common["Authorization"];
     setToken(null);
     setUser(null);
-    
   };
 
   const logout = () => {
