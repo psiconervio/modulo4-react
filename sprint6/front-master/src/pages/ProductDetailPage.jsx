@@ -51,17 +51,19 @@ const ProductDetailPage = () => {
     }
   }, [id, isLoading, getProductById, navigate]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!user) {
       navigate("/login");
       return;
     }
-    if (message.trim() && product && user) {
-      startProductConversation(user._id, message, product);
-      navigate("/messages/" + user._id);
-    }
-  };
 
+    if (!message.trim()) return;
+    if (!product?.seller?._id) return;
+
+    console.log("handleSendMessage", message, product, user);
+    await startProductConversation(product.seller._id, message, product);
+    navigate("/messages/" + product.seller._id);
+  };
   if (isLoading || !product) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -160,18 +162,22 @@ const ProductDetailPage = () => {
                 className="w-10 h-10 rounded-full mr-3"
               />
               <div>
-                <p className="font-medium">{product.seller?.username || "No hay un vendedor"}</p>
+                <p className="font-medium">
+                  {product.seller?.username || "No hay un vendedor"}
+                </p>
                 <p className="text-sm text-gray-500">Vendedor</p>
               </div>
             </div>
             <div className="mt-6">
               {user && can(user, "contactar:products") ? (
-                <button
-                  onClick={() => setIsMessageModalOpen(true)}
-                  className="btn-primary w-full"
-                >
-                  Contactar vendedor
-                </button>
+                <Link to={`/messages/${product._id}`}>
+                  <button
+                    // onClick={() => setIsMessageModalOpen(true)}
+                    className="btn-primary w-full"
+                  >
+                    Contactar vendedor
+                  </button>
+                </Link>
               ) : (
                 <button className="btn-primary w-full">
                   No tienes Permisos

@@ -29,8 +29,8 @@ function App() {
             <Route path="edit-product/:id" element={<EditProduct />} />
             <Route path="edit-profile/:id" element={<EditProfile />} />
             <Route path="search" element={<SearchResultsPage />} />
-            <Route path="messages" element={<MessagesPage />} />
-            <Route path="messages/:userId" element={<MessagesPage />} />
+            {/* <Route path="messages" element={<MessagesPage />} /> */}
+            <Route path="messages/:productId" element={<MessagesPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="saved" element={<SavedItemsPage />} />
             <Route path="create-listing" element={<CreateListingPage />} />

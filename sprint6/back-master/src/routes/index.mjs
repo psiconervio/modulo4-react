@@ -1,11 +1,13 @@
-import express from 'express';
-import superheroRouter from './superheroRouter.mjs';
-import authRouter from './authRouter.mjs';
+import express from "express";
+import superheroRouter from "./superheroRouter.mjs";
+import authRouter from "./authRouter.mjs";
+import chatRoutes from "./ChatRouter.mjs"; // Importar las rutas de chat
 
 const router = express.Router();
+router.use("/messages", chatRoutes);
 
-router.use('/superheros', superheroRouter);
-router.use('/auth', authRouter);
+router.use("/superheros", superheroRouter);
+router.use("/auth", authRouter);
 
 export default router;
 // const express = require('express');

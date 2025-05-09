@@ -1,23 +1,40 @@
 import ChatMessage from '../models/ChatMessage.mjs';
 
 class ChatService {
-    // Guardar un mensaje en la base de datos
-    async saveMessage(productId, senderId, message) {
-        const chatMessage = new ChatMessage({
-            product: productId,
-            sender: senderId,
-            message,
-        });
-        await chatMessage.save();
-        return chatMessage;
-    }
+  // Crear y guardar un nuevo mensaje
+  async saveMessage(productId, senderId, message) {
+    const chatMessage = new ChatMessage({
+      product: productId,
+      sender: senderId,
+      message,
+    });
+    await chatMessage.save();
+    return chatMessage;
+  }
 
-    // Obtener el historial de mensajes para un producto
-    async getMessagesByProduct(productId) {
-        return await ChatMessage.find({ product: productId })
-            .populate('sender', 'username email')
-            .sort({ timestamp: 1 }); // Ordenar por fecha
-    }
+  // Obtener todos los mensajes asociados a un producto
+  async getMessagesByProduct(productId) {
+    return ChatMessage.find({ product: productId })
+      .populate('sender', 'username email')
+      .sort({ timestamp: 1 });
+  }
+
+  // Actualizar un mensaje específico
+  async updateMessage(id, newMessage) {
+    const updated = await ChatMessage.findByIdAndUpdate(
+      id,
+      { message: newMessage },
+      { new: true }
+    );
+    return updated;
+  }
+
+  // Eliminar un mensaje específico
+  async deleteMessage(id) {
+    const result = await ChatMessage.findByIdAndDelete(id);
+    return result;
+  }
 }
 
 export default new ChatService();
+
